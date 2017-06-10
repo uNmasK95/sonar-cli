@@ -1,0 +1,29 @@
+<h1 class="page-header">Zones</h1>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        Zone
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        Type of Zone
+      </div>
+      <br>
+    </div>
+    <!-- .panel-heading -->
+    <div class="panel-body">
+      <div *ngFor="let z of zones">
+        <ul class="list-group">
+          <div id="zonesL" class="row" (click)="sensorDetails(z)">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              {{z.description}}
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <span *ngIf="z.type=='Exterior'" class="fa fa-picture-o"></span><span *ngIf="z.type=='Interior'" class="fa fa-home"></span> {{z.type}}
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <!-- .panel-body -->
+</div>
