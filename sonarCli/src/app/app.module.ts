@@ -28,6 +28,7 @@ import { ZonesExternalComponent } from './zones/zones-external/zones-external.co
 import { ZonesSensorCreateComponent } from './zones/zones-sensor-create/zones-sensor-create.component';
 import { ZonesSensorEditComponent } from './zones/zones-sensor-edit/zones-sensor-edit.component';
 import { UsersCreateComponent } from './users/users-create/users-create.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { UsersCreateComponent } from './users/users-create/users-create.componen
     FormsModule,
     HttpModule,
     CommonModule,
-    routing
+    routing,
+    ChartsModule
   ],
   providers: [
     IsAuthenticatedService,
