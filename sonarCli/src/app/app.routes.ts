@@ -13,6 +13,8 @@ import { ProfileComponent } from "app/profile/profile.component";
 import { DashboardEditComponent } from "app/dashboard/dashboard-edit/dashboard-edit.component";
 import { ZonesExternalComponent } from "app/zones/zones-external/zones-external.component";
 import { ZonesInternalComponent } from "app/zones/zones-internal/zones-internal.component";
+import { ZonesSensorCreateComponent } from "app/zones/zones-sensor-create/zones-sensor-create.component";
+import { ZonesSensorEditComponent } from "app/zones/zones-sensor-edit/zones-sensor-edit.component";
 
 export const routes: Routes = [
    // { path: '', component: LoginComponent/*, canActivate: [AuthGuard]*/ },
@@ -25,7 +27,11 @@ export const routes: Routes = [
     { path: 'history', component: HistoryComponent },
     { path: 'zones', component: ZonesComponent },
     { path: 'zones/internal/:id', component: ZonesInternalComponent },
+    { path: 'zones/internal/:id/new', component: ZonesSensorCreateComponent },
+    { path: 'zones/internal/:id/sensor/:id2', component: ZonesSensorEditComponent },
     { path: 'zones/external/:id', component: ZonesExternalComponent },
+    { path: 'zones/external/:id/new', component: ZonesSensorCreateComponent },
+    { path: 'zones/external/:id/sensor/:id2', component: ZonesSensorEditComponent },
 
     { path: 'users', component: UsersComponent },
     { path: 'notifications', component: NotificationsComponent },

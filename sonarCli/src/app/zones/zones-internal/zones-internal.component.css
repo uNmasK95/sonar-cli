@@ -1,0 +1,32 @@
+#sensorsL{
+    border: 2px solid gray;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#sensorsL:hover{
+    border: 2px solid #4d4d4d;
+}
+
+.btn-social{position:relative;padding-left:44px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.btn-social>:first-child{position:absolute;left:0;top:0;bottom:0;width:32px;line-height:34px;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
+.btn-registerR{color:#fff;background-color:green;border-color:rgba(0,0,0,0.2)}.btn-registerR:hover,.btn-registerR:focus,.btn-registerR:active,.btn-registerR.active,.open>.dropdown-toggle.btn-registerR{color:#fff;background-color:darkgreen;border-color:rgba(0,0,0,0.2)}
+.btn-registerR:active,.btn-registerR.active,.open>.dropdown-toggle.btn-registerR{background-image:none}
+.btn-registerR.disabled,.btn-registerR[disabled],fieldset[disabled] .btn-registerR,.btn-registerR.disabled:hover,.btn-registerR[disabled]:hover,fieldset[disabled] .btn-registerR:hover,.btn-registerR.disabled:focus,.btn-registerR[disabled]:focus,fieldset[disabled] .btn-registerR:focus,.btn-registerR.disabled:active,.btn-registerR[disabled]:active,fieldset[disabled] .btn-registerR:active,.btn-registerR.disabled.active,.btn-registerR[disabled].active,fieldset[disabled] .btn-registerR.active{background-color:green;border-color:rgba(0,0,0,0.2)}
+.btn-registerR .badge{color:green;background-color:#fff}
+
+.btn-registerR     { background-color: green; }
+
+.btn-social{position:relative;padding-left:44px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.btn-social>:first-child{position:absolute;left:0;top:0;bottom:0;width:32px;line-height:34px;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
+.btn-editR{color:#fff;background-color:#205081;border-color:rgba(0,0,0,0.2)}.btn-editR:hover,.btn-editR:focus,.btn-editR:active,.btn-editR.active,.open>.dropdown-toggle.btn-editR{color:#fff;background-color:#163758;border-color:rgba(0,0,0,0.2)}
+.btn-editR:active,.btn-editR.active,.open>.dropdown-toggle.btn-editR{background-image:none}
+.btn-editR.disabled,.btn-editR[disabled],fieldset[disabled] .btn-editR,.btn-editR.disabled:hover,.btn-editR[disabled]:hover,fieldset[disabled] .btn-editR:hover,.btn-editR.disabled:focus,.btn-editR[disabled]:focus,fieldset[disabled] .btn-editR:focus,.btn-editR.disabled:active,.btn-editR[disabled]:active,fieldset[disabled] .btn-editR:active,.btn-editR.disabled.active,.btn-editR[disabled].active,fieldset[disabled] .btn-editR.active{background-color:#205081;border-color:rgba(0,0,0,0.2)}
+.btn-editR .badge{color:#205081;background-color:#fff}
+
+.btn-editR     { background-color: #205081; }
+
+.panel-body{
+    word-wrap: break-word;
+}

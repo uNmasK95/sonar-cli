@@ -1,4 +1,62 @@
-<h1 class="page-header">Users</h1>
-<p>
-  profile works!
-</p>
+<h1 class="page-header">Profile</h1>
+
+<div class="container"> 
+		<div class="row">
+			<div class="col-xs-12 col-sm-3 col-md-3 col-md-offset-1">
+				<div class="text-center">
+					<img src="/../../assets/img/profile2.jpg" class="avatar img-circle" alt="avatar" id="imagemProfile">
+					<h6>{{userLogged.name}}</h6>
+				</div>
+			</div>
+
+			<div class="panel panel-dashboardProf">
+				<div class="panel-body">		
+					<div class="col-xs-12 col-sm-6 col-md-6 personal-info">
+							<h1>Edit Profile</h1>
+							<!--alert></alert-->
+							<form class="form-horizontal" role="form" (ngSubmit)="f.form.valid && edit()" #f="ngForm" novalidate>
+								<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label class="col-lg-3 control-label">Username:</label>
+									<div class="col-lg-8">
+										<input class="form-control" type="text" name="name" [(ngModel)]="model.name" value={{userLogged.name}} #name="ngModel">
+									</div>
+								</div>
+								<div class="form-group ">
+									<label class="col-lg-3 control-label">Email:</label>
+									<div class="col-lg-8">
+										<input name="email" [(ngModel)]="model.email" disabled="disabled" class="form-control" type="text" value={{userLogged.email}} #email="ngModel">
+									</div>
+								</div>
+								<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+										<label class="col-lg-3 control-label">Password:</label>
+										<div class="col-lg-8">
+												<input class="form-control" name="password" [(ngModel)]="model.password" type="password" #password="ngModel">
+										</div>
+								</div>
+								<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !newpassword.valid }">
+									<label class="col-lg-3 control-label">New Password:</label>
+									<div class="col-lg-8">
+										<input class="form-control" name="newpassword" [(ngModel)]="model.newpassword" type="password" #newpassword="ngModel">
+									</div>
+								</div>
+								<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !newconfpassword.valid }">
+									<label class="col-lg-3 control-label">Confirm new password:</label>
+									<div class="col-lg-8">
+											<input class="form-control" name="newconfpassword" [(ngModel)]="model.newconfpassword" type="password" #newconfpassword="ngModel">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label"></label>
+									<div class="col-md-8">
+										<input type="button" class="btn btn-primary" (click)="edit()" value="Save Changes">
+										<span></span>
+										<input type="reset" class="btn btn-default" value="Cancel">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+			</div>
+	</div>
+</div>
+

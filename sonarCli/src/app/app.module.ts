@@ -25,6 +25,8 @@ import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edi
 import { DashboardItemComponent } from "app/dashboard/dashboard-list/dashboard-item.component";
 import { ZonesInternalComponent } from './zones/zones-internal/zones-internal.component';
 import { ZonesExternalComponent } from './zones/zones-external/zones-external.component';
+import { ZonesSensorCreateComponent } from './zones/zones-sensor-create/zones-sensor-create.component';
+import { ZonesSensorEditComponent } from './zones/zones-sensor-edit/zones-sensor-edit.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ZonesExternalComponent } from './zones/zones-external/zones-external.co
     DashboardItemComponent,
     DashboardEditComponent,
     ZonesInternalComponent,
-    ZonesExternalComponent
+    ZonesExternalComponent,
+    ZonesSensorCreateComponent,
+    ZonesSensorEditComponent
   ],
   imports: [
     BrowserModule,
