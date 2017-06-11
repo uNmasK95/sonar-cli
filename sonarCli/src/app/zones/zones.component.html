@@ -1,7 +1,7 @@
 <h1 class="page-header">Zones</h1>
 
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="chat-panel panel panel-default">
+    <div class="panel-heading " >
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         Zone
       </div>
@@ -12,18 +12,32 @@
     </div>
     <!-- .panel-heading -->
     <div class="panel-body">
-      <div *ngFor="let z of zones">
-        <ul class="list-group">
-          <div id="zonesL" class="row" (click)="sensorDetails(z)">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              {{z.description}}
+        <ul *ngFor="let z of zones" class="chat">
+          <li>
+            <div id="zoneS" class="chat-body clearfix " (click)="sensorDetails(z)" title="See this zone" data-toggle="popover" data-trigger="hover">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                {{z.description}}
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <span *ngIf="z.type=='Exterior'" class="fa fa-picture-o"></span><span *ngIf="z.type=='Interior'" class="fa fa-home"></span> {{z.type}}
+              </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              <span *ngIf="z.type=='Exterior'" class="fa fa-picture-o"></span><span *ngIf="z.type=='Interior'" class="fa fa-home"></span> {{z.type}}
-            </div>
-          </div>
+          </li>
         </ul>
-      </div>
+      <!--/div-->
     </div>
     <!-- .panel-body -->
+    <div class="panel-footer">
+          <!-- Search -->    
+          <div class="input-group custom-search-form">
+              <input type="text" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">
+                      <i class="fa fa-search"></i>
+                  </button>
+              </span>
+          </div>
+          <!-- /Search -->
+      </div>
+      <!-- /.panel-footer -->
 </div>

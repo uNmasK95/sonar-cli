@@ -10,6 +10,10 @@ export class ZonesSensorEditComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+    
   }
+
+  
 
 }

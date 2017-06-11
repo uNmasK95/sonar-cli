@@ -4,3 +4,24 @@
    top: -15px;
    left: 35px;
 }
+
+
+#listNot {
+  height: 350px;
+  overflow-y: scroll;
+}
+
+#l{
+    margin: 0;
+    padding: 0;
+}
+
+#pH{
+    margin: 0;
+    padding-bottom: 0;
+    padding-left: 15px;
+}
+
+#pF{
+    text-align: center;
+}

@@ -1,4 +1,66 @@
 <h1 class="page-header">Notifications</h1>
-<p>
-  notifications works!
-</p>
+
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+  <!-- /.panel -->
+  <div class="chat-panel panel panel-default">
+      <div class="panel-heading">
+          <i class="fa fa-bullhorn"></i> All Notifications
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+          <ul *ngFor="let not of notifications" class="chat">
+              <li *ngIf="isInternal(not.zone)" class="left clearfix">
+                  <span class="chat-img pull-left">
+                      <img id="ex" src="/../../assets/img/alert.png" alt="User Avatar" class="img-circle" />
+                  </span>
+                  <div class="chat-body clearfix">
+                      <div class="header">
+                          <strong class="primary-font">{{not.sensor}}</strong>
+                          <small class="pull-right text-muted">
+                              <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
+                          </small>
+                      </div>
+                      <p>
+                          <strong>Zone:</strong> {{not.zone}}
+                      </p>
+                      <p>
+                          {{not.description}}
+                      </p>
+                  </div>
+              </li>
+              <li *ngIf="!isInternal(not.zone)" class="right clearfix">
+                  <span class="chat-img pull-right">
+                      <img id="ex" src="/../../assets/img/alert.png" alt="User Avatar" class="img-circle" />
+                  </span>
+                  <div class="chat-body clearfix">
+                      <div class="header">
+                          <small class=" text-muted">
+                              <i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small>
+                          <p class="pull-right">
+                            <strong>{{not.sensor}}</strong><br>
+                            <strong>Zone:</strong> {{not.zone}}<br>
+                            {{not.description}}<br>
+                        </p>
+                      </div>
+                  </div>
+              </li>
+          </ul>
+      </div>
+      <!-- /.panel-body -->
+      <div class="panel-footer">
+          <!-- Search -->    
+          <div class="input-group custom-search-form">
+              <input type="text" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">
+                      <i class="fa fa-search"></i>
+                  </button>
+              </span>
+          </div>
+          <!-- /Search -->
+      </div>
+      <!-- /.panel-footer -->
+      
+  </div>
+  <!-- /.panel .chat-panel -->
+</div>
