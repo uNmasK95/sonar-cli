@@ -15,6 +15,7 @@ import { ZonesExternalComponent } from "app/zones/zones-external/zones-external.
 import { ZonesInternalComponent } from "app/zones/zones-internal/zones-internal.component";
 import { ZonesSensorCreateComponent } from "app/zones/zones-sensor-create/zones-sensor-create.component";
 import { ZonesSensorEditComponent } from "app/zones/zones-sensor-edit/zones-sensor-edit.component";
+import { UsersCreateComponent } from "app/users/users-create/users-create.component";
 
 export const routes: Routes = [
    // { path: '', component: LoginComponent/*, canActivate: [AuthGuard]*/ },
@@ -34,6 +35,8 @@ export const routes: Routes = [
     { path: 'zones/external/:id/sensor/:id2', component: ZonesSensorEditComponent },
 
     { path: 'users', component: UsersComponent },
+    { path: 'users/new', component: UsersCreateComponent },
+
     { path: 'notifications', component: NotificationsComponent },
     { path: 'profile', component: ProfileComponent },
 

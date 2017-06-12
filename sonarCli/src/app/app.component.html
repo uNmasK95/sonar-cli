@@ -18,40 +18,27 @@
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <i class="badge badge-notify">3</i> <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
                   </a>
-                  <ul class="dropdown-menu dropdown-alerts">
-                      <li>
-                          <a href="#">
-                              <div>
-                                  <i class="fa fa-bullhorn"></i> SensorInterior1
-                                  <span class="pull-right text-muted small">4 minutes ago</span>
-                              </div>
-                          </a>
-                      </li>
-                      <li class="divider"></li>
-                      <li>
-                          <a href="#">
-                              <div>
-                                  <i class="fa fa-bullhorn"></i> SensorInterior2
-                                  <span class="pull-right text-muted small">5 minutes ago</span>
-                              </div>
-                          </a>
-                      </li>
-                      <li class="divider"></li>
-                      <li>
-                          <a href="#">
-                              <div>
-                                  <i class="fa fa-bullhorn"></i> SensirExterior3
-                                  <span class="pull-right text-muted small">7 minutes ago</span>
-                              </div>
-                          </a>
-                      </li>
-                      <li class="divider"></li>
-                      <li>
-                          <a class="text-center" [routerLink]="['/notifications']">
-                              <strong>See All Alerts</strong>
-                              <i class="fa fa-angle-right"></i>
-                          </a>
-                      </li>
+                  <ul  class="dropdown-menu dropdown-alerts" >
+                        <div id="pH" class="panel-heading">
+                            Notifications
+                        </div>
+                        <div id="listNot" class="panel-body">
+                            <li *ngFor="let notNotR of notNotReaded">
+                                <a id="l" href="#">
+                                    <div>
+                                        <i class="fa fa-bullhorn"></i> {{notNotR.sensor}}
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                                <div class="divider"></div>
+                            </li>
+                        </div>
+                        <div id="pF" class="panel-footer">
+                            <a class="text-center" [routerLink]="['/notifications']">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
                   </ul>
                   <!-- /.dropdown-alerts -->
               </li>

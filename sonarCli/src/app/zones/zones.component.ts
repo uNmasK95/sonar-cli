@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
 })
 export class ZonesComponent implements OnInit {
 
-  zones: Zone[] =  [new Zone(1,"Zona1","Exterior"),new Zone(2,"Zona2","Interior"),new Zone(3,"Zona3","Exterior"),new Zone(4,"Zona4","Exterior")]
+  zones: Zone[] =  [new Zone(1,"Zona1","Exterior"),new Zone(2,"Zona2","Interior"),new Zone(3,"Zona3","Exterior"),new Zone(4,"Zona4","Exterior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior")]
   
   constructor(private router: Router) { }
 

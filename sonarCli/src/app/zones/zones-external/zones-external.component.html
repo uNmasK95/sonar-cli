@@ -15,7 +15,7 @@
                 Map
             </div>
             <!-- .panel-heading -->
-            <div class="panel-body">
+            <div id="mapPanelBody" class="panel-body">
               MAPA AQUI
             </div>
             <!-- .panel-body -->
@@ -70,14 +70,23 @@
 
         <br>
         <!-- SensorsList -->
-        <div *ngFor="let s of sensors">
-          <ul class="list-group">
-            <div id="sensorL" class="row" (click)="sensorChoise(s)">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Select sensor" data-toggle="popover" data-trigger="hover">
-                <i id="idS" class="fa fa-microphone"></i> {{s.name}}
-              </div>
-            </div>
-          </ul>
+        <div class="chat-panel panel panel-default">
+          <div class="panel-heading">
+            Sensors
+          </div>
+          <!-- .panel-heading -->
+          <div class="panel-body">
+              <ul class="chat" *ngFor="let s of sensors">
+                <li class="clearfix">
+                  <div id="sensorL" class="row" (click)="sensorChoise(s)">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Select sensor" data-toggle="popover" data-trigger="hover">
+                      <i id="idS" class="fa fa-microphone"></i> {{s.name}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+          </div>
+          <!-- .panel-body -->
         </div>
         <!-- /SensorsList -->
       </div>

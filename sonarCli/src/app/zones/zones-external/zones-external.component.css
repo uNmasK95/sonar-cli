@@ -20,3 +20,9 @@
 .btn-editR .badge{color:#205081;background-color:#fff}
 
 .btn-editR     { background-color: #205081; }
+
+
+#mapPanelBody {
+  height: 290px;
+  overflow-y: scroll;
+}
