@@ -46,11 +46,12 @@ export class LoginComponent implements OnInit {
 
   utilizadorOn(){
       console.log(localStorage.getItem('id'));
-    this.userService.getUtilizador(localStorage.getItem('id')).subscribe(
+    this.userService.getUser(localStorage.getItem('id')).subscribe(
         resultado => {
               // crio um utilizador deixando apenas o id, email, username e type.
               let user = resultado;
               user.id = user._id.$oid;
+              delete user.password_digest;
               localStorage.setItem('userOn',JSON.stringify(user));
       },
       error => {

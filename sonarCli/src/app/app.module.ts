@@ -21,6 +21,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserService } from "./services/user.service";
 import { AlertService } from "./services/alert.service";
 import { DashboardListComponent } from './dashboard/dashboard-list/dashboard-list.component';
+import { AlertComponent } from "app/alert/alert.component";
 import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edit.component';
 import { DashboardItemComponent } from "./dashboard/dashboard-list/dashboard-item.component";
 import { ZonesInternalComponent } from './zones/zones-internal/zones-internal.component';
@@ -30,6 +31,8 @@ import { ZonesSensorEditComponent } from './zones/zones-sensor-edit/zones-sensor
 import { UsersCreateComponent } from './users/users-create/users-create.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { AuthLoginService } from "app/services/auth-login.service";
+import { FilterPipe } from './users/FilterPipe';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { AuthLoginService } from "app/services/auth-login.service";
     DashboardComponent,
     HistoryComponent,
     ZonesComponent,
+    AlertComponent,
     UsersComponent,
+    FilterPipe,
     NotificationsComponent,
     ProfileComponent,
     DashboardListComponent,

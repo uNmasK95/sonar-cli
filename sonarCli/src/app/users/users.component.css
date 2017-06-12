@@ -17,3 +17,11 @@
 .btn-registerR .badge{color:green;background-color:#fff}
 
 .btn-registerR     { background-color: green; }
+
+#deleteS{
+    color: red;
+    cursor: pointer;
+}
+#deleteS:hover{
+    color: #990000;
+}

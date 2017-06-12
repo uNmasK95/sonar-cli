@@ -12,7 +12,7 @@ export class UserService {
 
 
   registerUser(email: string, password:string){
-    return this.http.post(this.httpUtil.url('/users'), JSON.stringify({email: email, password: password}), this.httpUtil.headers())
+    return this.http.post(this.httpUtil.url('/admin/users'), JSON.stringify({email: email, password: password}), this.httpUtil.headers())
                .map(
                  (response : Response) => {
                    console.log("registado utilizador: "+ email);
@@ -20,17 +20,28 @@ export class UserService {
                )
   }
 
-  getUtilizador(id: string){
+  getUser(id: string){
     return this.http.get(this.httpUtil.url('/admin/users/'+id),this.httpUtil.headers()).map(this.httpUtil.extrairDados);
   }
 
-  getTodosUtilizadores(){
-    return this.http.get(this.httpUtil.url('/users'),this.httpUtil.headers()).map(this.httpUtil.extrairDados);
+  getAllUsers(){
+    return this.http.get(this.httpUtil.url('/admin/users'),this.httpUtil.headers()).map(this.httpUtil.extrairDados);
   }
 
-  removeUtilizador(id:number){
-    return this.http.delete(this.httpUtil.url('/users'),this.httpUtil.headers());
+  removeUser(id:string){
+    return this.http.delete(this.httpUtil.url('/admin/users/'+id),this.httpUtil.headers()).map(this.httpUtil.extrairDados);
   }
+
+  userconfirm(email: string, password: string){
+        return this.http.post((this.httpUtil.url('/login')), JSON.stringify({email : email, password : password}) ,this.httpUtil.headers())
+                .map(this.httpUtil.extrairDados);
+  }
+
+  update(id: string,email: string, password: string){
+        return this.http.put(this.httpUtil.url('/admin/users/' + id),JSON.stringify({email: email, password: password}),this.httpUtil.headers())
+                   .map(this.httpUtil.extrairDados);
+  }
+  
 
 
 }
