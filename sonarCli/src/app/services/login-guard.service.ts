@@ -17,8 +17,5 @@ export class LoginGuardService {
       return true;
     }
     this.router.navigate(['/login']);
-
-    //Para ja
-    return true;
   }
 }

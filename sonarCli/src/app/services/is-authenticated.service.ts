@@ -33,6 +33,7 @@ export class IsAuthenticatedService {
                       let data = response.json();
                       console.log(data);
                       if(data && data.auth_token){
+                        console.log("login");
                         localStorage.setItem('currentUser',data.auth_token);
                         localStorage.setItem('id',data.user_id.$oid);
                       }
@@ -61,6 +62,6 @@ export class IsAuthenticatedService {
   		if (this.getLoginStatus()) {
   			return true;
   		}
-  		this.router.navigate(['/']);
+  		this.router.navigate(['/dashboard']);
   	}
 }

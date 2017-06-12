@@ -28,12 +28,12 @@ export class LoginComponent implements OnInit {
   login() {
     this.loading = true;
     //APAGAR
-      //this.router.navigate(['/']);
+    //this.router.navigate(['/']);
     this.isauthenticationService.login(this.model.email, this.model.password)
         .subscribe(
               resultado => {
                   this.utilizadorOn();
-                  this.router.navigate(['/']);
+                  this.router.navigate(['/dashboard']);
               },
               error => {
                   console.log("ERROR:"+error);

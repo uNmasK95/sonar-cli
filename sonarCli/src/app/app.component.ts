@@ -35,8 +35,7 @@ export class AppComponent {
   }
 
   isLogged(){
-    //return this.isAuthenticatedService.getLoginStatus();
-    return true;
+    return this.isAuthenticatedService.getLoginStatus();
   }
   
   logout(){
