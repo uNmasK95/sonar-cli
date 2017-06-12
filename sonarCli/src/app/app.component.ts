@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IsAuthenticatedService } from "./services/is-authenticated.service";
 import { Router } from "@angular/router";
-import { LoginGuardService } from "app/services/login-guard.service";
+/*import { LoginGuardService } from "app/services/login-guard.service";*/
 import { Notification } from "app/models/notification";
 
 @Component({
@@ -28,8 +28,8 @@ export class AppComponent {
 
   constructor(
     private isAuthenticatedService: IsAuthenticatedService,
-    private router: Router,
-    private loginGuardService: LoginGuardService)
+    private router: Router/*,
+    private loginGuardService: LoginGuardService*/)
     //private userService: UserService) 
     { 
   }

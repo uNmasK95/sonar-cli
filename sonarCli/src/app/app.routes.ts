@@ -16,48 +16,31 @@ import { ZonesInternalComponent } from "app/zones/zones-internal/zones-internal.
 import { ZonesSensorCreateComponent } from "app/zones/zones-sensor-create/zones-sensor-create.component";
 import { ZonesSensorEditComponent } from "app/zones/zones-sensor-edit/zones-sensor-edit.component";
 import { UsersCreateComponent } from "app/users/users-create/users-create.component";
+import { AuthLoginService } from "app/services/auth-login.service";
 
 export const routes: Routes = [
-    { path: '', component: DashboardComponent, /*canActivate: [LoginGuardService]*//*, canActivate: [AuthGuard]*/ },
+    { path: '', component: LoginComponent, canActivate: [AuthLoginService]/*canActivate: [LoginGuardService]*//*, canActivate: [AuthGuard]*/ },
    // { path: '', component: LoginComponent/*, canActivate: [AuthGuard]*/ },
-    { path: 'login', component: LoginComponent, canActivate: [LoginGuardService] },
-    { path: 'register', component: RegisterComponent, canActivate: [LoginGuardService] },
+  /*  { path: 'login', component: LoginComponent, canActivate: [LoginGuardService] },
+    { path: 'register', component: RegisterComponent, canActivate: [LoginGuardService] },*/
 
     { path: 'dashboard', component: DashboardComponent, canActivate: [IsAuthenticatedService] },
-    { path: 'row/:id', component: DashboardEditComponent },
+    { path: 'row/:id', component: DashboardEditComponent, canActivate: [IsAuthenticatedService] },
     
-    { path: 'history', component: HistoryComponent },
-    { path: 'zones', component: ZonesComponent },
-    { path: 'zones/internal/:id', component: ZonesInternalComponent },
-    { path: 'zones/internal/:id/new', component: ZonesSensorCreateComponent },
-    { path: 'zones/internal/:id/sensor/:id2', component: ZonesSensorEditComponent },
-    { path: 'zones/external/:id', component: ZonesExternalComponent },
-    { path: 'zones/external/:id/new', component: ZonesSensorCreateComponent },
-    { path: 'zones/external/:id/sensor/:id2', component: ZonesSensorEditComponent },
+    { path: 'history', component: HistoryComponent, canActivate: [IsAuthenticatedService] },
+    { path: 'zones', component: ZonesComponent, canActivate: [IsAuthenticatedService] },
+    { path: 'zones/internal/:id', component: ZonesInternalComponent, canActivate: [IsAuthenticatedService] },
+    { path: 'zones/internal/:id/new', component: ZonesSensorCreateComponent, canActivate: [IsAuthenticatedService] },
+    { path: 'zones/internal/:id/sensor/:id2', component: ZonesSensorEditComponent, canActivate: [IsAuthenticatedService] },
+    { path: 'zones/external/:id', component: ZonesExternalComponent, canActivate: [IsAuthenticatedService] },
+    { path: 'zones/external/:id/new', component: ZonesSensorCreateComponent, canActivate: [IsAuthenticatedService] },
+    { path: 'zones/external/:id/sensor/:id2', component: ZonesSensorEditComponent, canActivate: [IsAuthenticatedService] },
 
-    { path: 'users', component: UsersComponent },
-    { path: 'users/new', component: UsersCreateComponent },
+    { path: 'users', component: UsersComponent, canActivate: [IsAuthenticatedService] },
+    { path: 'users/new', component: UsersCreateComponent, canActivate: [IsAuthenticatedService] },
 
-    { path: 'notifications', component: NotificationsComponent },
-    { path: 'profile', component: ProfileComponent }
-    //Novas
-   /* { path: 'projects', component: DashboardComponent },
-    { path: 'projects/new', component: CreateProjectComponent },
-    { path: 'projects/:id/userstories', component: UserStoriesComponent }, //para PO
-
-    { path: 'projects/:id/sprints', component: SprintsComponent }, //para SM (estes acho que tem de ter um canActivate)
-    { path: 'projects/:id/sprints/new', component: SprintCreateComponent }, //para SM //mudar comp
-    { path: 'projects/:id/sprints/:id2', component: SprintsUserStoriesTasksComponent }, //para SM //mudar comp
-
-    { path: 'projects/:id', component: UserStoriesDashboardComponent }, //para Dev/SM    
-
-    { path: 'teams', component: TeamsComponent, canActivate: [ IsAuthenticatedService ] },
-    { path: 'teams/new', component: TeamsCreateComponent, canActivate: [ IsAuthenticatedService ] }, //Para SM
-    { path: 'userstories', component: UserStoriesComponent, canActivate: [ IsAuthenticatedService ] }, // tab direto
-    { path: 'questions', component: QuestionsComponent, canActivate: [ IsAuthenticatedService ] },
-    //{ path: 'questions/:id', component: QuestionsDetailComponent },
-    { path: 'profile/:id', component: ProfileComponent, canActivate: [ IsAuthenticatedService ] },
-    //{ path: 'profile/:id', component: ProfileComponent },*/
+    { path: 'notifications', component: NotificationsComponent, canActivate: [IsAuthenticatedService] },
+    { path: 'profile', component: ProfileComponent, canActivate: [IsAuthenticatedService] }
 
 
 ]

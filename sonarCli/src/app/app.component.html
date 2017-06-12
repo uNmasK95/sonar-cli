@@ -1,4 +1,4 @@
-<div *ngIf="isLogged()" id="wrapper">
+<div id="wrapper">
 
       <!-- Navigation -->
       <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -13,12 +13,12 @@
           </div>
           <!-- /.navbar-header -->
 
-          <ul class="nav navbar-top-links navbar-right">
-              <li class="dropdown" title="Notifications" data-toggle="popover" data-trigger="hover" *ngIf="isLogged()">
+          <ul  class="nav navbar-top-links navbar-right">
+              <li  class="dropdown" title="Notifications" data-toggle="popover" data-trigger="hover" *ngIf="isLogged()">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <i class="badge badge-notify">3</i> <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
                   </a>
-                  <ul  class="dropdown-menu dropdown-alerts" >
+                  <ul  *ngIf="isLogged()" class="dropdown-menu dropdown-alerts" >
                         <div id="pH" class="panel-heading">
                             Notifications
                         </div>
@@ -43,11 +43,11 @@
                   <!-- /.dropdown-alerts -->
               </li>
               <!-- /.dropdown -->
-              <li class="dropdown" *ngIf="isLogged()">
+              <li  class="dropdown" *ngIf="isLogged()">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                   </a>
-                  <ul class="dropdown-menu dropdown-user" >
+                  <ul  *ngIf="isLogged()" class="dropdown-menu dropdown-user" >
                       <li><a [routerLink]="['/profile']"><i class="fa fa-user fa-fw"></i> User Profile</a>
                       </li>
                       <li class="divider"></li>
@@ -60,7 +60,7 @@
           </ul>
           <!-- /.navbar-top-links -->
 
-          <div class="navbar-default sidebar" role="navigation">
+          <div *ngIf="isLogged()" class="navbar-default sidebar" role="navigation">
               <div class="sidebar-nav navbar-collapse">
                   <ul class="nav" id="side-menu">
                       <li class="sidebar-search">
@@ -111,5 +111,5 @@
 
   </div>
 
-  <login *ngIf="!isLogged()"></login>
+  <!--login *ngIf="!isLogged()"></login-->
 

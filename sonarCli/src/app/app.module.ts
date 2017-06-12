@@ -11,7 +11,7 @@ import { routing } from './app.routes';
 
 import { HttpUtilService } from './services/http-util.service';
 import { IsAuthenticatedService } from './services/is-authenticated.service';
-import { LoginGuardService } from "./services/login-guard.service";
+/*import { LoginGuardService } from "./services/login-guard.service";*/
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoryComponent } from './history/history.component';
 import { ZonesComponent } from './zones/zones.component';
@@ -29,6 +29,7 @@ import { ZonesSensorCreateComponent } from './zones/zones-sensor-create/zones-se
 import { ZonesSensorEditComponent } from './zones/zones-sensor-edit/zones-sensor-edit.component';
 import { UsersCreateComponent } from './users/users-create/users-create.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { AuthLoginService } from "app/services/auth-login.service";
 
 @NgModule({
   declarations: [
@@ -60,10 +61,10 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   ],
   providers: [
     IsAuthenticatedService,
-    LoginGuardService,
     HttpUtilService,
     AlertService,
-    UserService
+    UserService,
+    AuthLoginService
   ],
   bootstrap: [AppComponent]
 })

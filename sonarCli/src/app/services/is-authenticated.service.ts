@@ -62,6 +62,6 @@ export class IsAuthenticatedService {
   		if (this.getLoginStatus()) {
   			return true;
   		}
-  		this.router.navigate(['/dashboard']);
+  		this.router.navigate(['']);
   	}
 }
