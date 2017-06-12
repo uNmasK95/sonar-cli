@@ -18,11 +18,12 @@ import { ZonesSensorEditComponent } from "app/zones/zones-sensor-edit/zones-sens
 import { UsersCreateComponent } from "app/users/users-create/users-create.component";
 
 export const routes: Routes = [
+    { path: '', component: DashboardComponent, /*canActivate: [LoginGuardService]*//*, canActivate: [AuthGuard]*/ },
    // { path: '', component: LoginComponent/*, canActivate: [AuthGuard]*/ },
     { path: 'login', component: LoginComponent, canActivate: [LoginGuardService] },
     { path: 'register', component: RegisterComponent, canActivate: [LoginGuardService] },
 
-    { path: 'dashboard', component: DashboardComponent },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [IsAuthenticatedService] },
     { path: 'row/:id', component: DashboardEditComponent },
     
     { path: 'history', component: HistoryComponent },
@@ -38,8 +39,7 @@ export const routes: Routes = [
     { path: 'users/new', component: UsersCreateComponent },
 
     { path: 'notifications', component: NotificationsComponent },
-    { path: 'profile', component: ProfileComponent },
-
+    { path: 'profile', component: ProfileComponent }
     //Novas
    /* { path: 'projects', component: DashboardComponent },
     { path: 'projects/new', component: CreateProjectComponent },
@@ -59,7 +59,6 @@ export const routes: Routes = [
     { path: 'profile/:id', component: ProfileComponent, canActivate: [ IsAuthenticatedService ] },
     //{ path: 'profile/:id', component: ProfileComponent },*/
 
-    { path: '', component: DashboardComponent, canActivate: [LoginGuardService]/*, canActivate: [AuthGuard]*/ }
 
 ]
 

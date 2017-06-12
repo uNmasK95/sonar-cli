@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IsAuthenticatedService } from "app/services/is-authenticated.service";
+import { IsAuthenticatedService } from "./services/is-authenticated.service";
 import { Router } from "@angular/router";
 import { LoginGuardService } from "app/services/login-guard.service";
 import { Notification } from "app/models/notification";
@@ -35,8 +35,7 @@ export class AppComponent {
   }
 
   isLogged(){
-    //return this.isAuthenticatedService.getLoginStatus();
-    return true;
+    return this.isAuthenticatedService.getLoginStatus();
   }
   
   logout(){

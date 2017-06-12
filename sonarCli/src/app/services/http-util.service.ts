@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class HttpUtilService {
   
-  private API_URL: string = 'https://evening-anchorage-49793.herokuapp.com'; //Mudar
+  private API_URL: string = 'http://localhost:3000'; //Mudar
  
   url(path: string) {
     return this.API_URL + path;
