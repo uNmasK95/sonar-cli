@@ -20,8 +20,8 @@ export class UserService {
                )
   }
 
-  getUtilizador(id: number){
-    return this.http.get(this.httpUtil.url('/users/'+id),this.httpUtil.headers()).map(this.httpUtil.extrairDados);
+  getUtilizador(id: string){
+    return this.http.get(this.httpUtil.url('/admin/users/'+id),this.httpUtil.headers()).map(this.httpUtil.extrairDados);
   }
 
   getTodosUtilizadores(){

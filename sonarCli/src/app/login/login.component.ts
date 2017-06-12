@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { IsAuthenticatedService } from ".././services/is-authenticated.service";
 import { AlertService } from ".././services/alert.service";
 import { UserService } from ".././services/user.service";
+import { User } from "app/models/user";
 
 @Component({
   selector: 'login',
@@ -44,17 +45,17 @@ export class LoginComponent implements OnInit {
   }
 
   utilizadorOn(){
-    /*this.userService.getById(+localStorage.getItem('id')).subscribe(
+      console.log(localStorage.getItem('id'));
+    this.userService.getUtilizador(localStorage.getItem('id')).subscribe(
         resultado => {
               // crio um utilizador deixando apenas o id, email, username e type.
-              let userOn = resultado;
-              delete userOn.team;
-              userOn.type = userOn.type.id;
-              localStorage.setItem('userOn',JSON.stringify(userOn));
+              let user = resultado;
+              user.id = user._id.$oid;
+              localStorage.setItem('userOn',JSON.stringify(user));
       },
       error => {
               console.log(error);
-      });*/
+      });
   }
 
 }
