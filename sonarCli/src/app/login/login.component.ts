@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { IsAuthenticatedService } from "app/services/is-authenticated.service";
-import { AlertService } from "app/services/alert.service";
-import { UserService } from "app/services/user.service";
+import { IsAuthenticatedService } from ".././services/is-authenticated.service";
+import { AlertService } from ".././services/alert.service";
+import { UserService } from ".././services/user.service";
 
 @Component({
   selector: 'login',
@@ -28,9 +28,8 @@ export class LoginComponent implements OnInit {
   login() {
     this.loading = true;
     //APAGAR
-      this.router.navigate(['/']);
-    //
-    /*this.isauthenticationService.login(this.model.email, this.model.password)
+      //this.router.navigate(['/']);
+    this.isauthenticationService.login(this.model.email, this.model.password)
         .subscribe(
               resultado => {
                   this.utilizadorOn();
@@ -41,7 +40,7 @@ export class LoginComponent implements OnInit {
                   this.alertService.error("Email ou Password incorretos!");
                   this.loading = false;
               }
-          );*/
+          );
   }
 
   utilizadorOn(){

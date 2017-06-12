@@ -25,16 +25,16 @@ export class IsAuthenticatedService {
     return localStorage['currentUser'];
   }
 
-  //LOGIN retorna um token
+  //LOGIN retorna um token  
   login(email: string, pass: string){
-    return this.http.post((this.httpUtil.url('/auth/login')), JSON.stringify({email : email, password : pass}) ,this.httpUtil.headers())
+    return this.http.post((this.httpUtil.url('/login')), JSON.stringify({email : email, password : pass}) ,this.httpUtil.headers())
                 .map(
                   (response: Response) => {
                       let data = response.json();
                       console.log(data);
                       if(data && data.auth_token){
                         localStorage.setItem('currentUser',data.auth_token);
-                        localStorage.setItem('id',data.user_id);
+                        localStorage.setItem('id',data.user_id.$oid);
                       }
                   }
                 )
@@ -46,15 +46,12 @@ export class IsAuthenticatedService {
     localStorage.removeItem('currentUser');
   }
 
-  register(username: string,email: string, password:string, type : string){
-    return this.http.post(this.httpUtil.url('/signup'), JSON.stringify({ name: username, email: email, password: password, type: type}), this.httpUtil.headers())
+  // ver se é preciso colocar admin false;
+  register(username: string,email: string, password:string){
+    return this.http.post(this.httpUtil.url('/users'), JSON.stringify({email: email, password: password}), this.httpUtil.headers())
                .map(
                  (response : Response) => {
-                   let data = response.json();
-                   if(data && data.auth_token){
-                      localStorage.setItem('currentUser',data.auth_token);
-                      localStorage.setItem('id',data.user_id);
-                   }
+                   console.log("registado utilizador: "+ email);
                  }
                )
   }

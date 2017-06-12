@@ -56,7 +56,7 @@ export const routes: Routes = [
     { path: 'profile/:id', component: ProfileComponent, canActivate: [ IsAuthenticatedService ] },
     //{ path: 'profile/:id', component: ProfileComponent },*/
 
-    { path: '', component: DashboardComponent, canActivate: [LoginGuardService]/*, canActivate: [AuthGuard]*/ }
+    { path: '', component: DashboardComponent, /*canActivate: [LoginGuardService]*//*, canActivate: [AuthGuard]*/ }
 
 ]
 

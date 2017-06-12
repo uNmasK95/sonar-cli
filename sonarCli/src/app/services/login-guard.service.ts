@@ -13,10 +13,10 @@ export class LoginGuardService {
 
   // Depois do utilizador estar logado não pode ir para o login nem register
   canActivate(){
-    /*if(!localStorage['currentUser']){
+    if(!localStorage['currentUser']){
       return true;
     }
-    this.router.navigate(['/']);*/
+    this.router.navigate(['/login']);
 
     //Para ja
     return true;
