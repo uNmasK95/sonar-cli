@@ -26,6 +26,7 @@ export class ZonesComponent implements OnInit {
             zone = new Zone(z._id.$oid,z.name,z.description,z.type,z.min,z.max);
             this.zones.push(zone);
           }
+          console.log(this.zones);
         }
       );
   }

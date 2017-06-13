@@ -9,7 +9,9 @@
 #deleteS{
     color: red;
     cursor: pointer;
+    margin-top: 10px;
 }
 #deleteS:hover{
     color: #990000;
 }
+

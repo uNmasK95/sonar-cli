@@ -16,8 +16,29 @@
             </div>
             <!-- .panel-heading -->
             <div id="mapPanelBody" class="panel-body">
-              <agm-map [latitude]="lat" [longitude]="lng">
+              <!--agm-map [latitude]="lat" [longitude]="lng">
                 <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+              </agm-map-->
+              <agm-map 
+                [latitude]="lat"
+                [longitude]="lng"
+                [zoom]="zoom"
+                [disableDefaultUI]="false"
+                [zoomControl]="false">
+              
+                <agm-marker 
+                    *ngFor="let m of sensors; let i = index"
+                    [latitude]="m.latitude"
+                    [longitude]="m.longitude"
+                    [label]="toString(i)"
+                    (dragEnd)="markerDragEnd(m, $event)">
+                    
+                  <agm-info-window>
+                    <strong>{{m.name}}</strong>
+                  </agm-info-window>
+                  
+                </agm-marker>
+
               </agm-map>
             </div>
             <!-- .panel-body -->
@@ -33,7 +54,7 @@
             </div>
             <!-- .panel-heading -->
             <div class="panel-body">
-              {{sensorSelected.name}}: Local ({{sensorSelected.latitude}}º,{{sensorSelected.longitude}}º)
+              <strong>{{sensorSelected.name}}:</strong> Local ({{sensorSelected.latitude}}º,{{sensorSelected.longitude}}º)
             </div>
             <!-- .panel-body -->
           </div>
@@ -77,12 +98,12 @@
             Sensors
           </div>
           <!-- .panel-heading -->
-          <div class="panel-body">
-              <ul class="chat" *ngFor="let s of sensors">
+          <div id="listS" class="panel-body">
+              <ul class="chat" *ngFor="let s of sensors; let i = index">
                 <li class="clearfix">
                   <div id="sensorL" class="row" (click)="sensorChoise(s)">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Select sensor" data-toggle="popover" data-trigger="hover">
-                      <i id="idS" class="fa fa-microphone"></i> {{s.name}}
+                      <i id="idS" class="fa fa-microphone"></i> ({{i}}) {{s.name}}
                     </div>
                   </div>
                 </li>

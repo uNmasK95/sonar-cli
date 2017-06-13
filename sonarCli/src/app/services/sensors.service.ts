@@ -16,7 +16,7 @@ export class SensorsService {
   }
 
   //Get all sensor of a zone
-  get(zone_id: number) {
+  get(zone_id) {
     return this.http.get(this.httpUtil.url('/zones/'+zone_id+'/sensors'), this.httpUtil.headers())
                .map(this.httpUtil.extrairDados);
   }

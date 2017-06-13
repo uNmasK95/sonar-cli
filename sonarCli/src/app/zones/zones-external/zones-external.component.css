@@ -4,6 +4,7 @@
 #sensorL:hover{
     color: green;
 }
+
 .btn-social{position:relative;padding-left:44px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.btn-social>:first-child{position:absolute;left:0;top:0;bottom:0;width:32px;line-height:34px;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
 .btn-registerR{color:#fff;background-color:green;border-color:rgba(0,0,0,0.2)}.btn-registerR:hover,.btn-registerR:focus,.btn-registerR:active,.btn-registerR.active,.open>.dropdown-toggle.btn-registerR{color:#fff;background-color:darkgreen;border-color:rgba(0,0,0,0.2)}
 .btn-registerR:active,.btn-registerR.active,.open>.dropdown-toggle.btn-registerR{background-image:none}
@@ -23,10 +24,15 @@
 
 
 #mapPanelBody {
-  height: 290px;
+  height: 250px;
  /* overflow-y: scroll;*/
 }
 
 agm-map {
   height: 100%;
+}
+
+#listS {
+  height: 308px;
+  overflow-y: scroll;
 }
