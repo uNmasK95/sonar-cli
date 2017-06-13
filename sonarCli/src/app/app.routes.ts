@@ -2,7 +2,6 @@ import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { LoginGuardService } from './services/login-guard.service';
 import { IsAuthenticatedService } from './services/is-authenticated.service';
 import { DashboardComponent } from "app/dashboard/dashboard.component";
 import { HistoryComponent } from "app/history/history.component";
