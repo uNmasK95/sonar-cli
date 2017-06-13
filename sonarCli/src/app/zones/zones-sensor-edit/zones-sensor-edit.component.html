@@ -9,65 +9,109 @@
         </div>
         <!-- .panel-heading -->
         <div class="panel-body">
-          <!-- Name -->
-          <br>
-          <div class="row">
-            <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
-              <label>Name</label>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              <input type="text" class="form-control" placeholder="Ex: Sensor XPTO">
-            </div>
-          </div>
-          <!-- /Name -->
-
-          <!-- Desciption -->
-          <br>
-          <div class="row">
-            <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
-              <label>Desciption</label>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              <textarea class="form-control" placeholder="Ex: Sensor is ..."></textarea>
-            </div>
-          </div>
-          <!-- /Description -->
-
-          <!-- Range -->
-          <br>
-          <div class="row">
-            <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
-              <label>Range</label>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="form-group">
-                  <label>Min:</label>
-                  <input type="number" class="form-control">
+          <form class="form-horizontal" (ngSubmit)="f.form.valid && updateSensor()" #f="ngForm" novalidate>
+             
+                <!-- Name -->
+                <br>
+                <div class="row">
+                  <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
+                    <label>Name</label>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <input value={{sensor.name}} type="text" name="nameS" id="idnameS" [(ngModel)]="model.nameS" #nameS="ngModel" required class="form-control" >
+                    
+                  </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="form-group">
-                  <label>Max:</label>
-                  <input type="number" class="form-control">
+                <!-- /Name -->
+             
+
+              
+                <!-- Desciption -->
+                <br>
+                <div class="row">
+                  <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
+                    <label>Desciption</label>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <textarea value={{sensor.description}} class="form-control"  name="descS" id="iddescS" [(ngModel)]="model.descS" #descS="ngModel" required></textarea>
+                    
+                  </div>
                 </div>
-            </div>
-          </div>
-          <!-- /Range -->
+                <!-- /Description -->
+             
 
-          <!-- Confirm Button -->
-          <br>
-          <div class="row">
-            <div class="col-lg-3 col-lg-offset-7 col-md-3 col-md-offset-7 col-sm-3 col-sm-offset-7 col-xs-3 col-xs-offset-7">  
-              <!-- Button Add Sensor -->
-              <a class="btn btn-block btn-social btn-registerR">
-                  <i class="fa fa-floppy-o"></i> Save
-              </a>
-              <!-- /Button Add Sensor-->
-            </div>
-          </div>
-          <br>
-          <!-- /Confirm Button -->
+              
+                <!-- Hostname -->
+                <br>
+                <div class="row">
+                  <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
+                    <label>Hostname</label>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <input type="text" class="form-control" value={{sensor.hostname}} name="hostnameS" id="idhostnameS" [(ngModel)]="model.hostnameS" #hostnameS="ngModel" required>
+                    
+                  </div>
+                </div>
+                <!-- /Hostname -->
+              
 
+              
+                <!-- Range -->
+                <br>
+                <div class="row">
+                  <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
+                    <label>Range</label>
+                  </div>
+                  
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <label>Min:</label>
+                    <input type="number" class="form-control" value={{sensor.min}} name="min" id="idmin" [(ngModel)]="model.min" #min="ngModel" required>
+                    
+                  </div>
+                
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <label>Max:</label>
+                    <input type="number" class="form-control" value={{sensor.max}} name="max" id="idmax" [(ngModel)]="model.max" #max="ngModel" required>
+                    
+                  </div>
+                </div>
+                <!-- /Range -->
+                
+
+              
+                <!-- Lat/Long -->
+                <br>
+                <div *ngIf="typeZone==1" class="row">
+                  <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
+                    <label>Location</label>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <label>Latitude:</label>
+                    <input type="number" class="form-control" value={{sensor.latitude}} name="lat" id="idlat" [(ngModel)]="model.lat" #lat="ngModel" required>
+                    
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <label>Longitude:</label>
+                    <input type="number" class="form-control" value={{sensor.longitude}} name="long" id="idlong" [(ngModel)]="model.long" #long="ngModel" required>
+                    
+                  </div>
+              </div>
+                <!-- /Lat/Long -->
+              
+                <br>
+                <!-- Confirm Button -->
+                <div class="row">
+                  <div class="col-lg-3 col-lg-offset-7 col-md-3 col-md-offset-7 col-sm-3 col-sm-offset-7 col-xs-3 col-xs-offset-7">  
+                    <!-- Button Add Sensor -->
+                    <button (click)="updateSensor()" class="btn btn-block btn-social btn-registerR" title="Update" data-toggle="popover" data-trigger="hover">
+                        <i class="fa fa-floppy-o"></i> Update
+                    </button>
+                    <!-- /Button Add Sensor-->
+                  </div>
+                </div>
+                <br>
+                <!-- /Confirm Button -->
+          </form>
         </div>
         <!-- .panel-body -->
     </div>

@@ -16,7 +16,7 @@
 
   <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4">  
     <!-- Button Add Sensor -->
-    <a class="btn btn-block btn-social btn-registerR" [routerLink]="['/zones','internal',zoneId,'new']">
+    <a class="btn btn-block btn-social btn-registerR" [routerLink]="['/zones','internal',zoneId,'new']" title="Register Sensor" data-toggle="popover" data-trigger="hover">
         <i class="fa fa-plus-square"></i> Register Sensor
     </a>
     <!-- /Button Add Sensor-->
@@ -49,7 +49,7 @@
               </div>
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                 <!-- Button Add Sensor -->
-                <a class="btn btn-block btn-social btn-editR" [routerLink]="['/zones','internal',zoneId,'sensor',sensorSelected.id]">
+                <a class="btn btn-block btn-social btn-editR" (click)="sensorChoise(s)" title="Edit Sensor" data-toggle="popover" data-trigger="hover">
                     <i class="fa fa-pencil-square-o"></i> Edit Sensor
                 </a>
                 <!-- /Button Add Sensor-->

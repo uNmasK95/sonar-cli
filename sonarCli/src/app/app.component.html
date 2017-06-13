@@ -43,15 +43,17 @@
                   <!-- /.dropdown-alerts -->
               </li>
               <!-- /.dropdown -->
-              <li  class="dropdown" *ngIf="isLogged()">
+              <li title="User Profile / Logout" data-toggle="popover" data-trigger="hover" class="dropdown" *ngIf="isLogged()">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                   </a>
                   <ul  *ngIf="isLogged()" class="dropdown-menu dropdown-user" >
-                      <li><a [routerLink]="['/profile']"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                      <li title="User Profile" data-toggle="popover" data-trigger="hover" >
+                          <a [routerLink]="['/profile']"><i class="fa fa-user fa-fw"></i> User Profile</a>
                       </li>
                       <li class="divider"></li>
-                      <li><a [routerLink]="['/login']" (click)="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                      <li title="Logout" data-toggle="popover" data-trigger="hover">
+                          <a [routerLink]="['/login']" (click)="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                       </li>
                   </ul>
                   <!-- /.dropdown-user -->

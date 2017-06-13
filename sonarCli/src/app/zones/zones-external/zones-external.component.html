@@ -16,7 +16,9 @@
             </div>
             <!-- .panel-heading -->
             <div id="mapPanelBody" class="panel-body">
-              MAPA AQUI
+              <agm-map [latitude]="lat" [longitude]="lng">
+                <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+              </agm-map>
             </div>
             <!-- .panel-body -->
           </div>
@@ -40,7 +42,7 @@
 
         <!-- Edit Sensor -->
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-          <a class="btn btn-block btn-social btn-editR" [routerLink]="['/zones','external',zoneId,'sensor',sensorSelected.id]">
+          <a class="btn btn-block btn-social btn-editR" [routerLink]="['/zones','external',zoneId,'sensor',sensorSelected.id]" title="Edit Sensor" data-toggle="popover" data-trigger="hover">
               <i class="fa fa-pencil-square-o"></i> Edit Sensor
           </a>
         </div>
@@ -51,7 +53,7 @@
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
         <br>
         <!-- Button Add Sensor -->
-        <a class="btn btn-block btn-social btn-registerR" [routerLink]="['/zones','external',zoneId,'new']">
+        <a class="btn btn-block btn-social btn-registerR" [routerLink]="['/zones','external',zoneId,'new']" title="Register Sensor" data-toggle="popover" data-trigger="hover">
             <i class="fa fa-plus-square"></i> Register Sensor
         </a>
         <!-- /Button Add Sensor-->
