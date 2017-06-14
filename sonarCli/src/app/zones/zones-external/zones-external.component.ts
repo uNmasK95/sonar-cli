@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Sensor } from "app/models/sensor";
 import { Router, ActivatedRoute } from "@angular/router";
 import { SensorsService } from "app/services/sensors.service";
+import { AgmCoreModule } from '@agm/core';
 
 @Component({
   selector: 'zones-external',
@@ -15,8 +16,36 @@ export class ZonesExternalComponent implements OnInit {
 
   zoneId: number = -1;
  // chave = AIzaSyBPDQVLufqJn7UtWpNPAf2tfNUHuoQ4zBQ;
-  lat: number = 41.80636;
-  lng: number = -8.413773;
+
+  //Map--------
+  // google maps zoom level
+  zoom: number = 8;
+  
+  // initial center position for the map
+  lat: number = 51.673858;
+  lng: number = 7.815982;
+
+  markers: marker[] = [
+	  {
+		  lat: 51.673858,
+		  lng: 7.815982,
+		  label: 'A',
+		  draggable: true
+	  },
+	  {
+		  lat: 51.373858,
+		  lng: 7.215982,
+		  label: 'B',
+		  draggable: false
+	  },
+	  {
+		  lat: 51.723858,
+		  lng: 7.895982,
+		  label: 'C',
+		  draggable: true
+	  }
+  ]
+  //Map--------
 
   constructor(
     private router: Router,
@@ -41,13 +70,44 @@ export class ZonesExternalComponent implements OnInit {
           }
           if(this.sensors.length!=0){
             this.sensorSelected = this.sensors[0];
+            this.lat = this.sensors[0].latitude;
+            this.lng = this.sensors[0].longitude;
           }
           //console.log(this.zones)
         }
       );
+
+    //Initial values for map
+
+
   }
 
   sensorChoise(sensor: Sensor){
       this.sensorSelected = sensor;
+      this.lat = sensor.latitude;
+      this.lng = sensor.longitude;
   }
+
+  toString(v){
+    return ""+v;
+  }
+
+  //Map-------
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`)
+  }
+  
+  markerDragEnd(m: marker, $event: MouseEvent) {
+    console.log('dragEnd', m, $event);
+  }
+  //Map-------
+
+}
+
+// just an interface for type safety.
+interface marker {
+	lat: number;
+	lng: number;
+	label?: string;
+	draggable: boolean;
 }
