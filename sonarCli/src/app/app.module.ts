@@ -32,6 +32,10 @@ import { UsersCreateComponent } from './users/users-create/users-create.componen
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { AuthLoginService } from "app/services/auth-login.service";
 import { FilterPipe } from './users/FilterPipe';
+import { ZonesService } from "app/services/zones.service";
+import { SensorsService } from "app/services/sensors.service";
+import { AgmCoreModule } from '@agm/core';
+import { SensorValuesService} from "app/services/sensorvalues.service";
 
 
 @NgModule({
@@ -62,14 +66,20 @@ import { FilterPipe } from './users/FilterPipe';
     HttpModule,
     CommonModule,
     routing,
-    ChartsModule
+    ChartsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDKaj_b4kICi5aOJhOOQAmci5eKKa30YTk'
+    })
   ],
   providers: [
     IsAuthenticatedService,
     HttpUtilService,
     AlertService,
+    SensorValuesService,
     UserService,
-    AuthLoginService
+    AuthLoginService,
+    ZonesService,
+    SensorsService
   ],
   bootstrap: [AppComponent]
 })

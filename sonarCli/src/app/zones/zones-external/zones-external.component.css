@@ -24,5 +24,9 @@
 
 #mapPanelBody {
   height: 290px;
-  overflow-y: scroll;
+ /* overflow-y: scroll;*/
+}
+
+agm-map {
+  height: 100%;
 }

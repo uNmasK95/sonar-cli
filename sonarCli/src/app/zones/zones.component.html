@@ -19,7 +19,7 @@
                 {{z.description}}
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <span *ngIf="z.type=='Exterior'" class="fa fa-picture-o"></span><span *ngIf="z.type=='Interior'" class="fa fa-home"></span> {{z.type}}
+                <span *ngIf="z.type==0" class="fa fa-picture-o"></span><span *ngIf="z.type==1" class="fa fa-home"></span> {{typeZone(z.type)}}
               </div>
             </div>
           </li>

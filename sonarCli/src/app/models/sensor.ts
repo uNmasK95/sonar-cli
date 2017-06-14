@@ -1,10 +1,12 @@
 export class Sensor {
     constructor(
-        public id: number,
+        public id: string,
         public name: string,
         public description: string,
         public latitude: number,
         public longitude: number,
-        public zone: number)
+        public hostname: string,
+        public min: number,
+        public max: number,)
         {}
 }
