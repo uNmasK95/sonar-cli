@@ -36,6 +36,9 @@ import { ZonesService } from "app/services/zones.service";
 import { SensorsService } from "app/services/sensors.service";
 import { AgmCoreModule } from '@agm/core';
 import { SensorValuesService} from "app/services/sensorvalues.service";
+import { DashboardItemGraficComponent } from './dashboard/dashboard-list/dashboard-item-grafic/dashboard-item-grafic.component';
+import { RowService } from "./services/row.service";
+import { GraficService } from "./services/grafic.service";
 
 
 @NgModule({
@@ -58,7 +61,8 @@ import { SensorValuesService} from "app/services/sensorvalues.service";
     ZonesExternalComponent,
     ZonesSensorCreateComponent,
     ZonesSensorEditComponent,
-    UsersCreateComponent
+    UsersCreateComponent,
+    DashboardItemGraficComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +83,8 @@ import { SensorValuesService} from "app/services/sensorvalues.service";
     UserService,
     AuthLoginService,
     ZonesService,
+    RowService,
+    GraficService,
     SensorsService
   ],
   bootstrap: [AppComponent]

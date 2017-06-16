@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  model : any = {};
 
+  constructor() { }
+//oma dashboard tem linhas uma linha tem varios graficos e um grafico tem metricas
   ngOnInit() {
+    this.model.timestamp = 1;
+    this.model.refresh = 5;
   }
 
 }

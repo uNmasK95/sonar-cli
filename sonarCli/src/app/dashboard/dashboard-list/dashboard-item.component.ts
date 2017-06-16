@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Row } from "app/models/row";
 
 @Component({
@@ -7,10 +7,20 @@ import { Row } from "app/models/row";
   styleUrls: ['./dashboard-item.component.css']
 })
 export class DashboardItemComponent implements OnInit {
+  @Input() timestamp: number;
   @Input() row: Row;
+ 
   constructor() { }
 
   ngOnInit() {
+  }
+
+   ngOnChanges(changes: SimpleChanges) {
+    console.log(this.timestamp);
+  }
+
+  putRow(){
+    localStorage.setItem('row',JSON.stringify(this.row));
   }
 
 }
