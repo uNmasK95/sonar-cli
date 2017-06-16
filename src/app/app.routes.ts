@@ -1,20 +1,20 @@
 import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { IsAuthenticatedService } from './services/is-authenticated.service';
-import { DashboardComponent } from "app/dashboard/dashboard.component";
-import { HistoryComponent } from "app/history/history.component";
-import { ZonesComponent } from "app/zones/zones.component";
-import { UsersComponent } from "app/users/users.component";
-import { NotificationsComponent } from "app/notifications/notifications.component";
-import { ProfileComponent } from "app/profile/profile.component";
-import { DashboardEditComponent } from "app/dashboard/dashboard-edit/dashboard-edit.component";
-import { ZonesExternalComponent } from "app/zones/zones-external/zones-external.component";
-import { ZonesInternalComponent } from "app/zones/zones-internal/zones-internal.component";
-import { ZonesSensorCreateComponent } from "app/zones/zones-sensor-create/zones-sensor-create.component";
-import { ZonesSensorEditComponent } from "app/zones/zones-sensor-edit/zones-sensor-edit.component";
-import { UsersCreateComponent } from "app/users/users-create/users-create.component";
+import { DashboardComponent } from "app/components/dashboard/dashboard.component";
+import { HistoryComponent } from "app/components/history/history.component";
+import { ZonesComponent } from "app/components/zones/zones.component";
+import { UsersComponent } from "app/components/users/users.component";
+import { NotificationsComponent } from "app/components/notifications/notifications.component";
+import { ProfileComponent } from "app/components/profile/profile.component";
+import { DashboardEditComponent } from "app/components/dashboard/dashboard-edit/dashboard-edit.component";
+import { ZonesExternalComponent } from "app/components/zones/zones-external/zones-external.component";
+import { ZonesInternalComponent } from "app/components/zones/zones-internal/zones-internal.component";
+import { ZonesSensorCreateComponent } from "app/components/zones/zones-sensor-create/zones-sensor-create.component";
+import { ZonesSensorEditComponent } from "app/components/zones/zones-sensor-edit/zones-sensor-edit.component";
+import { UsersCreateComponent } from "app/components/users/users-create/users-create.component";
 import { AuthLoginService } from "app/services/auth-login.service";
 
 export const routes: Routes = [

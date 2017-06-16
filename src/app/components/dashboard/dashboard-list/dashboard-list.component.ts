@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { Row } from "../../models/row";
-import { RowService } from "../../services/row.service";
+import { Row } from "../../../models/row";
+import { RowService } from "../../../services/row.service";
 import { GraficService } from "app/services/grafic.service";
 import { Grafic } from "app/models/grafic";
 

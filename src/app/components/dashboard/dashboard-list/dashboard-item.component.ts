@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { Row } from "app/models/row";
+import { Row } from 'app/models/row';
 
 @Component({
   selector: 'dashboard-item',
@@ -9,7 +9,7 @@ import { Row } from "app/models/row";
 export class DashboardItemComponent implements OnInit {
   @Input() timestamp: number;
   @Input() row: Row;
- 
+
   constructor() { }
 
   ngOnInit() {
@@ -20,7 +20,7 @@ export class DashboardItemComponent implements OnInit {
   }
 
   putRow(){
-    localStorage.setItem('row',JSON.stringify(this.row));
+    localStorage.setItem('row', JSON.stringify(this.row));
   }
 
 }

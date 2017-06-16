@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { IsAuthenticatedService } from ".././services/is-authenticated.service";
-import { AlertService } from ".././services/alert.service";
-import { UserService } from ".././services/user.service";
+import { IsAuthenticatedService } from "../../services/is-authenticated.service";
+import { AlertService } from "../../services/alert.service";
+import { UserService } from "../../services/user.service";
 import { User } from "app/models/user";
-import { SensorValuesService } from "../services/sensorvalues.service";
+import { SensorValuesService } from "../../services/sensorvalues.service";
 
 @Component({
   selector: 'login',

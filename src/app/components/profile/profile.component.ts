@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../models/user';
+import { User } from '../../models/user';
 import { AlertService } from "app/services/alert.service";
 import { IsAuthenticatedService } from "app/services/is-authenticated.service";
 import { UserService } from "app/services/user.service";

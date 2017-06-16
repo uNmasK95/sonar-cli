@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, ViewChild, Output } from '@angular/core';
-import { Grafic } from "../../../models/grafic";
-import { BaseChartDirective } from "ng2-charts";
+import { BaseChartDirective } from 'ng2-charts';
+import {Grafic} from '../../../../models/grafic';
 
 @Component({
   selector: 'dashboard-item-grafic',
