@@ -1,5 +1,18 @@
 <h1 class="page-header">Zones</h1>
 
+<!-- Add Zone -->
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-8 col-md-4 col-md-offset-8 col-sm-4 col-sm-offset-8 col-xs-7 col-xs-offset-5">  
+      <!-- Button Add User -->
+      <a class="btn btn-block btn-social btn-registerR" [routerLink]="['/zones','new']">
+          <i class="fa fa-plus-square"></i> Add Zone
+      </a>
+    </div>
+    <!-- /Button Add user-->
+</div>
+<br>
+<!-- /Add Zone -->
+
 <div class="chat-panel panel panel-default">
     <div class="panel-heading " >
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -12,11 +25,12 @@
     </div>
     <!-- .panel-heading -->
     <div class="panel-body">
-        <ul *ngFor="let z of zones" class="chat">
+      <div *ngFor="let z of zones | FilterPipe2: model.queryString; let i = index">
+        <ul  class="chat">
           <li>
             <div id="zoneS" class="chat-body clearfix " (click)="sensorDetails(z)" title="See this zone" data-toggle="popover" data-trigger="hover">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                {{z.description}}
+                {{z.name}}: {{z.description}}
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <span *ngIf="z.type==0" class="fa fa-picture-o"></span><span *ngIf="z.type==1" class="fa fa-home"></span> {{typeZone(z.type)}}
@@ -24,20 +38,23 @@
             </div>
           </li>
         </ul>
+      </div>
       <!--/div-->
     </div>
     <!-- .panel-body -->
     <div class="panel-footer">
           <!-- Search -->    
-          <div class="input-group custom-search-form">
-              <input type="text" class="form-control" placeholder="Search...">
+          <form name="form"  #f="ngForm" >
+          <div class="input-group custom-search-form" [ngClass]="{ 'has-error': f.submitted && !queryString.valid }">
+              <input type="text" class="form-control" name="queryString" id="queryString" [(ngModel)]="model.queryString" value="" #queryString="ngModel" placeholder="Search...">
               <span class="input-group-btn">
                   <button class="btn btn-default" type="button">
                       <i class="fa fa-search"></i>
                   </button>
               </span>
           </div>
-          <!-- /Search -->
+        </form>
+        <!-- /Search -->
       </div>
       <!-- /.panel-footer -->
 </div>

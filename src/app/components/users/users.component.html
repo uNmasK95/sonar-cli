@@ -33,7 +33,7 @@
               {{u.email}}
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-              <span *ngIf="u.admin==true" class="fa fa-user"></span><span *ngIf="u.admin==true" class="fa fa-cogs"></span><span *ngIf="u.admin==false" class="fa fa-user"></span><span *ngIf="u.admin==false" class="fa fa-eye"></span>&emsp;{{u.type}}
+              <span *ngIf="u.admin==true" class="fa fa-user"></span><span *ngIf="u.admin==true" class="fa fa-cogs"></span><span *ngIf="u.admin==false" class="fa fa-user"></span><span *ngIf="u.admin==false" class="fa fa-eye"></span>&emsp;{{type(u.admin)}}
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
               <span (click)="removeUser(u,i)" id="deleteS" class="fa fa-times" title="Delete user" data-toggle="popover" data-trigger="hover"></span>
@@ -46,7 +46,7 @@
     <!-- .panel-body -->
     <div class="panel-footer">
         <!-- Search -->    
-        <form name="form" (ngSubmit)="f.form.valid && addTeam()" #f="ngForm" novalidate>
+        <form name="form"  #f="ngForm" >
           <div class="input-group custom-search-form" [ngClass]="{ 'has-error': f.submitted && !queryString.valid }">
               <input type="text" class="form-control" name="queryString" id="queryString" [(ngModel)]="model.queryString" value="" #queryString="ngModel" placeholder="Search...">
               <span class="input-group-btn">

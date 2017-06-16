@@ -31,7 +31,8 @@ import { ZonesSensorEditComponent } from './components/zones/zones-sensor-edit/z
 import { UsersCreateComponent } from './components/users/users-create/users-create.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { AuthLoginService } from "app/services/auth-login.service";
-import { FilterPipe } from './components/users/FilterPipe';
+import { FilterPipe } from 'app/services/FilterPipe';
+import { FilterPipe2 } from 'app/services/FilterPipe2';
 import { ZonesService } from "app/services/zones.service";
 import { SensorsService } from "app/services/sensors.service";
 import { AgmCoreModule } from '@agm/core';
@@ -39,6 +40,7 @@ import { SensorValuesService} from "app/services/sensorvalues.service";
 import { DashboardItemGraficComponent } from './components/dashboard/dashboard-list/dashboard-item-grafic/dashboard-item-grafic.component';
 import { RowService } from "./services/row.service";
 import { GraficService } from "./services/grafic.service";
+import { ZonesCreateComponent } from './components/zones/zones-create/zones-create.component';
 
 
 @NgModule({
@@ -52,6 +54,7 @@ import { GraficService } from "./services/grafic.service";
     AlertComponent,
     UsersComponent,
     FilterPipe,
+    FilterPipe2,
     NotificationsComponent,
     ProfileComponent,
     DashboardListComponent,
@@ -62,7 +65,8 @@ import { GraficService } from "./services/grafic.service";
     ZonesSensorCreateComponent,
     ZonesSensorEditComponent,
     UsersCreateComponent,
-    DashboardItemGraficComponent
+    DashboardItemGraficComponent,
+    ZonesCreateComponent
   ],
   imports: [
     BrowserModule,
