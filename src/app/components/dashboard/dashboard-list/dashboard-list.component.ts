@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Row } from "../../../models/row";
 import { RowService } from "../../../services/row.service";
-import { GraficService } from "app/services/grafic.service";
-import { Grafic } from "app/models/grafic";
+import { GraficService } from "../../../services/grafic.service";
+import { Grafic } from "../../../models/grafic";
 
 @Component({
   selector: 'dashboard-list',
