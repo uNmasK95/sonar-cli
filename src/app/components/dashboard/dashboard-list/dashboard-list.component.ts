@@ -19,6 +19,7 @@ export class DashboardListComponent implements OnInit {
               private graficService:GraficService) { }
 
   ngOnInit() {
+    console.log("estou aqui")
     this.getRows();
   }
   
