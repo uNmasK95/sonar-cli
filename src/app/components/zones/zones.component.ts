@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Zone } from "app/models/zone";
 import { Router } from "@angular/router";
 import { ZonesService } from "app/services/zones.service";
+import { FilterPipe2 } from "app/services/FilterPipe2";
 
 @Component({
   selector: 'zones',
@@ -10,7 +11,7 @@ import { ZonesService } from "app/services/zones.service";
 })
 export class ZonesComponent implements OnInit {
 
-  /*zones: Zone[] =  [new Zone(1,"Zona1","Exterior"),new Zone(2,"Zona2","Interior"),new Zone(3,"Zona3","Exterior"),new Zone(4,"Zona4","Exterior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior"),new Zone(2,"Zona2","Interior")]*/
+  model : any = {};
   zones: Zone[] = [];
 
   constructor(

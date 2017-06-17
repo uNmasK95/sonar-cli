@@ -19,4 +19,11 @@ export class ZonesService {
                .map(this.httpUtil.extrairDados);
   }
 
+  //Create a new zone
+  create(name,desc,type,min,max){
+    return this.http.post(this.httpUtil.url('/zones'), JSON.stringify({name: name, description: desc,
+          type: type, min: min, max: max}), this.httpUtil.headers())
+              .map(this.httpUtil.extrairDados);
+  }
+
 }

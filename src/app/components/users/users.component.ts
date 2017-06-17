@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from "app/models/user";
 import { Router } from "@angular/router";
-import { FilterPipe } from './FilterPipe';
 import { UserService } from "app/services/user.service";
 import { AlertService } from "app/services/alert.service";
+import { FilterPipe } from "app/services/FilterPipe";
 
 @Component({
   selector: 'users',
@@ -58,6 +58,12 @@ export class UsersComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  //Return type of user
+  type(value: boolean): string{
+      if(value==true) return "Admin";
+      return "Normal User";
   }
 
 }

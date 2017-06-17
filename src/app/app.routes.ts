@@ -16,6 +16,7 @@ import { ZonesSensorCreateComponent } from "app/components/zones/zones-sensor-cr
 import { ZonesSensorEditComponent } from "app/components/zones/zones-sensor-edit/zones-sensor-edit.component";
 import { UsersCreateComponent } from "app/components/users/users-create/users-create.component";
 import { AuthLoginService } from "app/services/auth-login.service";
+import { ZonesCreateComponent } from "app/components/zones/zones-create/zones-create.component";
 
 export const routes: Routes = [
     { path: '', component: LoginComponent, canActivate: [AuthLoginService]/*canActivate: [LoginGuardService]*//*, canActivate: [AuthGuard]*/ },
@@ -28,6 +29,7 @@ export const routes: Routes = [
     
     { path: 'history', component: HistoryComponent, canActivate: [IsAuthenticatedService] },
     { path: 'zones', component: ZonesComponent, canActivate: [IsAuthenticatedService] },
+    { path: 'zones/new', component: ZonesCreateComponent, canActivate: [IsAuthenticatedService] },
     { path: 'zones/internal/:id', component: ZonesInternalComponent, canActivate: [IsAuthenticatedService] },
     { path: 'zones/internal/:id/new', component: ZonesSensorCreateComponent, canActivate: [IsAuthenticatedService] },
     { path: 'zones/internal/:id/sensor/:id2', component: ZonesSensorEditComponent, canActivate: [IsAuthenticatedService] },
