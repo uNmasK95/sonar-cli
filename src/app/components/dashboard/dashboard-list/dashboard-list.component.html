@@ -1,1 +1,52 @@
-<dashboard-item *ngFor="let r of rows; let i = index" [row]="r" [timestamp]="timestamp"></dashboard-item>
+<dashboard-item *ngFor="let r of rows; let i = index" (eliminalinha)="eliminalinha()" [row]="r" [timestamp]="timestamp"></dashboard-item>
+<div *ngIf="!createRowOn" class="col-md-offset-9 col-md-3">
+    <a (click)="createRowRegister()"  class="btn btn-block btn-social btn-editR" id="createrow" title="Update Graphic" data-toggle="popover" data-trigger="hover">
+        <i class="fa fa-plus-square"></i> Create Row
+    </a>
+</div>
+
+<div *ngIf="createRowOn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <form class="form-horizontal" (ngSubmit)="f.form.valid && createRow()" #f="ngForm" novalidate>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+                    <!-- Name -->
+                    <br>
+                        <div class="row">
+                            <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
+                                <label>Name</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" name="name" id="idname" [(ngModel)]="model.name" #name="ngModel" required class="form-control" placeholder="Ex: Sensor XPTO">
+                                <div *ngIf="f.submitted && !name.valid" class="help-block">Name is required</div>
+                            </div>
+                        </div>
+                <!-- /Name -->
+                    </div>
+                     <!-- Confirm Button -->
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-2 col-lg-offset-6 col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6 col-xs-2 col-xs-offset-6">  
+                                <!-- Button cancel row -->
+                                <button (click)="createRowCancel()" type="button" class="btn btn-block btn-social btn-deleteG" >
+                                    <i class="fa fa-plus-square"></i> Cancel
+                                </button>
+                                <!-- /Button cancel Sensor-->
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">  
+                                 <!-- Button add row -->
+                                <button type="submit" class="btn btn-block btn-social btn-registerR" >
+                                    <i class="fa fa-plus-square"></i> Create
+                                </button>
+                                 <!-- Button add row -->
+                            </div>
+                        </div>
+                        <br>
+                    <!-- /Confirm Button -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

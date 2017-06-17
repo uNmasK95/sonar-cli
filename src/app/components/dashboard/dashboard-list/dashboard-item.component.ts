@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input,Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { Row } from 'app/models/row';
 
 @Component({
@@ -9,6 +9,7 @@ import { Row } from 'app/models/row';
 export class DashboardItemComponent implements OnInit {
   @Input() timestamp: number;
   @Input() row: Row;
+  @Output() eliminalinha = new EventEmitter();
 
   constructor() { }
 
@@ -17,6 +18,11 @@ export class DashboardItemComponent implements OnInit {
 
    ngOnChanges(changes: SimpleChanges) {
     console.log(this.timestamp);
+  }
+
+  deleteRow(){
+    localStorage.setItem("deleteRow",JSON.stringify({ row : this.row}));
+    this.eliminalinha.emit();
   }
 
   putRow(){

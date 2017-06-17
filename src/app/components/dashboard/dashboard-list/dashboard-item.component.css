@@ -19,3 +19,10 @@
 .btn-editR .badge{color:#205081;background-color:#fff}
 
 .btn-editR     { background-color: #205081; }
+
+.btn-deleteG{color:#fff;background-color:#cb2027;border-color:rgba(0,0,0,0.2)}.btn-deleteG:hover,.btn-deleteG:focus,.btn-deleteG:active,.btn-deleteG.active,.open>.dropdown-toggle.btn-deleteG{color:#fff;background-color:#9f191f;border-color:rgba(0,0,0,0.2)}
+.btn-deleteG:active,.btn-deleteG.active,.open>.dropdown-toggle.btn-deleteG{background-image:none}
+.btn-deleteG.disabled,.btn-deleteG[disabled],fieldset[disabled] .btn-deleteG,.btn-deleteG.disabled:hover,.btn-deleteG[disabled]:hover,fieldset[disabled] .btn-deleteG:hover,.btn-deleteG.disabled:focus,.btn-deleteG[disabled]:focus,fieldset[disabled] .btn-deleteG:focus,.btn-deleteG.disabled:active,.btn-deleteG[disabled]:active,fieldset[disabled] .btn-deleteG:active,.btn-deleteG.disabled.active,.btn-deleteG[disabled].active,fieldset[disabled] .btn-deleteG.active{background-color:#cb2027;border-color:rgba(0,0,0,0.2)}
+.btn-deleteG .badge{color:#cb2027;background-color:#fff}
+
+.btn-deleteG     { background-color: #cb2027; }

@@ -16,7 +16,16 @@ export class DashboardEditComponent implements OnInit {
 
   ngOnInit() {
     this.row = JSON.parse(localStorage.getItem('row'));
-    console.log(this.timestamp);
+    console.log(this.row);
+  }
+
+  haveSpaceForMoreGraphic(){
+    if(this.row.grafics.length <=2){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
 

@@ -34,8 +34,19 @@ export class LoginComponent implements OnInit {
     this.isauthenticationService.login(this.model.email, this.model.password)
         .subscribe(
               resultado => {
-                  this.utilizadorOn();
-                  this.router.navigate(['/dashboard']);
+                  this.userService.getUser(localStorage.getItem('id')).subscribe(
+                    resultado => {
+                        // crio um utilizador deixando apenas o id, email, username e type.
+                        let user = resultado;
+                        user.id = user._id.$oid;
+                        delete user.password_digest;
+                        localStorage.setItem('userOn',JSON.stringify(user));
+                        this.router.navigate(['/dashboard']);
+                  },
+                  error => {
+                        console.log(error);
+                  });
+                  
               },
               error => {
                   console.log("ERROR:"+error);
@@ -45,8 +56,7 @@ export class LoginComponent implements OnInit {
           );
   }
 
-  utilizadorOn(){
-      console.log(localStorage.getItem('id'));
+ /* utilizadorOn(){
     this.userService.getUser(localStorage.getItem('id')).subscribe(
         resultado => {
               // crio um utilizador deixando apenas o id, email, username e type.
@@ -58,6 +68,6 @@ export class LoginComponent implements OnInit {
       error => {
               console.log(error);
       });
-  }
+  }*/
 
 }
