@@ -43,11 +43,12 @@ export class HistoryComponent implements OnInit {
     {data: [28, 48, 40, 19, 86, 27, 90,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40], label: 'Sensor2'},
     {data: [18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40], label: 'Sensor3'}*/
   ];  
-    public lineChartLabels:Array<any> = ['50s', '55s', '00s', '05s', 
+    public lineChartLabels:Array<any> = [/*'50s', '55s', '00s', '05s', 
             '10s', '15s', '20s','50s', '55s', '00s', '05s', 
             '10s', '15s', '20s','50s', '55s', '00s', '05s', 
             '10s', '15s', '20s','50s', '55s', '00s', '05s', 
-            '10s', '15s', '20s', '15s', '20s'];
+            '10s', '15s', '20s', '15s', '20s','10s', '15s', '20s', '15s', '20s','10s', '15s', '20s', '15s', '20s'*/
+            ];
     public lineChartOptions:any = {
       responsive: true
       
@@ -139,32 +140,75 @@ export class HistoryComponent implements OnInit {
 
     updateMetrics(){
       console.log("Mudei");
-      console.log(this.model.init);
+      let init = this.model.init;
+      let initD = new Date(init);
+      let year = initD.getFullYear();
+      let month = initD.getMonth();
+      let day = initD.getDate();
+      let hourI = this.model.hourI;
+      let minI = this.model.minI;
+      let timestampI = + new Date(year, month, day, hourI, minI, 0, 0);
+      console.log(timestampI);
+      
+      let finish = this.model.finish;
+      let finishD = new Date(finish);
+      let yearF = finishD.getFullYear();
+      let monthF = finishD.getMonth();
+      let dayF = finishD.getDate();
+      let hourF = this.model.hourF;
+      let minF = this.model.minF;
+      let timestampF = + new Date(yearF, monthF, dayF, hourF, minF, 0, 0);
+      console.log(timestampF);
 
+      //Dividir o eixo x
+      let tamanho = timestampF/1000-timestampI/1000;
+      let timestampAux = timestampI/1000;
+      for(let i=0;i<=tamanho;i++){
+        let aux = i+1;
+        this.lineChartLabels.push(''+timestampAux);
+        timestampAux++;
+      }
+
+      //Buscar valores leituras
       let size = 0;
       //Percorrer aux2 e buscar reads e colocar em linedata
       console.log(this.aux2.length);
-      let values=[];
-      for(let i=0;i<this.aux2.length;i++){
+      let values: Array<any> =[];
+      let rValues = [];
+      let valuesTime = [];
+      /*for(let i=0;i<this.aux2.length;i++){
         console.log("buscar valores");
         values = [];
         this.lineChartData[i].data = [];
-        this.sensorValuesService.getSensorIdValues(this.aux2[i].sensorId,this.aux2[i].zoneId,3600)
+        this.sensorValuesService.getSensorIdValues2(this.aux2[i].sensorId,this.aux2[i].zoneId,timestampI/1000,timestampF/1000)
           .subscribe(
             res => {
               console.log(res);
-              for(let r of res){
+              for(let r of res){//recebeu valores, guardar no sitio certo
                 //console.log(r);
-                values.push(r.value);
+                values.push( {value: r.value, timestamp: r.timestamp});
+                valuesTime.push(new Date(r.timestamp*1000));
               }
-               this.lineChartData[i].data = values;
+              for(let k=0;k<this.lineChartLabels.length;k++){
+                let timesAux = parseInt(this.lineChartLabels[k]);
+                let findTimestamp = values.find(res => res.timestamp==timesAux); 
+                if(findTimestamp){//Encontrou
+                  rValues.push(findTimestamp.values);
+                }else{//Nao encontrou
+                  rValues.push(0);
+                }
+              }
+               this.lineChartData[i].data = rValues;
                this.chart.ngOnChanges({});
                values = [];
+               rValues = [];
+               //console.log(valuesTime);
+               valuesTime = [];
             }
           );
           //this.lineChartData[i].data = values;
          // this.chart.ngOnChanges({});
-      }
+      /}*/
       //console.log("SAI");
       //console.log(this.lineChartData);
       //this.chart.ngOnChanges({});
