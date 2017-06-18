@@ -87,13 +87,36 @@ export class HistoryComponent implements OnInit {
                 private sensorValuesService: SensorValuesService) { }
 
     ngOnInit() {
-      this.model.init = this.init;
-      this.model.hourI = this.hourI;
-      this.model.minI = this.minI;
-      this.model.finish = this.finish;
-      this.model.hourF = this.hourF;
-      this.model.minF = this.minF;
-      
+      if(localStorage['metrics']){//já foram definidas todas as metricas
+        this.model.init = localStorage['metrics'].getInit();
+        this.model.hourI = localStorage['metrics'].getHourI();
+        this.model.minI = localStorage['metrics'].getMinI();
+        this.model.finish = localStorage['metrics'].getFinish();
+        this.model.hourF = localStorage['metrics'].getHourF();
+        this.model.minF = localStorage['metrics'].getMinF();
+        //Percorrer array sensor localhost
+        for(let i=0;i<localStorage['metrics'].getSensors().length;i++){
+          if(i!=0){
+            this.aux2.push({zone: localStorage['metrics'].getSensors()[i].zone,
+                zoneId: localStorage['metrics'].getSensors()[i].zoneId, 
+                sensor: localStorage['metrics'].getSensors()[i].sensor, 
+                sensorId: localStorage['metrics'].getSensors()[i].sensorId});
+            this.aux2[i] = (localStorage['metrics'].getSensors())[i].zone;
+          }else{
+            this.aux2[i].zone=localStorage['metrics'].getSensors()[i].zone;
+            this.aux2[i].zoneId=localStorage['metrics'].getSensors()[i].zoneId;
+            this.aux2[i].sensor=localStorage['metrics'].getSensors()[i].sensor;
+            this.aux2[i].sensorId=localStorage['metrics'].getSensors()[i].sensorId;
+          }
+        }
+      }else{ //ainda nao foram
+        this.model.init = this.init;
+        this.model.hourI = this.hourI;
+        this.model.minI = this.minI;
+        this.model.finish = this.finish;
+        this.model.hourF = this.hourF;
+        this.model.minF = this.minF;
+      }
 
       let zone: Zone = null;
       this.zonesService.getAll()
@@ -163,6 +186,7 @@ export class HistoryComponent implements OnInit {
       //Dividir o eixo x
       let tamanho = timestampF/1000-timestampI/1000;
       let timestampAux = timestampI/1000;
+      this.lineChartLabels = [];
       for(let i=0;i<=tamanho;i++){
         let aux = i+1;
         this.lineChartLabels.push(''+timestampAux);
@@ -175,25 +199,31 @@ export class HistoryComponent implements OnInit {
       console.log(this.aux2.length);
       let values: Array<any> =[];
       let rValues = [];
-      let valuesTime = [];
-      /*for(let i=0;i<this.aux2.length;i++){
+     // let valuesTime = [];
+      for(let i=0;i<this.aux2.length;i++){
         console.log("buscar valores");
         values = [];
+        rValues = [];
         this.lineChartData[i].data = [];
         this.sensorValuesService.getSensorIdValues2(this.aux2[i].sensorId,this.aux2[i].zoneId,timestampI/1000,timestampF/1000)
           .subscribe(
             res => {
-              console.log(res);
+              //console.log(res);
               for(let r of res){//recebeu valores, guardar no sitio certo
                 //console.log(r);
                 values.push( {value: r.value, timestamp: r.timestamp});
-                valuesTime.push(new Date(r.timestamp*1000));
+                //valuesTime.push(new Date(r.timestamp*1000));
               }
+              console.log("values lidos:");
+              console.log(values);
               for(let k=0;k<this.lineChartLabels.length;k++){
                 let timesAux = parseInt(this.lineChartLabels[k]);
+                //console.log(timesAux);
                 let findTimestamp = values.find(res => res.timestamp==timesAux); 
+                //console.log("Encontrou?");
+                //console.log(findTimestamp);
                 if(findTimestamp){//Encontrou
-                  rValues.push(findTimestamp.values);
+                  rValues.push(findTimestamp.value);
                 }else{//Nao encontrou
                   rValues.push(0);
                 }
@@ -203,66 +233,12 @@ export class HistoryComponent implements OnInit {
                values = [];
                rValues = [];
                //console.log(valuesTime);
-               valuesTime = [];
+               //valuesTime = [];
             }
           );
           //this.lineChartData[i].data = values;
          // this.chart.ngOnChanges({});
-      /}*/
-      //console.log("SAI");
-      //console.log(this.lineChartData);
-      //this.chart.ngOnChanges({});
-      //this.sensorValuesService.getSensorIdValues(this.)
-
-      /*let dateNow = new Date();
-      dateNow.getDay();
-
-
-      let init = this.init;
-      let hourI = this.hourI;
-      let minI = this.minI;
-      let finish = this.finish;
-      let hourF = this.hourF;
-      let minF = this.minF;
-
-      if(this.model.init){
-        init = this.model.init;
       }
-      if(this.model.hourI){
-        hourI = this.model.hourI;
-      }
-      if(this.model.minI){
-        minI = this.model.minI;
-      }
-      if(this.model.finish){
-        finish = this.model.finish;
-      }
-      if(this.model.hourF){
-        hourF = this.model.hourF;
-      }
-      if(this.model.minF){
-        minF = this.model.minF;
-      }
-      console.log(".....")
-      console.log(this.init);
-      console.log(this.model.init);
-      console.log(this.hourI);
-      console.log(this.minI);
-      console.log(this.finish);
-      console.log(this.hourF);
-      console.log(this.minF);
-      */
-      /*this.sensorsService.update(this.idZone, this.idSensor, name, hostname, description,
-        min, max, lat, long)
-            .subscribe(
-              res => {
-                if(this.typeZone==0){//internal
-                  this.router.navigate(['/zones/internal',this.idZone]);
-                }else{//external
-                  this.router.navigate(['/zones/external',this.idZone]);
-                }
-              }
-            );*/
     }
 
     //When select of zone changes, get the respective sensors
@@ -338,21 +314,55 @@ export class HistoryComponent implements OnInit {
 
 class SensorGraphic { 
    //field 
-   sensors : Sensor[] = new Array(); 
-
+   sensors : Array<any> = []; 
+   init: string = "";
+   hourI: number = -1;
+   minI: number = -1;
+   finish: string = "";
+   hourF: number = -1;
+   minF: number = -1;
    //function 
    getSensors() { 
       return this.sensors;
    } 
-   setSensor(s: Sensor){
-       this.sensors.push(s);
+   setSensor(z,zId,s,sId){
+       this.sensors.push({zone: z,zoneId: zId, sensor:s, sensorId: sId});
    }
-   /*removeSensor(i: number){
-       this.choises.splice(i,1);
+   getInit() { 
+      return this.init;
+   } 
+   setInit(i){
+       this.init = i;
    }
-   exists(elem: Element){
-       if(this.choises.indexOf(elem)==-1) return false;
-       else return true;
-   }*/
+   getHourI() { 
+      return this.hourI;
+   } 
+   setHourI(h){
+       this.hourI = h;
+   }
+   getMinI() { 
+      return this.minI;
+   } 
+   setMinI(m){
+       this.minI = m;
+   }
+   getFinish() { 
+      return this.finish;
+   } 
+   setFinish(f){
+       this.finish = f;
+   }
+   getHourF() { 
+      return this.hourF;
+   } 
+   setHourF(h){
+       this.hourF = h;
+   }
+   getMinF() { 
+      return this.minF;
+   } 
+   setMinF(m){
+       this.minF = m;
+   }
 
 }
