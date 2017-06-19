@@ -41,7 +41,8 @@ import { DashboardItemGraficComponent } from './components/dashboard/dashboard-l
 import { RowService } from "./services/row.service";
 import { GraficService } from "./services/grafic.service";
 import { ZonesCreateComponent } from './components/zones/zones-create/zones-create.component';
-
+import { DashboardEditMetricComponent } from './components/dashboard/dashboard-edit/dashboard-edit-metric/dashboard-edit-metric.component';
+import { MetricService } from "app/services/metric.service";
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ZonesCreateComponent } from './components/zones/zones-create/zones-crea
     ZonesSensorEditComponent,
     UsersCreateComponent,
     DashboardItemGraficComponent,
-    ZonesCreateComponent
+    ZonesCreateComponent,
+    DashboardEditMetricComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +87,7 @@ import { ZonesCreateComponent } from './components/zones/zones-create/zones-crea
     AlertService,
     SensorValuesService,
     UserService,
+    MetricService,
     AuthLoginService,
     ZonesService,
     RowService,

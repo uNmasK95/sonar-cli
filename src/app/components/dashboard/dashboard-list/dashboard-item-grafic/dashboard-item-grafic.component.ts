@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, ViewChild, Output } from '@angular/core';
+import { Component, OnInit, OnChanges, EventEmitter, Input, ViewChild, Output, SimpleChanges } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
 import {Grafic} from '../../../../models/grafic';
 
@@ -13,6 +13,7 @@ export class DashboardItemGraficComponent implements OnInit {
   @Input() timestamp: number;
   @Input() grafic : Grafic;
   @Output() graphicSelect = new EventEmitter();
+  
 
   private selectGraphic : boolean = false;
 
@@ -65,6 +66,12 @@ export class DashboardItemGraficComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if(JSON.parse(localStorage.getItem("graphic")).id == this.grafic.id){
+      
+    }
   }
 
   //#################Chart################

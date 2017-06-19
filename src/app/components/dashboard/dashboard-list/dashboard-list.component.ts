@@ -4,6 +4,7 @@ import { RowService } from "../../../services/row.service";
 import { GraficService } from "../../../services/grafic.service";
 import { Grafic } from "../../../models/grafic";
 import { User } from "../../../models/user";
+import { Metric } from "app/models/metric";
 
 @Component({
   selector: 'dashboard-list',
@@ -46,6 +47,7 @@ export class DashboardListComponent implements OnInit {
       resultado =>{
         let graficos: Grafic[] = [];
         let rowaux = new Row(resultado._id.$oid,resultado.name,graficos)
+        this.rows.push(rowaux);
       },
       error =>{
         console.log(error);
@@ -77,7 +79,14 @@ export class DashboardListComponent implements OnInit {
           let graficos: Grafic[] = [];
           if(row.graphics){
             for( let grafic of row.graphics){
-              let graphic = new Grafic(grafic._id.$oid,grafic.name,grafic.rangeTime); 
+              let metrics : Metric[] = [];
+              if(grafic.metrics){
+                for( let metric of grafic.metrics){
+                  let metricaux = new Metric(metric._id.$oid,metric.name,metric.zone_id.$oid,metric.sensor_id.$oid);
+                  metrics.push(metricaux);
+                }
+              }
+              let graphic = new Grafic(grafic._id.$oid,grafic.name,grafic.rangeTime,metrics); 
               graficos.push(graphic);
             }
           }

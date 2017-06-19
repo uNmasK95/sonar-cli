@@ -1,5 +1,9 @@
 <h1 class="page-header">Edit Row</h1>
-
+<div class="row">
+  <div *ngIf="removegraphic" class="col-md-4">
+  <div class="alert alert-success" role="alert">Graphic successfully removed</div>
+  </div>
+</div>
 <div class="row">
   <div class="col-lg-12">
     <div class="row">
@@ -7,7 +11,7 @@
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
         <!-- Button Delete -->
         <br>
-        <a class="btn btn-block btn-social btn-deleteG">
+        <a (click)="deleteGraphic()" class="btn btn-block btn-social btn-deleteG">
             <i class="fa fa-times"></i> Delete Graphic
         </a>
         <!-- /Button Delete-->
@@ -54,7 +58,7 @@
                     <dashboard-item-grafic (graphicSelect)="graphicSelect()" *ngFor="let g of row.grafics; let i =index" [grafic]="g" [timestamp]="timestamp"></dashboard-item-grafic>
                     <div *ngIf="haveSpaceForMoreGraphic()" class="panel-body col-md-4">
                       <div style="display: block;">
-                        <i style="width:100%"class="fa fa-plus-square-o" aria-hidden="true"></i>
+                        <i (click)="createGraphic()" style="width:100%"class="fa fa-plus-square-o" aria-hidden="true"></i>
                       </div>
                     </div>
                     <!--div id="border" class="col-md-4">
@@ -81,23 +85,63 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                 Edit Graphic
+              </div>
+              <!-- Button Add Sensor -->
+              <div class="col-lg-3 col-lg-offset-6 col-md-3 col-md-offset-6 col-sm-3 col-sm-offset-6 col-xs-3 col-xs-offset-6">
+                <button (click)="addMetric()" class="btn btn-block btn-social btn-editR">
+                    <i class="fa fa-plus-square"></i> Add Sensor
+                </button>
+              </div>
+              <!-- /Button Sensor-->
             </div>
+          </div>
             <!-- .panel-heading -->
             <div class="panel-body">
-
               <!-- Sensor of Graphic -->
-              <div class="row">
+               <li class="left clearfix" *ngFor="let line of aux2; let i=index">
+                  <dashboard-edit-metric (metricNewComming)="metricNew($event)" (removeMetric)="removeMetricGraphic($event)" [index]="i" [metric]=line [zones]="zones" [sensorzones]="sensor_zones"></dashboard-edit-metric>
+                  <!--form class="form-horizontal" (ngSubmit)="f.form.valid && addMetric()" #f="ngForm" novalidate>
+                    
+                      <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1">
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !zoneS.valid}">
+                          <label>Zone</label>
+                          <select (ngModelChange)="getMetrics($event,i)" class="form-control" name="zoneS" id="idzoneS" [(ngModel)]="line.zone"  required>
+                            <option *ngFor="let z of zones" [value]="z.id">{{z.name}}</option>
+                          </select>
+                          <div *ngIf="f.submitted && !zoneS.valid" class="help-block">Zone is required</div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1">
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !sensorS.valid }">
+                          <label>Sensor</label>
+                          <select (ngModelChange)="getSensor($event,i)" class="form-control" name="sensorS" id="idsensorS" [(ngModel)]="line.sensor" required>
+                            <option *ngFor="let s of sensors" [value]="s.id">{{s.name}}</option>
+                          </select>
+                          <div *ngIf="f.submitted && !sensorS.valid" class="help-block">Sensor is required</div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <i (click)="remove(i)" id="deleteS" class="fa fa-times" aria-hidden="true" title="Remove"  data-toggle="popover" data-trigger="hover"></i>
+                      </div>
+
+                  </form-->
+                </li>
+
+              <!--div class="row">
                 <div class="col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1 col-xs-1 col-xs-offset-1">
                   <label>Zone</label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                   <div class="form-group">
-                    <select class="form-control">
-                      <option>Campo1</option>
-                      <option>Campo2</option>
-                    </select> 
+                    <select class="form-control" [(ngModel)]="model.zoneSelect">
+                      <option *ngFor="let zone of zones" [ngValue]="zone">{{zone.name}}</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
@@ -105,28 +149,31 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                   <div class="form-group">
-                    <select class="form-control">
-                      <option>Sensor1</option>
-                      <option>Sensor2</option>
+                    <select class="form-control" [(ngModel)]="model.sensorSelect">
+                      <option *ngFor="let sensor of getSensorZone()" [ngValue]="sensor">{{sensor.name}}</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                   <span id="deleteS" class="fa fa-times"></span>
                 </div>
-              </div>
+              </div-->
               <!-- /Sensor of Graphic -->
-
+              
               <!-- Button Add Sensor -->
-              <div class="row">
-                <div class="col-lg-4 col-lg-offset-7 col-md-4 col-md-offset-7 col-sm-4 col-sm-offset-7 col-xs-4 col-xs-offset-7">
-                  <a class="btn btn-block btn-social btn-editR">
+              <!--div class="row">
+                <div class="col-lg-3 col-lg-offset-6 col-md-3 col-md-offset-6 col-sm-3 col-sm-offset-6 col-xs-3 col-xs-offset-6">
+                  <a *ngIf="haveNumberMetric()" class="btn btn-block btn-social btn-editR">
+                      <i class="fa fa-plus-square"></i> Save
+                  </a>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <a *ngIf="dontHaveSpace()" class="btn btn-block btn-social btn-editR">
                       <i class="fa fa-plus-square"></i> Add Sensor
                   </a>
                 </div>
-              </div>
+              </div-->
               <!-- /Button Sensor-->
-
             </div>
             <!-- .panel-body -->
         </div>

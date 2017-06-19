@@ -1,0 +1,53 @@
+<!--div class="row">
+    <div class="col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1 col-xs-1 col-xs-offset-1">
+      <label>Zone</label>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="form-group">
+        <select class="form-control" [(ngModel)]="model.zoneSelect">
+          <option *ngFor="let zone of zones" [ngValue]="zone">{{zone.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+      <label>Sensor</label>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="form-group">
+        <select class="form-control" [(ngModel)]="model.sensorSelect">
+          <option *ngFor="let sensor of getSensorZone()" [ngValue]="sensor">{{sensor.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+      <span id="deleteS" class="fa fa-times"></span>
+    </div>
+  </div-->
+
+<form class="form-horizontal" (ngSubmit)="f.form.valid && addMetric()" #f="ngForm" novalidate>
+                
+    <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1">
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !zoneS.valid}">
+        <label>Zone</label>
+        <select (ngModelChange)="getMetrics($event)" class="form-control" name="zoneS" id="idzoneS" [(ngModel)]="model.zone"  required>
+          <option *ngFor="let z of zones" [value]="z.id">{{z.name}}</option>
+        </select>
+        <div *ngIf="f.submitted && !zoneS.valid" class="help-block">Zone is required</div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1">
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !sensorS.valid }">
+        <label>Sensor</label>
+        <select (ngModelChange)="getSensor($event)" class="form-control" name="sensorS" id="idsensorS" [(ngModel)]="model.sensor" required>
+          <option *ngFor="let s of sensors" [value]="s.id">{{s.name}}</option>
+        </select>
+        <div *ngIf="f.submitted && !sensorS.valid" class="help-block">Sensor is required</div>
+      </div>
+    </div>
+
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+      <i (click)="remove()" id="deleteS" class="fa fa-times" aria-hidden="true" title="Remove"  data-toggle="popover" data-trigger="hover"></i>
+    </div>
+
+</form>
