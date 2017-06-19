@@ -1,9 +1,12 @@
 export class Notification {
     constructor(
-        public id: number,
-        public sensor: string,
+        public id: string,
         public zone: string,
+        public sensor: string,
+        public min: number,
+        public max: number,      
+        public value: number,
         public description: string,
-        public date: Date)
+        public timestamp: string)
         {}
 }

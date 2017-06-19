@@ -41,6 +41,7 @@ import { DashboardItemGraficComponent } from './components/dashboard/dashboard-l
 import { RowService } from "./services/row.service";
 import { GraficService } from "./services/grafic.service";
 import { ZonesCreateComponent } from './components/zones/zones-create/zones-create.component';
+import { NotificationsService } from "app/services/notifications.service";
 
 
 @NgModule({
@@ -89,7 +90,8 @@ import { ZonesCreateComponent } from './components/zones/zones-create/zones-crea
     ZonesService,
     RowService,
     GraficService,
-    SensorsService
+    SensorsService,
+    NotificationsService
   ],
   bootstrap: [AppComponent]
 })
