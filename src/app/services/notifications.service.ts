@@ -35,7 +35,7 @@ export class NotificationsService {
   //Marcar notificacao como lida pelo user locado
   wasRead(not: Notification){
     console.log(not.id);
-    console.log(localStorage['id']);
+    //console.log(localStorage['id']);
       return this.http.put(this.httpUtil.url('/notifications/'+not.id+"?user="+localStorage['id']),'',
             this.httpUtil.headers())
                 .map(this.httpUtil.extrairDados);

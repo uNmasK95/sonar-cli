@@ -44,4 +44,23 @@ export class ZonesInternalComponent implements OnInit {
   sensorChoise(sensor: Sensor){
       this.router.navigate(['/zones/internal/'+this.zoneId+'/sensor/'+sensor.id]);
   }
+
+  refresh(sensor){
+    console.log("update");
+  }
+
+  //Ver se esta ativo
+  active(sensor){
+    return false;;
+  }
+
+  //turnOn sensor
+  activeNow(sensor){
+    console.log("Ativar");
+  }
+
+  //turnOff sensor
+  turnOff(sensor){
+    console.log("Desativar");
+  }
 }

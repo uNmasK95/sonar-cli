@@ -9,39 +9,25 @@
       <!-- /.panel-heading -->
       <div class="panel-body">
           <ul *ngFor="let not of notifications" class="chat">
-              <li *ngIf="isInternal(not.zone)" class="left clearfix">
+              <li class="left clearfix">
                   <span class="chat-img pull-left">
                       <img id="ex" src="/../../assets/img/alert.png" alt="User Avatar" class="img-circle" />
                   </span>
                   <div class="chat-body clearfix">
                       <div class="header">
-                          <strong class="primary-font">{{not.sensor}}</strong>
+                          <strong class="primary-font">{{not.sensorName}}</strong>
                           <small class="pull-right text-muted">
-                              <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
+                              <i class="fa fa-clock-o fa-fw"></i> {{timeToNow(not.timestamp)}} mins ago 
                           </small>
                       </div>
                       <p>
-                          <strong>Zone:</strong> {{not.zone}}
+                          <strong>Zone:</strong> {{not.zoneName}}
                       </p>
                       <p>
-                          {{not.description}}
+                          {{not.description}}: 
                       </p>
-                  </div>
-              </li>
-              <li *ngIf="!isInternal(not.zone)" class="right clearfix">
-                  <span class="chat-img pull-right">
-                      <img id="ex" src="/../../assets/img/alert.png" alt="User Avatar" class="img-circle" />
-                  </span>
-                  <div class="chat-body clearfix">
-                      <div class="header">
-                          <small class=" text-muted">
-                              <i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small>
-                          <p class="pull-right">
-                            <strong>{{not.sensor}}</strong><br>
-                            <strong>Zone:</strong> {{not.zone}}<br>
-                            {{not.description}}<br>
-                        </p>
-                      </div>
+                      <p *ngIf="max(not)"><i id="v" class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> {{dif(not)}} db</p>
+                      <p *ngIf="!max(not)"><i id="v" class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> {{dif(not)}} db</p>
                   </div>
               </li>
           </ul>
