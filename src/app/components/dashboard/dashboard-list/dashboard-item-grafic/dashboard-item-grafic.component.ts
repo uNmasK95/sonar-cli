@@ -21,6 +21,7 @@ export class DashboardItemGraficComponent implements OnInit {
   
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
 
+  interval;
   antigorefresh: number = 5;
   antigotimestamp: number = 1;
   refreshXgraphic: number = 5;
@@ -112,7 +113,7 @@ export class DashboardItemGraficComponent implements OnInit {
           let rValues = [];
           
           this.lineChartData.push({data: new Array(), label: metrica.sensor});
-          
+            
           this.sensorsService.getSensorIdValues(metrica.zone,metrica.sensor,1).subscribe(
             resultado =>{
 
@@ -167,7 +168,9 @@ export class DashboardItemGraficComponent implements OnInit {
                 //if(this.lineChartData){
                  this.chart.ngOnChanges({});
 
-                 //}
+                 this.setIntervals(metrica,rValues);
+
+                 //}   
                 //}
                 values = [];
                 rValues = [];
@@ -185,7 +188,83 @@ export class DashboardItemGraficComponent implements OnInit {
         }
       }
   }
-  
+  setIntervals(metrica,rValues){
+    this.interval = setInterval(() => {
+      let t: number = this.refresh/5;
+      this.lineChartLabels.splice(0,t);
+      rValues.splice(0,t);
+      let p = this.lineChartLabels[0];
+      let numerocomeca = this.lineChartLabels.length;
+      for(let i = this.lineChartLabels.length;i<(this.lineChartLabels.length+t) ;i++){
+        p = parseInt(p+'') + this.refreshXgraphic;
+      //  console.log(i);
+       // console.log(p);
+       // console.log(this.lineChartLabels.length+t);
+        this.lineChartLabels.push(p+'');
+        break;
+      }
+      this.sensorsService.getSensorIdValues(metrica.zone,metrica.sensor,p).subscribe(
+        resultado=>{
+          let i = 0;
+          let values : Array<any>= []
+          for(let value of resultado){
+            values.push( {value: value.value, timestamp: value.timestamp});
+            i++;
+          }
+        
+         // console.log(p);
+          this.lineChartData.find(x => x.label == metrica.sensor).data.splice(i,resultado.length);
+          //let k = this.lineChartLabels.length -1;
+          
+          for(;numerocomeca<this.lineChartLabels.length-2;numerocomeca++){
+            let timesAux = parseInt(this.lineChartLabels[numerocomeca]);
+            let timesAuxF = parseInt(this.lineChartLabels[numerocomeca+1]);
+
+            let findTimestamp = values.filter(res => res.timestamp>=timesAux && res.timestamp<=timesAuxF);
+
+
+            if(findTimestamp.length != 0){//Encontrou
+              /*let sum = 0;
+              let number = findTimestamp.length;
+              for(let f of findTimestamp){
+                sum += f.value;
+              }
+              rValues.push(sum/number);*/
+              rValues.push(findTimestamp[0].value);
+            }else{//Nao encontrou
+              rValues.push(0);
+            }
+          }
+          let timesAux = parseInt(this.lineChartLabels[numerocomeca]);
+          let findTimestamp = values.filter(res => res.timestamp>=timesAux);
+          if(findTimestamp.length != 0){//Encontrou
+            /*let sum = 0;
+            let number = findTimestamp.length;
+            for(let f of findTimestamp){
+              sum += f.value;
+            }
+            rValues.push(sum/number);*/
+            rValues.push(findTimestamp[0].value);
+            //rValues.push(findTimestamp.value);
+          }else{//Nao encontrou
+            rValues.push(0);
+          }
+          this.lineChartData.find(x => x.label == metrica.sensor).data = rValues;
+          //this.lineChartData[index].data = rValues;
+            //if(this.lineChartData){
+          this.chart.ngOnChanges({});
+          console.log(rValues);
+          console.log("atuaddddliza")
+          
+
+        }
+      )
+    }, 1000 * this.refresh);
+  }
+  ngOnDestroy() {
+      // Will clear when component is destroyed e.g. route is navigated away from.
+    clearInterval(this.interval);
+  }
   
 
   divideTimestamp(){
@@ -227,6 +306,7 @@ export class DashboardItemGraficComponent implements OnInit {
       }
     }
     if(this.timestamp != this.antigotimestamp || this.refresh != this.antigorefresh){
+      clearInterval(this.interval);
         console.log("mudei o refresh")
         this.antigorefresh = this.refresh;
         this.antigotimestamp = this.timestamp;
@@ -293,12 +373,15 @@ export class DashboardItemGraficComponent implements OnInit {
                 rValues.push(0);
               }
               
+              
               //tratar ultimo 
               //console.log(rValues);
                this.lineChartData.find(x => x.label == metrica.sensor).data = rValues;
               //this.lineChartData[index].data = rValues;
                 //if(this.lineChartData){
                  this.chart.ngOnChanges({});
+
+                this.setIntervals(metrica,rValues);
                 //}
                 /*setInterval(() => {
                   console.log("damidmadiw");
