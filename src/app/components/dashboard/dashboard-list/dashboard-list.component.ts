@@ -20,6 +20,7 @@ export class DashboardListComponent implements OnInit {
   @Input() timestamp : number;
   @Input() zones: Zone[];
   @Input() sensorzones : Map<string,Sensor[]>;
+  @Input() refresh: number;
   
   userOn : User;
   createRowOn : boolean = false;
@@ -94,7 +95,7 @@ export class DashboardListComponent implements OnInit {
               let metrics : Metric[] = [];
               if(grafic.metrics){
                 for( let metric of grafic.metrics){
-                      let metricaux = new Metric(metric._id.$oid,metric.name,metric.zone_id.$oid,metric.sensor_id.$oid);
+                      let metricaux = new Metric(metric._id.$oid,metric.name,metric.zone_id.$oid,metric.sensor_id.$oid,"");
                       metrics.push(metricaux);
                 }
               }

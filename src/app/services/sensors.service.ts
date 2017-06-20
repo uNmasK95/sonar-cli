@@ -45,9 +45,8 @@ export class SensorsService {
       var search = new URLSearchParams();
       search.set('zone', ''+zoneid);
       search.set('sensor', ''+sensorid);
-      search.set('window',''+timestamp); //mudar aqui caralho
+      search.set('window',''+1); //mudar aqui caralho
       let headers = new Headers(headersParams);
-      console.log(search);
       let options = new RequestOptions({ headers: headers, search:search});
       return this.http.get(this.httpUtil.url("/reads"),options)
                   .map(this.httpUtil.extrairDados);

@@ -128,7 +128,7 @@ export class DashboardEditComponent implements OnInit {
 
   addMetric(){
     console.log("add ")
-    let metrica = new Metric("","","","");
+    let metrica = new Metric("","","","","");
     this.aux2.push(metrica);
   }
 /*
@@ -191,7 +191,7 @@ export class DashboardEditComponent implements OnInit {
         resultado =>{
           console.log(resultado)
           console.log("adicionei")
-          let newMetric = new Metric(resultado._id.$oid,resultado.name, resultado.zone_id.$oid,resultado.sensor_id.$oid)
+          let newMetric = new Metric(resultado._id.$oid,resultado.name, resultado.zone_id.$oid,resultado.sensor_id.$oid,"")
           this.row.grafics.find(x => x.id == this.graficSelectNow.id).metric.splice(metric.i,1,newMetric);
           this.graficSelectNow.metric.splice(metric.i,1,newMetric);
         },
@@ -210,7 +210,7 @@ export class DashboardEditComponent implements OnInit {
         resultado =>{
           console.log(resultado)
            console.log("adicionei")
-          let newMetric = new Metric(resultado._id.$oid,resultado.name, resultado.zone_id.$oid,resultado.sensor_id.$oid)
+          let newMetric = new Metric(resultado._id.$oid,resultado.name, resultado.zone_id.$oid,resultado.sensor_id.$oid,"")
           this.row.grafics.find(x => x.id == this.graficSelectNow.id).metric.push(newMetric);
           this.graficSelectNow.metric.push(newMetric);
         },

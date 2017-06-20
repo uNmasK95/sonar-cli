@@ -1,4 +1,4 @@
-<dashboard-item *ngFor="let r of rows; let i = index" (eliminalinha)="eliminalinha()" [row]="r" [timestamp]="timestamp"></dashboard-item>
+<dashboard-item *ngFor="let r of rows; let i = index" (eliminalinha)="eliminalinha()" [row]="r" [refresh]="refresh" [timestamp]="timestamp"></dashboard-item>
 <div *ngIf="!createRowOn" class="col-md-offset-9 col-md-3">
     <a (click)="createRowRegister()"  class="btn btn-block btn-social btn-editR" id="createrow" title="Update Graphic" data-toggle="popover" data-trigger="hover">
         <i class="fa fa-plus-square"></i> Create Row

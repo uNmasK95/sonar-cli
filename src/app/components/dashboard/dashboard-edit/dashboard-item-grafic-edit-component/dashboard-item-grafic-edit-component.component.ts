@@ -89,11 +89,15 @@ export class DashboardItemGraficEditComponentComponent implements OnInit {
           //console.log(this.sensorzones.get(this.grafic.metric[0].zone));
           let values: Array<any> =[0,0,0,1,2,3,4,10,20,30,40,50,60,70,80,90,100];
           //.find(x => x.id == metrica.id)
-          this.lineChartData.push({data: values, label: ""});
+          this.lineChartData.push({data: values, label:metrica.sensor});
+          console.log(this.lineChartData[index])
 
           this.sensorsService.getSensor(metrica.zone,metrica.sensor).subscribe(
-            resultado =>{
-              this.lineChartData[index].label = resultado.name;
+            resultado =>{ 
+              console.log(resultado)
+              console.log(index);
+              this.lineChartData.find(x => x.label == resultado._id.$oid).label = resultado.name;
+              this.chart.ngOnChanges({});
             }
           )
           /*this.sensorsService.getSensorIdValues(metrica.zone,metrica.sensor,this.timestamp).subscribe(
@@ -159,6 +163,7 @@ export class DashboardItemGraficEditComponentComponent implements OnInit {
           index++;
         }
       }
+      console.log(this.lineChartData)
   }
 
   divideTimestamp(){

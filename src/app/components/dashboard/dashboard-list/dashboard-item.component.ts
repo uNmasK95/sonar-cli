@@ -9,6 +9,7 @@ import { SensorValuesService } from "app/services/sensorvalues.service";
 })
 export class DashboardItemComponent implements OnInit {
   @Input() timestamp: number;
+  @Input() refresh: number;
   @Input() row: Row;
   @Output() eliminalinha = new EventEmitter();
 
