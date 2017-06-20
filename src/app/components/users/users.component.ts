@@ -36,8 +36,7 @@ export class UsersComponent implements OnInit {
         console.log(resultado)
         for(let user of resultado){
           if(user._id.$oid != localStorage.getItem('id')){
-            let useraux = new User(user._id.$oid,user.email,user.admin)
-            console.log(useraux)
+            let useraux = new User(user._id.$oid,user.email,user.user_type)
             this.users.push(useraux)
           }
         }
@@ -61,8 +60,10 @@ export class UsersComponent implements OnInit {
   }
 
   //Return type of user
-  type(value: boolean): string{
-      if(value==true) return "Admin";
+  type(value: number): string{
+      console.log(value);
+      console.log("type")
+      if(value==0) return "Admin";
       return "Normal User";
   }
 

@@ -11,13 +11,10 @@ export class UserService {
   constructor(private router: Router, private http: Http, private httpUtil: HttpUtilService) { }
 
 
-  registerUser(email: string, password:string){
-    return this.http.post(this.httpUtil.url('/admin/users'), JSON.stringify({email: email, password: password}), this.httpUtil.headers())
-               .map(
-                 (response : Response) => {
-                   console.log("registado utilizador: "+ email);
-                 }
-               )
+  registerUser(email: string, password:string, user_type:number){
+    console.log(user_type);
+    return this.http.post(this.httpUtil.url('/admin/users'), JSON.stringify({email: email, password: password, user_type: user_type}), this.httpUtil.headers())
+               .map(this.httpUtil.extrairDados)
   }
 
   getUser(id: string){

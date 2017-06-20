@@ -21,16 +21,32 @@ export class UsersCreateComponent implements OnInit {
     if(this.model.email && this.model.password){
       //ver a cena de admins, mas tem a informação que falta no this.model.admin = true||fase
       console.log("vou aqui")
-      this.userService.registerUser(this.model.email,this.model.password).subscribe(
-        resultado => {
-          this.loading = false;
-          this.alertService.success("User "+this.model.email+" add to the system");
-        },
-        error => {
-          this.loading = false;
-          this.alertService.error("Email in Use");
-        }
-      )
+      if(this.model.admin){
+        this.userService.registerUser(this.model.email,this.model.password,0).subscribe(
+          resultado => {
+             console.log(resultado);
+            this.loading = false;
+            this.alertService.success("User "+this.model.email+" add to the system");
+          },
+          error => {
+            this.loading = false;
+            this.alertService.error("Email in Use");
+          }
+        )
+      }
+      else{
+        this.userService.registerUser(this.model.email,this.model.password,1).subscribe(
+          resultado => {
+            console.log(resultado);
+            this.loading = false;
+            this.alertService.success("User "+this.model.email+" add to the system");
+          },
+          error => {
+            this.loading = false;
+            this.alertService.error("Email in Use");
+          }
+        )
+      }
       this.loading = false;
     }
     else{

@@ -5,6 +5,10 @@ import { GraficService } from "../../../services/grafic.service";
 import { Grafic } from "../../../models/grafic";
 import { User } from "../../../models/user";
 import { Metric } from "app/models/metric";
+import { ZonesService } from "app/services/zones.service";
+import { Zone } from "app/models/zone";
+import { Sensor } from "app/models/sensor";
+import { SensorsService } from "app/services/sensors.service";
 
 @Component({
   selector: 'dashboard-list',
@@ -14,18 +18,26 @@ import { Metric } from "app/models/metric";
 export class DashboardListComponent implements OnInit {
 
   @Input() timestamp : number;
+  @Input() zones: Zone[];
+  @Input() sensorzones : Map<string,Sensor[]>;
   
   userOn : User;
   createRowOn : boolean = false;
   model: any = {};
   rows: Row[] = [];
+  sensor_zones : Map<string,Sensor[]>;
 
   constructor(private rowService:RowService,
-              private graficService:GraficService) { }
+              private graficService:GraficService,private sensorsService:SensorsService, private zonesService: ZonesService) { 
+                this.sensor_zones = new Map<string,Sensor[]>();
+              }
 
   ngOnInit() {
+    console.log("iniciaiaidnaidna")
     this.userOn = JSON.parse(localStorage.getItem('userOn'));
     console.log(this.userOn)
+    console.log(this.zones)
+    console.log(this.sensorzones)
     this.getRows();
   }
   
@@ -82,8 +94,8 @@ export class DashboardListComponent implements OnInit {
               let metrics : Metric[] = [];
               if(grafic.metrics){
                 for( let metric of grafic.metrics){
-                  let metricaux = new Metric(metric._id.$oid,metric.name,metric.zone_id.$oid,metric.sensor_id.$oid);
-                  metrics.push(metricaux);
+                      let metricaux = new Metric(metric._id.$oid,metric.name,metric.zone_id.$oid,metric.sensor_id.$oid);
+                      metrics.push(metricaux);
                 }
               }
               let graphic = new Grafic(grafic._id.$oid,grafic.name,grafic.rangeTime,metrics); 
@@ -93,7 +105,6 @@ export class DashboardListComponent implements OnInit {
           let rowaux = new Row(row._id.$oid,row.name,graficos);
           this.rows.push(rowaux);
         }
-        console.log(resultado);
       },
       error =>{
         console.log(error)

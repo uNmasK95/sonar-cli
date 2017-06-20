@@ -1,3 +1,4 @@
+
 import { Component, OnInit, OnChanges, EventEmitter, Input, ViewChild, Output, SimpleChanges } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
 import {Grafic} from '../../../../models/grafic';
@@ -7,12 +8,12 @@ import { Sensor } from "app/models/sensor";
 import { SensorsService } from "app/services/sensors.service";
 
 @Component({
-  selector: 'dashboard-item-grafic',
-  templateUrl: './dashboard-item-grafic.component.html',
-  styleUrls: ['./dashboard-item-grafic.component.css']
+  selector: 'dashboard-itemgraficeditcomponent',
+  templateUrl: './dashboard-item-grafic-edit-component.component.html',
+  styleUrls: ['./dashboard-item-grafic-edit-component.component.css']
 })
 
-export class DashboardItemGraficComponent implements OnInit {
+export class DashboardItemGraficEditComponentComponent implements OnInit {
 
   @Input() timestamp: number;
   @Input() grafic : Grafic;
@@ -35,53 +36,34 @@ export class DashboardItemGraficComponent implements OnInit {
           '02h:17m:10s', '02h:17m:15s', '02h:17m:20s','02h:16m:50s', '02h:16m:55s', '02h:17m:00s', '02h:17m:05s', 
           '02h:17m:10s', '02h:17m:15s', '02h:17m:20s'*/];
   public lineChartOptions:any = {
-    responsive: true,
-     data: [{
-        type: "line",
-     }],
-    
-     elements:{
-        point:{
-          radius:1
-        }
-      },
-    scales: {
-      
-      xAxes: [{
-        display: false
-      }],
-      yAxes: [{
-        display: true
-      }],
-      
-	}
+    responsive: true
       
   };
 
   public lineChartColors:Array<any> = [
       { // grey
-        //backgroundColor: 'rgba(148,159,177,0.2)',
+        /*backgroundColor: 'rgba(148,159,177,0.2)',
         borderColor: 'rgba(148,159,177,1)',
-        //pointBackgroundColor: 'rgba(148,159,177,1)',
-        //pointBorderColor: '#fff',
+        pointBackgroundColor: 'rgba(148,159,177,1)',
+        pointBorderColor: '#fff',
         //pointHoverBackgroundColor: '#fff',
-        //pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+        //pointHoverBorderColor: 'rgba(148,159,177,0.8)'*/
       },
       { // dark grey
-        //backgroundColor: 'rgba(77,83,96,0.2)',
+        /*backgroundColor: 'rgba(77,83,96,0.2)',
         borderColor: 'rgba(77,83,96,1)',
-        //pointBackgroundColor: 'rgba(77,83,96,1)',
-        //pointBorderColor: '#fff',
-        //pointHoverBackgroundColor: '#fff',
-        //pointHoverBorderColor: 'rgba(77,83,96,1)'
+        pointBackgroundColor: 'rgba(77,83,96,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(77,83,96,1)'*/
       },
       { // grey
-        //backgroundColor: 'rgba(148,159,177,0.2)',
+        /*backgroundColor: 'rgba(148,159,177,0.2)',
         borderColor: 'rgba(148,159,177,1)',
-        //pointBackgroundColor: 'rgba(148,159,177,1)',
-        //pointBorderColor: '#fff',
-        //pointHoverBackgroundColor: '#fff',
-        //pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+        pointBackgroundColor: 'rgba(148,159,177,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(148,159,177,0.8)'*/
       }
   ];
   public lineChartLegend:boolean = true;
@@ -90,20 +72,31 @@ export class DashboardItemGraficComponent implements OnInit {
   constructor(private sensorvaluesservice: SensorValuesService,
               private sensorsService: SensorsService) { }
 
+  public dataEdit : any[] = [0,10,20,30,40,50,60,70,80,90,100];
+
   ngOnInit() {
-      console.log(this.grafic);
+
+    
       if(this.grafic.metric){
         let index = 0;
         
-        console.log("COMEÇA CARALHO")
-
-        this.divideTimestamp();
+        console.log("COMEÇA CARALHO SOU O EDIT!")
+        this.lineChartData.splice(0,1);
+        //this.divideTimestamp();
+        this.lineChartLabels= [];
 
         for(let metrica of this.grafic.metric){
-          let values: Array<any> =[];
-          let rValues = [];
-          this.lineChartData.push({data: new Array(), label: metrica.sensor});
-          this.sensorsService.getSensorIdValues(metrica.zone,metrica.sensor,this.timestamp).subscribe(
+          //console.log(this.sensorzones.get(this.grafic.metric[0].zone));
+          let values: Array<any> =[0,0,0,1,2,3,4,10,20,30,40,50,60,70,80,90,100];
+          //.find(x => x.id == metrica.id)
+          this.lineChartData.push({data: values, label: ""});
+
+          this.sensorsService.getSensor(metrica.zone,metrica.sensor).subscribe(
+            resultado =>{
+              this.lineChartData[index].label = resultado.name;
+            }
+          )
+          /*this.sensorsService.getSensorIdValues(metrica.zone,metrica.sensor,this.timestamp).subscribe(
             resultado =>{
 
               //console.log(this.timestamp)
@@ -150,7 +143,7 @@ export class DashboardItemGraficComponent implements OnInit {
               }
               
               //tratar ultimo 
-              //console.log(rValues);
+              console.log(rValues);
               this.lineChartData[index].data = rValues;
                 this.chart.ngOnChanges({});
                 values = [];
@@ -161,8 +154,8 @@ export class DashboardItemGraficComponent implements OnInit {
               console.log(error)
             }
           )
-          //console.log(this.lineChartData[index].data);
-          //console.log("PUTA QUE PARIU")
+          console.log(this.lineChartData[index].data);
+          console.log("PUTA QUE PARIU")*/
           index++;
         }
       }
@@ -177,7 +170,7 @@ export class DashboardItemGraficComponent implements OnInit {
     let t = timenow.getTime()-(1000 * 3600 * this.timestamp);
     //Dividir o eixo x
 
-    //console.log(t)
+    console.log(t)
 
     let tamanho =  3600 * this.timestamp;
     let timestampAux = t/1000;
@@ -187,10 +180,9 @@ export class DashboardItemGraficComponent implements OnInit {
     for(let i=0;i<=tamanho;i =(30*this.timestamp)+i){
       this.lineChartLabels.push(''+timestampAux);
       timestampAux = 30 + timestampAux;
-      //console.log(timestampAux)
     }
-    //console.log(this.lineChartLabels)
-    //console.log("esta aqui o array")
+    console.log(this.lineChartLabels)
+    console.log("esta aqui o array")
 
   }
 
@@ -234,3 +226,4 @@ export class DashboardItemGraficComponent implements OnInit {
     }
   }
 }
+

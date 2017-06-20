@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from "@angular/http";
+import { URLSearchParams,Http, Headers, Response, RequestOptions } from "@angular/http";
 import { HttpUtilService } from "app/services/http-util.service";
 
 @Injectable()
@@ -35,6 +35,22 @@ export class SensorsService {
                 JSON.stringify({hostname: hostname, name: name, description: description, min: min, max: max, 
                   latitude: lat, longitude: long }),this.httpUtil.headers())
                .map(this.httpUtil.extrairDados);
+  }
+
+    getSensorIdValues(zoneid:string,sensorid:string,timestamp:number){
+      let headersParams = { 'Content-Type': 'application/json' };
+      if (localStorage['currentUser']) {
+          headersParams['Authorization'] = localStorage['currentUser'];
+      }
+      var search = new URLSearchParams();
+      search.set('zone', ''+zoneid);
+      search.set('sensor', ''+sensorid);
+      search.set('window',''+timestamp); //mudar aqui caralho
+      let headers = new Headers(headersParams);
+      console.log(search);
+      let options = new RequestOptions({ headers: headers, search:search});
+      return this.http.get(this.httpUtil.url("/reads"),options)
+                  .map(this.httpUtil.extrairDados);
   }
 
 

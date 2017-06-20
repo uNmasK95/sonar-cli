@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { Row } from "app/models/row";
 import { Grafic } from "app/models/grafic";
 import { ZonesService } from "app/services/zones.service";
@@ -36,6 +36,7 @@ export class DashboardEditComponent implements OnInit {
   ngOnInit() {
     this.userOn = JSON.parse(localStorage.getItem('userOn'));
     this.row = JSON.parse(localStorage.getItem('row'));
+    this.timestamp = +localStorage.getItem('timestammp');
     if(this.row.grafics == []){
       this.criarAux2();
     }
@@ -54,12 +55,16 @@ export class DashboardEditComponent implements OnInit {
           }
           this.sensor_zones.set(zona._id.$oid,sensores);
         }
-        console.log(this.sensor_zones);
+        //console.log(this.sensor_zones);
       },
       error =>{
 
       }
     )
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(this.timestamp);
   }
 
   criarAux2(){
@@ -184,6 +189,8 @@ export class DashboardEditComponent implements OnInit {
 
       this.metricService.addMetric(this.userOn.id,this.row.id+"",this.graficSelectNow.id,this.aux2[metric.i].zone,this.aux2[metric.i].sensor).subscribe(
         resultado =>{
+          console.log(resultado)
+          console.log("adicionei")
           let newMetric = new Metric(resultado._id.$oid,resultado.name, resultado.zone_id.$oid,resultado.sensor_id.$oid)
           this.row.grafics.find(x => x.id == this.graficSelectNow.id).metric.splice(metric.i,1,newMetric);
           this.graficSelectNow.metric.splice(metric.i,1,newMetric);
@@ -202,6 +209,7 @@ export class DashboardEditComponent implements OnInit {
       this.metricService.addMetric(this.userOn.id,this.row.id+"",this.graficSelectNow.id,this.aux2[metric.i].zone,this.aux2[metric.i].sensor).subscribe(
         resultado =>{
           console.log(resultado)
+           console.log("adicionei")
           let newMetric = new Metric(resultado._id.$oid,resultado.name, resultado.zone_id.$oid,resultado.sensor_id.$oid)
           this.row.grafics.find(x => x.id == this.graficSelectNow.id).metric.push(newMetric);
           this.graficSelectNow.metric.push(newMetric);
@@ -211,7 +219,7 @@ export class DashboardEditComponent implements OnInit {
         }
       )
     }
-    console.log(this.graficSelectNow)
+    //console.log(this.graficSelectNow)
   }
 
  /* remove(i){

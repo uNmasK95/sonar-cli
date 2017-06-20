@@ -43,6 +43,7 @@ import { GraficService } from "./services/grafic.service";
 import { ZonesCreateComponent } from './components/zones/zones-create/zones-create.component';
 import { DashboardEditMetricComponent } from './components/dashboard/dashboard-edit/dashboard-edit-metric/dashboard-edit-metric.component';
 import { MetricService } from "app/services/metric.service";
+import { DashboardItemGraficEditComponentComponent } from './components/dashboard/dashboard-edit/dashboard-item-grafic-edit-component/dashboard-item-grafic-edit-component.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { MetricService } from "app/services/metric.service";
     DashboardItemGraficComponent,
     ZonesCreateComponent,
     DashboardEditMetricComponent,
+    DashboardItemGraficEditComponentComponent,
   ],
   imports: [
     BrowserModule,

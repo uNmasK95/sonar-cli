@@ -3,6 +3,7 @@ export class Metric {
         public id: string,
         public name: string,
         public zone: string,
-        public sensor: string
+        public sensor: string,
+        public sensorname: string
     ) {}
 }

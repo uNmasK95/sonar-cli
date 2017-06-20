@@ -33,7 +33,7 @@
               {{u.email}}
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-              <span *ngIf="u.admin==true" class="fa fa-user"></span><span *ngIf="u.admin==true" class="fa fa-cogs"></span><span *ngIf="u.admin==false" class="fa fa-user"></span><span *ngIf="u.admin==false" class="fa fa-eye"></span>&emsp;{{type(u.admin)}}
+              <span *ngIf="u.user_type==0" class="fa fa-user"></span><span *ngIf="u.user_type==0" class="fa fa-cogs"></span><span *ngIf="u.user_type==1" class="fa fa-user"></span><span *ngIf="u.user_type==1" class="fa fa-eye"></span>&emsp;{{type(u.user_type)}}
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
               <span (click)="removeUser(u,i)" id="deleteS" class="fa fa-times" title="Delete user" data-toggle="popover" data-trigger="hover"></span>
