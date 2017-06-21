@@ -15,19 +15,22 @@
 
           <ul  class="nav navbar-top-links navbar-right">
               <li  class="dropdown" title="Notifications" data-toggle="popover" data-trigger="hover" *ngIf="isLogged()">
-                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                      <i class="badge badge-notify">3</i> <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#" (click)="readAll($event)">
+                      <i *ngIf="notNotReaded.length!=0" class="badge badge-notify">{{notNotReaded.length}}</i> <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
                   </a>
-                  <ul  *ngIf="isLogged()" class="dropdown-menu dropdown-alerts" >
+                  <ul *ngIf="isLogged()" class="dropdown-menu dropdown-alerts" >
                         <div id="pH" class="panel-heading">
                             Notifications
                         </div>
                         <div id="listNot" class="panel-body">
-                            <li *ngFor="let notNotR of notNotReaded">
+                            <li *ngFor="let not of notifications">
                                 <a id="l" href="#">
                                     <div>
-                                        <i class="fa fa-bullhorn"></i> {{notNotR.sensor}}
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                        <i class="fa fa-bullhorn"></i> {{not.sensorName}}
+                                        <!--span class="pull-right text-muted small">{{not.timestamp}}</span-->
+                                        <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i> {{timeToNow(not.timestamp)}} mins ago 
+                                        </small>
                                     </div>
                                 </a>
                                 <div class="divider"></div>

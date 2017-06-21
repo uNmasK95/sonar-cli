@@ -14,6 +14,8 @@ export class ZonesInternalComponent implements OnInit {
   //sensorSelected: Sensor = new Sensor("-1","SensorX","Sensor fraco",-1,-1,"hostname.com",0,21);
 
   zoneId: number = -1; 
+  actives: number[] = [];
+  //times: Date()
 
   constructor(
     private router: Router,
@@ -35,13 +37,77 @@ export class ZonesInternalComponent implements OnInit {
           for(let s of res){
             sensor = new Sensor(s._id.$oid,s.name,s.description,s.latitude,s.longitude,s.hostname,s.min,s.max);
             this.sensors.push(sensor);
+            //this.times.push(new Date());
+
+            //Ver estado
+            this.sensorsService.getState(this.zoneId,sensor.id)
+              .subscribe(
+                res=> {
+                  if(res.state==true){
+                    this.actives.push(1); //sensor active
+                  }else{
+                    this.actives.push(0); //sensor desactive
+                  }
+                },
+                error=>{
+                  console.log("getState: Deu erro"); 
+                  
+                }
+              );
           }
           //console.log(this.zones)
+        },
+        error=>{
+          console.log("get: Deu erro"); 
         }
       );
   }
 
   sensorChoise(sensor: Sensor){
       this.router.navigate(['/zones/internal/'+this.zoneId+'/sensor/'+sensor.id]);
+  }
+
+  refresh(sensor){
+    console.log("update");
+  }
+
+  //Ver se esta ativo
+  active(sensor,i){
+    if(this.actives[i]==1){//active
+      return true;
+    }else{//inactive
+      return false;
+    }
+  }
+
+  //turnOn sensor
+  activeNow(sensor,i){
+    this.sensorsService.turnOn(this.zoneId,sensor.id)
+      .subscribe(
+        res => {
+          console.log("TURNON: Nao deu erro:"+i); 
+
+          this.actives[i]=1; //Por active
+        },
+        error=>{
+          console.log("TURNON: Deu erro"); 
+          console.log(error);
+        }
+      );
+  }
+
+  //turnOff sensor
+  turnOff(sensor,i){
+    this.sensorsService.turnOff(this.zoneId,sensor.id)
+      .subscribe(
+        res => {
+          console.log("TURNOFF: Nao deu erro"); 
+          this.actives[i]=0; //Por inactive
+        },
+        error=>{
+          console.log("TURNOFF: Deu erro"); 
+          console.log(error);
+        }
+      );
   }
 }

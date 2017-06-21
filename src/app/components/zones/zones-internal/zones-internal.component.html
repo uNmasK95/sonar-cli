@@ -39,10 +39,22 @@
       </div>
       <!-- .panel-heading -->
       <div class="panel-body">
-          <ul class="chat" *ngFor="let s of sensors">
+          <ul class="chat" *ngFor="let s of sensors; let i = index">
             <li class="clearfix">
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                {{s.name}}
+                {{s.name}}<br>
+                <button *ngIf="active(s,i)" type="button" class="btn btn-outline btn-success btn-xs" (click)="refresh(s)" title="refresh" data-toggle="popover" data-trigger="hover">
+                  <i class="fa fa-refresh" aria-hidden="true"></i> Mini button
+                </button>
+                <button *ngIf="active(s,i)" type="button" class="btn btn-danger btn-xs" (click)="turnOff(s,i)" title="TurnOff" data-toggle="popover" data-trigger="hover">
+                  <i class="fa fa-power-off" aria-hidden="true"></i>
+                </button>
+                <button *ngIf="!active(s,i)" type="button" class="btn btn-outline btn-danger btn-xs" (click)="refresh(s)" title="refresh" data-toggle="popover" data-trigger="hover">
+                  <i class="fa fa-refresh" aria-hidden="true"></i> Mini button
+                </button>
+                <button *ngIf="!active(s,i)" type="button" class="btn btn-success btn-xs" (click)="activeNow(s,i)" title="TurnOn" data-toggle="popover" data-trigger="hover">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
                 {{s.description}} 

@@ -4,6 +4,7 @@ import { Sensor } from "app/models/sensor";
 import { SensorsService } from "app/services/sensors.service";
 import { ZonesService } from "app/services/zones.service";
 import { BaseChartDirective } from "ng2-charts";
+import { SensorValuesService } from "app/services/sensorvalues.service";
 
 @Component({
   selector: 'history',
@@ -23,21 +24,31 @@ export class HistoryComponent implements OnInit {
   public minF: number = this.dateNow.getMinutes();
 
   public zones: Zone[] = [];
-  public sensors: Sensor[] = [];
+  public sensors: Array<any> = [[]];
   public sensorsGraphic: SensorGraphic[] = [];
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
-  
+    
+    public aux2: Array<any> = [ {zone: "First Zone Ex", zoneId: -1, sensor: "First Sensor Ex", sensorId: -1} ];
+
+    public aux: Array<any> = [
+    [65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40],
+     [28, 48, 40, 19, 86, 27, 90,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40],
+     [18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40]
+  ];  
+
    public lineChartData:Array<any> = [
-    {/*data: [65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40], label: 'Sensor1'*/}/*,
+     {data: [], label: 'First Sensor Ex'}
+   /* {data: [65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40], label: 'Sensor1'}/*,
     {data: [28, 48, 40, 19, 86, 27, 90,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40], label: 'Sensor2'},
     {data: [18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40], label: 'Sensor3'}*/
   ];  
-    public lineChartLabels:Array<any> = ['50s', '55s', '00s', '05s', 
+    public lineChartLabels:Array<any> = [/*'50s', '55s', '00s', '05s', 
             '10s', '15s', '20s','50s', '55s', '00s', '05s', 
             '10s', '15s', '20s','50s', '55s', '00s', '05s', 
             '10s', '15s', '20s','50s', '55s', '00s', '05s', 
-            '10s', '15s', '20s'];
+            '10s', '15s', '20s', '15s', '20s','10s', '15s', '20s', '15s', '20s','10s', '15s', '20s', '15s', '20s'*/
+            ];
     public lineChartOptions:any = {
       responsive: true
       
@@ -72,16 +83,40 @@ export class HistoryComponent implements OnInit {
     public lineChartType:string = 'line';
  
     constructor(private zonesService: ZonesService,
-                private sensorsService: SensorsService) { }
+                private sensorsService: SensorsService,
+                private sensorValuesService: SensorValuesService) { }
 
     ngOnInit() {
-      this.model.init = this.init;
-      this.model.hourI = this.hourI;
-      this.model.minI = this.minI;
-      this.model.finish = this.finish;
-      this.model.hourF = this.hourF;
-      this.model.minF = this.minF;
-      
+      if(localStorage['metrics']){//já foram definidas todas as metricas
+        this.model.init = localStorage['metrics'].getInit();
+        this.model.hourI = localStorage['metrics'].getHourI();
+        this.model.minI = localStorage['metrics'].getMinI();
+        this.model.finish = localStorage['metrics'].getFinish();
+        this.model.hourF = localStorage['metrics'].getHourF();
+        this.model.minF = localStorage['metrics'].getMinF();
+        //Percorrer array sensor localhost
+        for(let i=0;i<localStorage['metrics'].getSensors().length;i++){
+          if(i!=0){
+            this.aux2.push({zone: localStorage['metrics'].getSensors()[i].zone,
+                zoneId: localStorage['metrics'].getSensors()[i].zoneId, 
+                sensor: localStorage['metrics'].getSensors()[i].sensor, 
+                sensorId: localStorage['metrics'].getSensors()[i].sensorId});
+            this.aux2[i] = (localStorage['metrics'].getSensors())[i].zone;
+          }else{
+            this.aux2[i].zone=localStorage['metrics'].getSensors()[i].zone;
+            this.aux2[i].zoneId=localStorage['metrics'].getSensors()[i].zoneId;
+            this.aux2[i].sensor=localStorage['metrics'].getSensors()[i].sensor;
+            this.aux2[i].sensorId=localStorage['metrics'].getSensors()[i].sensorId;
+          }
+        }
+      }else{ //ainda nao foram
+        this.model.init = this.init;
+        this.model.hourI = this.hourI;
+        this.model.minI = this.minI;
+        this.model.finish = this.finish;
+        this.model.hourF = this.hourF;
+        this.model.minF = this.minF;
+      }
 
       let zone: Zone = null;
       this.zonesService.getAll()
@@ -91,31 +126,14 @@ export class HistoryComponent implements OnInit {
               zone = new Zone(z._id.$oid,z.name,z.description,z.type,z.min,z.max);
               this.zones.push(zone);
             }
-            if(this.zones.length!=0){
-              this.model.zoneS = this.zones[0].name;
-
-              let sensor: Sensor = null;
-              this.sensorsService.get(this.zones[0].id)
-                  .subscribe(
-                    res => {
-                      for(let s of res){
-                        sensor = new Sensor(s._id.$oid,s.name,s.description,s.latitude,s.longitude,s.hostname,s.min,s.max);
-                        this.sensors.push(sensor);
-                      }
-                      if(this.sensors.length!=0){//Have sensors
-                        this.model.sensorS = this.sensors[0].name; 
-                      }else{//No sensors
-                        this.model.sensorS = null;
-                      }
-                    }
-                  );
-            }
           }
         );
         
         for(let e of this.lineChartData){
           this.sensorsGraphic.push(e.label);
         }
+
+        console.log(this.lineChartData);
      
     }
   
@@ -145,154 +163,141 @@ export class HistoryComponent implements OnInit {
 
     updateMetrics(){
       console.log("Mudei");
-      console.log(this.model.init);
-      /*let dateNow = new Date();
-      dateNow.getDay();
+      let init = this.model.init;
+      let initD = new Date(init);
+      let year = initD.getFullYear();
+      let month = initD.getMonth();
+      let day = initD.getDate();
+      let hourI = this.model.hourI;
+      let minI = this.model.minI;
+      let timestampI = + new Date(year, month, day, hourI, minI, 0, 0);
+      console.log(timestampI);
+      
+      let finish = this.model.finish;
+      let finishD = new Date(finish);
+      let yearF = finishD.getFullYear();
+      let monthF = finishD.getMonth();
+      let dayF = finishD.getDate();
+      let hourF = this.model.hourF;
+      let minF = this.model.minF;
+      let timestampF = + new Date(yearF, monthF, dayF, hourF, minF, 0, 0);
+      console.log(timestampF);
 
+      //Dividir o eixo x
+      let tamanho = timestampF/1000-timestampI/1000;
+      let timestampAux = timestampI/1000;
+      this.lineChartLabels = [];
+      for(let i=0;i<=tamanho;i++){
+        let aux = i+1;
+        this.lineChartLabels.push(''+timestampAux);
+        timestampAux++;
+      }
 
-      let init = this.init;
-      let hourI = this.hourI;
-      let minI = this.minI;
-      let finish = this.finish;
-      let hourF = this.hourF;
-      let minF = this.minF;
-
-      if(this.model.init){
-        init = this.model.init;
-      }
-      if(this.model.hourI){
-        hourI = this.model.hourI;
-      }
-      if(this.model.minI){
-        minI = this.model.minI;
-      }
-      if(this.model.finish){
-        finish = this.model.finish;
-      }
-      if(this.model.hourF){
-        hourF = this.model.hourF;
-      }
-      if(this.model.minF){
-        minF = this.model.minF;
-      }
-      console.log(".....")
-      console.log(this.init);
-      console.log(this.model.init);
-      console.log(this.hourI);
-      console.log(this.minI);
-      console.log(this.finish);
-      console.log(this.hourF);
-      console.log(this.minF);
-      */
-      /*this.sensorsService.update(this.idZone, this.idSensor, name, hostname, description,
-        min, max, lat, long)
-            .subscribe(
-              res => {
-                if(this.typeZone==0){//internal
-                  this.router.navigate(['/zones/internal',this.idZone]);
-                }else{//external
-                  this.router.navigate(['/zones/external',this.idZone]);
+      //Buscar valores leituras
+      let size = 0;
+      //Percorrer aux2 e buscar reads e colocar em linedata
+      console.log(this.aux2.length);
+      let values: Array<any> =[];
+      let rValues = [];
+     // let valuesTime = [];
+      for(let i=0;i<this.aux2.length;i++){
+        console.log("buscar valores");
+        values = [];
+        rValues = [];
+        this.lineChartData[i].data = [];
+        this.sensorValuesService.getSensorIdValues2(this.aux2[i].sensorId,this.aux2[i].zoneId,timestampI/1000,timestampF/1000)
+          .subscribe(
+            res => {
+              //console.log(res);
+              for(let r of res){//recebeu valores, guardar no sitio certo
+                //console.log(r);
+                values.push( {value: r.value, timestamp: r.timestamp});
+                //valuesTime.push(new Date(r.timestamp*1000));
+              }
+              console.log("values lidos:");
+              console.log(values);
+              for(let k=0;k<this.lineChartLabels.length;k++){
+                let timesAux = parseInt(this.lineChartLabels[k]);
+                //console.log(timesAux);
+                let findTimestamp = values.find(res => res.timestamp==timesAux); 
+                //console.log("Encontrou?");
+                //console.log(findTimestamp);
+                if(findTimestamp){//Encontrou
+                  rValues.push(findTimestamp.value);
+                }else{//Nao encontrou
+                  rValues.push(0);
                 }
               }
-            );*/
+               this.lineChartData[i].data = rValues;
+               this.chart.ngOnChanges({});
+               values = [];
+               rValues = [];
+               //console.log(valuesTime);
+               //valuesTime = [];
+            }
+          );
+          //this.lineChartData[i].data = values;
+         // this.chart.ngOnChanges({});
+      }
     }
 
     //When select of zone changes, get the respective sensors
-    getSensors($event){
+    getSensors($event, i){
       console.log($event);
-      this.sensors = [];
-      let zoneSelected: Zone = this.zones.find(res => res.name==$event);
+      let zoneSelected: Zone = this.zones.find(res => res.id==$event);
 
       let sensor: Sensor = null;
       this.sensorsService.get(zoneSelected.id)
           .subscribe(
             res => {
+              this.sensors[i] = new Array();
               for(let s of res){
                 sensor = new Sensor(s._id.$oid,s.name,s.description,s.latitude,s.longitude,s.hostname,s.min,s.max);
-                this.sensors.push(sensor);
+                  this.sensors[i].push(sensor);
               }
-              if(this.sensors.length!=0){//have sensors
-                this.model.sensorS = this.sensors[0].name; 
-              }else{
-                this.model.sensorS = null;
-              }
+              this.aux2[i].zone = zoneSelected.name;
+              this.aux2[i].zoneId = $event;
             }
           );
+        console.log(this.aux2);
     }
 
     //Change sensor on graphic
-    changeSensorGraphic($event){
-      console.log($event);
-      let i = this.lineChartData.length;
-      console.log("i:"+i);
-      if(i==1){
-        this.lineChartData[0] = {data: new Array(), label: $event};
-        this.lineChartData[0].data = [20, 20, 20,20, 20, 20, 20,20, 20, 20, 20, 20, 20, 20,20, 20, 20, 20, 20, 20, 20,65, 59, 80, 81, 56, 55, 40];
-      }else{
-        for(let j=0;j<this.lineChartData.length;j++){
-          if(this.lineChartData[0].label==$event){
-            this.lineChartData[i] = {data: new Array(), label: $event};
-            this.lineChartData[i].data = [20, 20, 20,20, 20, 20, 20,20, 20, 20, 20, 20, 20, 20,20, 20, 20, 20, 20, 20, 20,65, 59, 80, 81, 56, 55, 40];
-          }
-        }
-      }
-      if($event=="sensor"){
-        this.lineChartData[0] = {data: new Array(), label: $event};
-        this.lineChartData[0].data = [20, 20, 20,40, 20, 20, 20,20, 40, 20, 20, 20, 20, 20,20, 20, 20, 20, 20, 20, 20,65, 59, 80, 81, 56, 55, 40];
-      }
+    changeSensorGraphic($event,i){
+      let sensorSelected: Sensor = this.sensors[i].find(res => res.id==$event);
+
+      this.lineChartData[i] = { data: new Array(), label: sensorSelected.name }
+      this.aux2[i].sensor = sensorSelected.name;
+      this.aux2[i].sensorId = $event;
+
       this.chart.ngOnChanges({});
     }
     
     //Add sensor to graphic
     addSensor(){
-      console.log(this.model.zoneS);
-      console.log(this.model.sensorS);
-
-      /*let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-      _lineChartData[2] = {data: new Array(this.lineChartData[2].data.length), label: this.lineChartData[2].label};
-      for (let j = 0; j < this.lineChartData[2].data.length; j++) {
-        _lineChartData[2].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
-      this.lineChartData = _lineChartData;*/
-
-      //this.lineChartData[2] = {data: new Array(this.lineChartData[2].data.length), label: this.lineChartData[2].label};
-      //this.lineChartData[2].data = [20, 20, 20,20, 20, 20, 20,20, 20, 20, 20, 20, 20, 20,20, 20, 20, 20, 20, 20, 20,65, 59, 80, 81, 56, 55, 40];
-       // {data: [20, 20, 20,20, 20, 20, 20,20, 20, 20, 20, 20, 20, 20,20, 20, 20, 20, 20, 20, 20,65, 59, 80, 81, 56, 55, 40], label: 'SensorNovo'};
-      
-     /* let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-      for (let i = 0; i < this.lineChartData.length; i++) {
-        _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-        for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-          if(i==2){
-            _lineChartData[i].data[j] =32;
-            _lineChartData[i].label = this.model.sensorS;
-          }else{
-            _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-          }
-        }
-      }
-      this.lineChartData = _lineChartData;*/
-
-      /*for (let j = 0; j < this.lineChartData[2].data.length; j++) {
-          
-        this.lineChartData[2].data[j] =32;
-        this.lineChartData[2].label = this.model.sensorS;
-         
-      }*/
       let i = this.lineChartData.length;
       console.log(i);
-      this.lineChartData[i] = {data: new Array(), label: this.model.sensorS};
-      //this.lineChartData[i].data = [20, 20, 20,20, 20, 20, 20,20, 20, 20, 20, 20, 20, 20,20, 20, 20, 20, 20, 20, 20,65, 59, 80, 81, 56, 55, 40];
+      this.lineChartData.push({data: new Array(), label: "New Sensor"});
+      this.aux2.push({zone: "New Zone",zoneId: 0, sensor: "New Sensor", sensorId: 0});
 
       this.chart.ngOnChanges({});
 
-      //this.lineChartData = this.lineChartData.slice();
-      console.log(this.lineChartData)
+      
+      /*console.log(this.lineChartData);
+      console.log(this.aux2);*/
 
   }
 
-  remove(sensor){
-    console.log("remove");
+  remove(i){
+    this.lineChartData.splice(i,1);
+    this.aux2.splice(i,1);
+    
+    this.chart.ngOnChanges({});
+
+  }
+
+  myName(i){
+    return "nameS"+i;
   }
 
 /*public randomize():void {
@@ -309,21 +314,55 @@ export class HistoryComponent implements OnInit {
 
 class SensorGraphic { 
    //field 
-   sensors : Sensor[] = new Array(); 
-
+   sensors : Array<any> = []; 
+   init: string = "";
+   hourI: number = -1;
+   minI: number = -1;
+   finish: string = "";
+   hourF: number = -1;
+   minF: number = -1;
    //function 
    getSensors() { 
       return this.sensors;
    } 
-   setSensor(s: Sensor){
-       this.sensors.push(s);
+   setSensor(z,zId,s,sId){
+       this.sensors.push({zone: z,zoneId: zId, sensor:s, sensorId: sId});
    }
-   /*removeSensor(i: number){
-       this.choises.splice(i,1);
+   getInit() { 
+      return this.init;
+   } 
+   setInit(i){
+       this.init = i;
    }
-   exists(elem: Element){
-       if(this.choises.indexOf(elem)==-1) return false;
-       else return true;
-   }*/
+   getHourI() { 
+      return this.hourI;
+   } 
+   setHourI(h){
+       this.hourI = h;
+   }
+   getMinI() { 
+      return this.minI;
+   } 
+   setMinI(m){
+       this.minI = m;
+   }
+   getFinish() { 
+      return this.finish;
+   } 
+   setFinish(f){
+       this.finish = f;
+   }
+   getHourF() { 
+      return this.hourF;
+   } 
+   setHourF(h){
+       this.hourF = h;
+   }
+   getMinF() { 
+      return this.minF;
+   } 
+   setMinF(m){
+       this.minF = m;
+   }
 
 }

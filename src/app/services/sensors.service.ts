@@ -36,7 +36,6 @@ export class SensorsService {
                   latitude: lat, longitude: long }),this.httpUtil.headers())
                .map(this.httpUtil.extrairDados);
   }
-
     getSensorIdValues(zoneid:string,sensorid:string,timestamp:number){
       let headersParams = { 'Content-Type': 'application/json' };
       if (localStorage['currentUser']) {
@@ -52,5 +51,23 @@ export class SensorsService {
                   .map(this.httpUtil.extrairDados);
   }
 
+  //Get State of sensor
+  getState(zoneId, sensorId){
+    return this.http.get(this.httpUtil.url('/zones/'+zoneId+'/sensors/'+sensorId+'/state'), this.httpUtil.headers())
+               .map(this.httpUtil.extrairDados);
+  }
 
+  //TurnOn sensor
+  turnOn(zoneId, sensorId){
+    return this.http.post(this.httpUtil.url('/zones/'+zoneId+'/sensors/'+sensorId+'/turnOn'),
+                JSON.stringify({}),this.httpUtil.headers())
+               .map(this.httpUtil.extrairDados);
+  }
+
+  //TurnOff sensor
+  turnOff(zoneId, sensorId){
+    return this.http.post(this.httpUtil.url('/zones/'+zoneId+'/sensors/'+sensorId+'/turnOff'),
+                JSON.stringify({}),this.httpUtil.headers())
+               .map(this.httpUtil.extrairDados);
+  }
 }

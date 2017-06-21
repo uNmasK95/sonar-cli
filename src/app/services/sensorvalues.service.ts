@@ -269,4 +269,21 @@ export class SensorValuesService implements OnInit {
     }
     */
 
+    // vai buscar todos os values de um sensor
+    getSensorIdValues2(sensorid:number,zoneid:number, timestampInitial, timestampFinal){
+        let headersParams = { 'Content-Type': 'application/json' };
+        if (localStorage['currentUser']) {
+            headersParams['Authorization'] = localStorage['currentUser'];
+        }
+        var search = new URLSearchParams();
+        search.set('zone', ''+zoneid);
+        search.set('sensor', ''+sensorid);
+        search.set('frist', ''+timestampInitial);
+        search.set('last', ''+timestampFinal);
+        let headers = new Headers(headersParams);
+        let options = new RequestOptions({ headers: headers, search:search});
+        return this.http.get(this.httpUtil.url("/reads"),options)
+                   .map(this.httpUtil.extrairDados);
+    }
+
 }
