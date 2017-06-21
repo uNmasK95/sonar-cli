@@ -26,7 +26,7 @@
 
 <form class="form-horizontal" (ngSubmit)="f.form.valid && addMetric()" #f="ngForm" novalidate>
                 
-    <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1">
+    <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-9 col-xs-offset-1">
       <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !zoneS.valid}">
         <label>Zone</label>
         <select (ngModelChange)="getMetrics($event)" class="form-control" name="zoneS" id="idzoneS" [(ngModel)]="model.zone"  required>
@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1">
+    <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-9 col-xs-offset-1">
       <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !sensorS.valid }">
         <label>Sensor</label>
         <select (ngModelChange)="getSensor($event)" class="form-control" name="sensorS" id="idsensorS" [(ngModel)]="model.sensor" required>

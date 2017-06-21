@@ -93,7 +93,7 @@ export class DashboardEditComponent implements OnInit {
   }
 
   haveSpaceForMoreGraphic(){
-    if(this.row.grafics.length <=2){
+    if(this.row.grafics.length <=1){
       return true;
     }
     else{
@@ -102,7 +102,7 @@ export class DashboardEditComponent implements OnInit {
   }
 
   createGraphic(){
-    if(this.row.grafics.length < 3){
+    if(this.row.grafics.length < 2){
       console.log("criar grafico")
       this.graficService.createGrafic(this.userOn.id, ""+this.row.id,"",1).subscribe(
         resultado =>{

@@ -25,7 +25,7 @@ export class DashboardItemGraficEditComponentComponent implements OnInit {
 
   //@ViewChild(BaseChartDirective) chart: BaseChartDirective;
   
-  public lineChartData:Array<any> = [{data: [], label: 'First Sensor Ex'}/*
+  public lineChartData:Array<any> = [{data: [], label: 'No Sensor'}/*
     {data: [65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40], label: 'Sensor1'},
     {data: [28, 48, 40, 19, 86, 27, 90,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40], label: 'Sensor2'},
     {data: [18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40,18, 48, 77, 9, 100, 27, 40], label: 'Sensor3'}
@@ -81,11 +81,14 @@ export class DashboardItemGraficEditComponentComponent implements OnInit {
         let index = 0;
         
         console.log("COMEÇA CARALHO SOU O EDIT!")
-        this.lineChartData.splice(0,1);
+        //this.lineChartData.splice(0,1);
         //this.divideTimestamp();
         this.lineChartLabels= [];
 
         for(let metrica of this.grafic.metric){
+          if(index == 0){
+            this.lineChartData.splice(0,1);
+          }
           //console.log(this.sensorzones.get(this.grafic.metric[0].zone));
           let values: Array<any> =[0,0,0,1,2,3,4,10,20,30,40,50,60,70,80,90,100];
           //.find(x => x.id == metrica.id)
@@ -163,7 +166,9 @@ export class DashboardItemGraficEditComponentComponent implements OnInit {
           index++;
         }
       }
-      console.log(this.lineChartData)
+      else{
+      console.log("nao deu nada")
+      }
   }
 
   divideTimestamp(){

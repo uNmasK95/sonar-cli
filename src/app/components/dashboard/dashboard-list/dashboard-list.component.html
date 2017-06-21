@@ -17,7 +17,7 @@
                             <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
                                 <label>Name</label>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
                                 <input type="text" name="name" id="idname" [(ngModel)]="model.name" #name="ngModel" required class="form-control" placeholder="Ex: Sensor XPTO">
                                 <div *ngIf="f.submitted && !name.valid" class="help-block">Name is required</div>
                             </div>
@@ -27,14 +27,14 @@
                      <!-- Confirm Button -->
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-lg-2 col-lg-offset-6 col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6 col-xs-2 col-xs-offset-6">  
+                            <div class="col-lg-2 col-lg-offset-6 col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6 col-xs-5 col-xs-offset-1">  
                                 <!-- Button cancel row -->
                                 <button (click)="createRowCancel()" type="button" class="btn btn-block btn-social btn-deleteG" >
                                     <i class="fa fa-plus-square"></i> Cancel
                                 </button>
                                 <!-- /Button cancel Sensor-->
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">  
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 ">  
                                  <!-- Button add row -->
                                 <button type="submit" class="btn btn-block btn-social btn-registerR" >
                                     <i class="fa fa-plus-square"></i> Create

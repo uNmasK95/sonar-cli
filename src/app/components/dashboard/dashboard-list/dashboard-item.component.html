@@ -7,12 +7,12 @@
             <!-- .panel-heading -->
             <div class="panel-body">
 
-            <div class="col-md-offset-8 col-md-2">
+            <div id="editrow" class="col-md-offset-8 col-md-2">
                 <a (click)="putRow()" class="btn btn-block btn-social btn-editR " [routerLink]="['/row',row.id]">
                     <i class="fa fa-pencil-square-o"></i> Edit Row
                 </a>
             </div>
-            <div class="col-md-2">
+            <div id="deleterow" class="col-md-2">
                 <a (click)="deleteRow()" class="btn btn-block btn-social btn-deleteG">
                     <i class="fa fa-times"></i> Delete Row
                 </a>

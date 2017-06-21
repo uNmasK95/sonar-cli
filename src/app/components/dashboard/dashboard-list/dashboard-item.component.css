@@ -26,3 +26,11 @@
 .btn-deleteG .badge{color:#cb2027;background-color:#fff}
 
 .btn-deleteG     { background-color: #cb2027; }
+
+#editrow{
+    margin-bottom: 3px;
+}
+#deleterow{
+margin-bottom: 3px;
+}
+

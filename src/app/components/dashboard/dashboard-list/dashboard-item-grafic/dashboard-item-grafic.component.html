@@ -1,5 +1,5 @@
 
-<div *ngIf="!selectd()" >
+<div >
   <div class="col-md-6">
   <div id="graph" class="panel-body">           
       <div class="row">
@@ -20,25 +20,3 @@
     </div>
   </div>
 </div> 
-
-<div *ngIf="selectd()" >
-  <div id = "border" class="col-md-6">
-    <div id="graph2" class="panel-body">           
-      <div class="row">
-        <div class="col-md-12">
-          <div style="display: block;">
-            <canvas baseChart 
-              [datasets]="lineChartData"
-              [labels]="lineChartLabels"
-              [options]="lineChartOptions"
-              [colors]="lineChartColors"
-              [legend]="lineChartLegend"
-              [chartType]="lineChartType"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

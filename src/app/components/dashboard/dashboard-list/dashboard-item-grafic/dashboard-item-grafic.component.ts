@@ -22,6 +22,7 @@ export class DashboardItemGraficComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
 
   interval;
+  names : Array<String> = [];
   antigorefresh: number = 5;
   antigotimestamp: number = 1;
   refreshXgraphic: number = 5;
@@ -93,7 +94,8 @@ export class DashboardItemGraficComponent implements OnInit {
   public lineChartType:string = 'line';
 
   constructor(private sensorvaluesservice: SensorValuesService,
-              private sensorsService: SensorsService) { }
+              private sensorsService: SensorsService) {
+              }
 
   ngOnInit() {
       console.log(this.grafic)
@@ -216,9 +218,13 @@ export class DashboardItemGraficComponent implements OnInit {
               values.push( {value: value.value, timestamp: value.timestamp});
               i++;
             }
-          
-          // console.log(p);
-            this.lineChartData.find(x => x.label == metrica.sensor).data.splice(i,resultado.length);
+
+            //console.log(t);
+            //console.log(numerocomeca)
+            //console.log("comeca")
+            //console.log(this.lineChartLabels.length)
+            //console.log("tamanho")
+            this.lineChartData.find(x => x.label == metrica.sensor).data.splice(0,t-1);
             //let k = this.lineChartLabels.length -1;
             
             for(;numerocomeca<this.lineChartLabels.length-2;numerocomeca++){
@@ -240,8 +246,12 @@ export class DashboardItemGraficComponent implements OnInit {
                 rValues.push(0);
               }
             }
-            let timesAux = parseInt(this.lineChartLabels[numerocomeca]);
+            let timesAux = parseInt(this.lineChartLabels[numerocomeca-1]);
+            //console.log(numerocomeca)
+            //console.log(this.lineChartLabels[numerocomeca-1])
             let findTimestamp = values.filter(res => res.timestamp>=timesAux);
+            //console.log(findTimestamp);
+            //console.log("dadaddadadaddad")
             if(findTimestamp.length != 0){//Encontrou
               /*let sum = 0;
               let number = findTimestamp.length;
@@ -249,9 +259,13 @@ export class DashboardItemGraficComponent implements OnInit {
                 sum += f.value;
               }
               rValues.push(sum/number);*/
+              //console.log(findTimestamp[0].value)
+              //console.log("vim ao time")
               rValues.push(findTimestamp[0].value);
+
               //rValues.push(findTimestamp.value);
             }else{//Nao encontrou
+              console.log("vou colocar o valor 0")
               rValues.push(0);
             }
             this.lineChartData.find(x => x.label == metrica.sensor).data = rValues;
@@ -331,7 +345,7 @@ export class DashboardItemGraficComponent implements OnInit {
           let rValues = [];
           
           this.lineChartData.push({data: new Array(), label: metrica.sensor});
-          
+
           this.sensorsService.getSensorIdValues(metrica.zone,metrica.sensor,1).subscribe(
             resultado =>{
 
@@ -429,14 +443,14 @@ export class DashboardItemGraficComponent implements OnInit {
   //#################Chart################
 
   // events
-  public chartClicked(e:any):void {
+  /*public chartClicked(e:any):void {
     console.log(e);
     localStorage.setItem("graphic",JSON.stringify({graphic : this.grafic}));
     console.log(this.grafic);
 
     this.graphicSelect.emit();
     this.selectGraphic=true;
-  }
+  }*/
 
   public chartHovered(e:any):void {
     console.log(e);
