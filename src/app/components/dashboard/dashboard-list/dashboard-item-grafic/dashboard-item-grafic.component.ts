@@ -78,8 +78,9 @@ export class DashboardItemGraficComponent implements OnInit, OnDestroy, OnChange
     if ( this.grafic.metric ) {
       let metricPosition = 0;
       for ( const metric of this.grafic.metric ){
-        this.chartMetricDefaultInit(metricPosition, 'metric ' + metricPosition);
+        this.chartMetricDefaultInit(metricPosition, '');
         this.chartGetFristValuesForMetric( metricPosition, metric);
+        this.getMetricsName(metricPosition, metric);
         metricPosition++;
       }
       this.setIntervalMetrics();
@@ -183,11 +184,11 @@ export class DashboardItemGraficComponent implements OnInit, OnDestroy, OnChange
     );
   }
 
-  diffTimestamp(lastTimestamp: number, nowTimestamp: number): number{
+  diffTimestamp(lastTimestamp: number, nowTimestamp: number): number {
     return (nowTimestamp - lastTimestamp) / this.refreshXgraphic || 0;
   }
 
-  chartAddDefaultValue(metricPosition: number){
+  chartAddDefaultValue(metricPosition: number) {
     this.lineChartData[metricPosition].data.splice(0, 1);
     this.lineChartData[metricPosition].data.push( this.defaultValue );
   }
@@ -213,6 +214,17 @@ export class DashboardItemGraficComponent implements OnInit, OnDestroy, OnChange
         }
       }, 1000 * this.refresh);
     }
+  }
+
+  getMetricsName( metricPosition: number, metric: any,  ) {
+    this.sensorsService.getSensor(metric.zone, metric.sensor).subscribe(
+      result => {
+        this.lineChartData[metricPosition].label = result.name;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }
