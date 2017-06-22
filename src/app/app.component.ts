@@ -11,13 +11,11 @@ import { Observable } from "rxjs/Observable";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-<<<<<<< HEAD
-  title = 'app workssadas!';
+
 
   notification: boolean = false;
   
-=======
->>>>>>> 21618c7068544350e56baec876b39d62f7c9376b
+
   notNotReaded: Notification[] = [];
 
   constructor(
