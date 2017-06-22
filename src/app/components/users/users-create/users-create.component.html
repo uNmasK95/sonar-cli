@@ -42,7 +42,19 @@
 
             <!-- Is Admin -->
             <br>
-            <div class="form-group ">
+            <div class="form-group">
+              <label class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-4">Type User:</label>
+              <div class="col-lg-1 col-md-2 col-sm-5 col-xs-8" id="ProductOwner">
+                <input type="radio" value="0" name="type" [(ngModel)]="model.type"> Admin
+                </div>
+              <div class="col-lg-1 col-md-2 col-sm-5 col-xs-8" id="ScrumMaster" >
+                <input type="radio" value="1" name="type" [(ngModel)]="model.type"> Normal
+              </div>
+               <div class="col-lg-1 col-md-2 col-sm-5 col-xs-8 col-xs-offset-4 col-md-offset-0" id="ScrumMaster" >
+                <input type="radio" value="2" name="type" [(ngModel)]="model.type"> Sensor
+              </div>
+            </div>
+            <!--div class="form-group ">
               <div class="col-lg-2 col-lg-offset-4 col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-2 col-xs-offset-4">
                 <div class="form-group">
                     <label class="checkbox-inline"> 
@@ -50,7 +62,7 @@
                     </label>
                 </div>
               </div>
-            </div>
+            </div-->
           <!-- /Is Admin -->
 
           <!-- Confirm Button -->

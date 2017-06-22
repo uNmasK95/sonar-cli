@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from "app/services/alert.service";
 import { UserService } from "app/services/user.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'users-create',
@@ -11,45 +12,35 @@ export class UsersCreateComponent implements OnInit {
   model : any = {};
   loading = false;
 
-  constructor(private alertService: AlertService, private userService: UserService) { }
+  constructor(private alertService: AlertService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    this.model.type = "1";
   }
 
   registerUser(){
+    console.log(this.model.type)
     this.loading = true;
     if(this.model.email && this.model.password){
       if(this.validateEmail()){
         //ver a cena de admins, mas tem a informação que falta no this.model.admin = true||fase
-        console.log("vou aqui")
-        if(this.model.admin){
-          /*
-          this.userService.registerUser(this.model.email,this.model.password,0).subscribe(
-            resultado => {
-              console.log(resultado);
-              this.loading = false;
-              this.alertService.success("User "+this.model.email+" add to the system");
-            },
-            error => {
-              this.loading = false;
-              this.alertService.error("Email in Use");
+        this.userService.registerUser(this.model.email,this.model.password,this.model.type).subscribe(
+          resultado => {
+            console.log(resultado);
+            this.loading = false;
+            if(this.model.type==2){
+              this.alertService.success("Sensor "+this.model.email+" add to the system");
             }
-          )
-          */
-        }
-        else{
-          /*this.userService.registerUser(this.model.email,this.model.password,1).subscribe(
-            resultado => {
-              console.log(resultado);
-              this.loading = false;
+            else{
               this.alertService.success("User "+this.model.email+" add to the system");
-            },
-            error => {
-              this.loading = false;
-              this.alertService.error("Email in Use");
             }
-          )*/
-        }
+            this.router.navigate(['/users'])
+          },
+          error => {
+            this.loading = false;
+            this.alertService.error("Email in Use");
+          }
+        )
       }else{
         this.alertService.error("Email not valid")
       }

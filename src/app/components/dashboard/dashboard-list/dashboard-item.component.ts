@@ -22,6 +22,7 @@ export class DashboardItemComponent implements OnInit {
   }
 
    ngOnChanges(changes: SimpleChanges) {
+     console.log("mudei o timestamp no dashboard item")
     console.log(this.timestamp);
   }
 

@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
 
       }
     )
-    this.model.timestamp = 1;
+    this.model.timestamp = 0.2;
     this.model.refresh = 5;
   }
 }
