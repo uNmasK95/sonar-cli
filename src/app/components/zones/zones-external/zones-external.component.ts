@@ -131,7 +131,25 @@ export class ZonesExternalComponent implements OnInit {
   refresh(){
     let i = this.sensorsDate.findIndex(res => res.sensor==this.sensorSelected.id);
     let aux = this.sensorsDate.find(res => res.sensor==this.sensorSelected.id);
-    this.sensorsDate[i] = {sensor: this.sensorSelected.id, date: new Date(), state: aux.state};
+
+    this.sensorsService.getState(this.zoneId,this.sensorSelected.id)
+              .subscribe(
+                resu=> {
+                  console.log(resu);
+                  if(resu.state==true){
+                    this.sensorsDate[i] = {sensor: this.sensorSelected.id, date: new Date(), state: 1}; //sensor active
+                  }else{
+                    this.sensorsDate[i] = {sensor: this.sensorSelected.id, date: new Date(), state: 0}; //sensor inactive
+                  }
+                  //console.log(this.sensorsDate);
+                },
+                error=>{
+                  this.sensorsDate[i] = {sensor: this.sensorSelected.id, date: new Date(), state: 0}; //sensor inactive
+                  console.log("getState: Deu erro"); 
+                }
+              );
+
+   //this.sensorsDate[i] = {sensor: this.sensorSelected.id, date: new Date(), state: aux.state};
     console.log("update");
   } 
 
