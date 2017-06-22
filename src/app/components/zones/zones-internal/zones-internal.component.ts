@@ -69,7 +69,26 @@ export class ZonesInternalComponent implements OnInit {
 
   refresh(sensor,i){
     console.log("update");
-    this.times[i] = new Date();
+    //Ver estado
+    this.sensorsService.getState(this.zoneId,sensor.id)
+      .subscribe(
+        res=> {
+          if(res.state==true){
+            this.times[i] = new Date();
+            this.actives[i] = 1; //sensor active
+          }else{
+            this.times[i] = new Date();
+            this.actives[i] = 0; //sensor desactive
+          }
+        },
+        error=>{
+          this.actives[i] = 0;
+          this.times[i] = new Date();
+          console.log("getState: Deu erro"); 
+          
+        }
+      );
+    //this.times[i] = new Date();
   }
 
   timeAux(date: Date){
