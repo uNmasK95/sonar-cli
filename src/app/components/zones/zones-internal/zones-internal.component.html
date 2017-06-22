@@ -43,14 +43,14 @@
             <li class="clearfix">
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 {{s.name}}<br>
-                <button *ngIf="active(s,i)" type="button" class="btn btn-outline btn-success btn-xs" (click)="refresh(s)" title="refresh" data-toggle="popover" data-trigger="hover">
-                  <i class="fa fa-refresh" aria-hidden="true"></i> Mini button
+                <button *ngIf="active(s,i)" type="button" class="btn btn-outline btn-success btn-xs" (click)="refresh(s,i)" title="refresh" data-toggle="popover" data-trigger="hover">
+                  <i class="fa fa-refresh" aria-hidden="true"></i> ACTIVE Updated at {{timeAux(times[i])}}
                 </button>
                 <button *ngIf="active(s,i)" type="button" class="btn btn-danger btn-xs" (click)="turnOff(s,i)" title="TurnOff" data-toggle="popover" data-trigger="hover">
                   <i class="fa fa-power-off" aria-hidden="true"></i>
                 </button>
-                <button *ngIf="!active(s,i)" type="button" class="btn btn-outline btn-danger btn-xs" (click)="refresh(s)" title="refresh" data-toggle="popover" data-trigger="hover">
-                  <i class="fa fa-refresh" aria-hidden="true"></i> Mini button
+                <button *ngIf="!active(s,i)" type="button" class="btn btn-outline btn-danger btn-xs" (click)="refresh(s,i)" title="refresh" data-toggle="popover" data-trigger="hover">
+                  <i class="fa fa-refresh" aria-hidden="true"></i> INACTIVE Updated at {{timeAux(times[i])}}
                 </button>
                 <button *ngIf="!active(s,i)" type="button" class="btn btn-success btn-xs" (click)="activeNow(s,i)" title="TurnOn" data-toggle="popover" data-trigger="hover">
                   <i class="fa fa-check" aria-hidden="true"></i>

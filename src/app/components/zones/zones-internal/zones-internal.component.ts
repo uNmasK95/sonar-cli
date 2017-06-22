@@ -15,7 +15,7 @@ export class ZonesInternalComponent implements OnInit {
 
   zoneId: number = -1; 
   actives: number[] = [];
-  //times: Date()
+  times: Date[] = [];
 
   constructor(
     private router: Router,
@@ -37,7 +37,7 @@ export class ZonesInternalComponent implements OnInit {
           for(let s of res){
             sensor = new Sensor(s._id.$oid,s.name,s.description,s.latitude,s.longitude,s.hostname,s.min,s.max);
             this.sensors.push(sensor);
-            //this.times.push(new Date());
+            this.times.push(new Date());
 
             //Ver estado
             this.sensorsService.getState(this.zoneId,sensor.id)
@@ -67,9 +67,14 @@ export class ZonesInternalComponent implements OnInit {
       this.router.navigate(['/zones/internal/'+this.zoneId+'/sensor/'+sensor.id]);
   }
 
-  refresh(sensor){
+  refresh(sensor,i){
     console.log("update");
+    this.times[i] = new Date();
   }
+
+  timeAux(date: Date){
+    return date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+  } 
 
   //Ver se esta ativo
   active(sensor,i){
