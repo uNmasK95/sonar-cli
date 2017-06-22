@@ -24,3 +24,11 @@
 li {
     list-style-type: none; 
 }
+
+#addGraphic{
+    width:100%;
+}
+
+#addGraphic:hover{
+    background-color: #696969;
+}
