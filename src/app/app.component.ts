@@ -11,23 +11,7 @@ import { Observable } from "rxjs/Observable";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app workssadas!';
-  
   notNotReaded: Notification[] = [];
-  //notifications: Notification[] = [];
-                    /*new Notification(1,"Sensor 1","Zone1","Sensor fora 40db",new Date()),
-                          new Notification(2,"Sensor 2","Zone2","Sensor fora 40db",new Date()),
-                          new Notification(3,"Sensor 3","Zone3","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date())
-                          ];*/
 
   constructor(
     private isAuthenticatedService: IsAuthenticatedService,
@@ -50,7 +34,7 @@ export class AppComponent implements OnInit {
             res[i].sensor.name,res[i].min,res[i].max,res[i].value,res[i].description,res[i].timestamp);
             this.notNotReaded.unshift(not);
           }
-          console.log("Todas not:"+res.length);
+          console.log("Todas not:"+ res.length);
           this.getNotifications();
         }
       );

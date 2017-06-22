@@ -92,27 +92,16 @@ export class DashboardEditComponent implements OnInit {
     return [];
   }
 
-  haveSpaceForMoreGraphic(){
-    if(this.row.grafics.length <=1){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
-
   createGraphic(){
-    if(this.row.grafics.length < 2){
-      console.log("criar grafico")
-      this.graficService.createGrafic(this.userOn.id, ""+this.row.id,"",1).subscribe(
-        resultado =>{
-          let metric : Metric[] = []
-          let graphicaux = new Grafic(resultado._id.$oid,resultado.name,resultado.rangeTime,metric);
-          this.row.grafics.push(graphicaux)
-          console.log(resultado);
-        }
-      );
-    }
+    console.log("criar grafico")
+    this.graficService.createGrafic(this.userOn.id, ""+this.row.id,"",1).subscribe(
+      resultado =>{
+        let metric : Metric[] = []
+        let graphicaux = new Grafic(resultado._id.$oid,resultado.name,resultado.rangeTime,metric);
+        this.row.grafics.push(graphicaux)
+        console.log(resultado);
+      }
+    );
   }
 
   graphicSelect(graphic: String){

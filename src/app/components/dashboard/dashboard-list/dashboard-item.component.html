@@ -32,10 +32,12 @@
               <!-- Graphics -->
               <br>
               <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 col-md-12">
                   <div class="panel">
                       <div class="panel-body">
+                        <div class="row">
                           <dashboard-item-grafic *ngFor="let g of row.grafics; let i =index" [refresh]="refresh" [grafic]="g" [timeview]="timestamp"></dashboard-item-grafic>
+                        </div>
                       </div>
                   </div>
                 </div>
