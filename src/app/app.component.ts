@@ -11,25 +11,14 @@ import { Observable } from "rxjs/Observable";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+<<<<<<< HEAD
   title = 'app workssadas!';
 
   notification: boolean = false;
   
+=======
+>>>>>>> 21618c7068544350e56baec876b39d62f7c9376b
   notNotReaded: Notification[] = [];
-  //notifications: Notification[] = [];
-                    /*new Notification(1,"Sensor 1","Zone1","Sensor fora 40db",new Date()),
-                          new Notification(2,"Sensor 2","Zone2","Sensor fora 40db",new Date()),
-                          new Notification(3,"Sensor 3","Zone3","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date()),
-                          new Notification(4,"Sensor 4","Zone4","Sensor fora 40db",new Date())
-                          ];*/
 
   constructor(
     private isAuthenticatedService: IsAuthenticatedService,

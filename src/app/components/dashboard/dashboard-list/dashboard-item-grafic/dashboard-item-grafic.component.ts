@@ -44,6 +44,7 @@ export class DashboardItemGraficComponent implements OnInit, OnDestroy, OnChange
   public lineChartLabels:Array<any> = [];
   public lineChartOptions:any = {
     responsive: true,
+    maintainAspectRatio: false,
      data: [{
         type: 'line'
      }],
@@ -92,8 +93,6 @@ export class DashboardItemGraficComponent implements OnInit, OnDestroy, OnChange
 
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('Timeview: ' + this.timeview + '-> Antigo Timeview: ' + this.antigotimeview );
-    console.log('Refresh: ' + this.refresh + '-> Antigo Refresh: ' + this.antigorefresh );
 
     if ( this.timeview !== this.antigotimeview || this.refresh !== this.antigorefresh){
       clearInterval(this.interval);
