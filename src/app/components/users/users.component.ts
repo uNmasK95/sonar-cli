@@ -21,19 +21,9 @@ export class UsersComponent implements OnInit {
     this.getAllUsers();
   }
 
-  sensorDetails(user: User){
-   /* if(zone.type=="Exterior"){
-      this.router.navigate(['/zones/external',zone.id]);
-    }else if(zone.type=="Interior"){
-      this.router.navigate(['/zones/internal',zone.id]);
-    }*/console.log("oalsd ")
-  }
-
-
   getAllUsers(){
     this.userService.getAllUsers().subscribe(
       resultado => {
-        console.log(resultado)
         for(let user of resultado){
           if(user._id.$oid != localStorage.getItem('id')){
             let useraux = new User(user._id.$oid,user.email,user.user_type)
@@ -61,8 +51,6 @@ export class UsersComponent implements OnInit {
 
   //Return type of user
   type(value: number): string{
-      console.log(value);
-      console.log("type")
       if(value==0) return "Admin";
       return "Normal User";
   }

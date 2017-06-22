@@ -147,9 +147,6 @@ export class HistoryComponent implements OnInit {
         for(let e of this.lineChartData){
           this.sensorsGraphic.push(e.label);
         }
-
-        console.log(this.lineChartData);
-     
     }
   
     //#################Chart################
@@ -177,7 +174,6 @@ export class HistoryComponent implements OnInit {
     }
 
     updateMetrics(){
-      console.log("Mudei");
       let init = this.model.init;
       let initD = new Date(init);
       let year = initD.getFullYear();
@@ -186,7 +182,6 @@ export class HistoryComponent implements OnInit {
       let hourI = this.model.hourI;
       let minI = this.model.minI;
       let timestampI = + new Date(year, month, day, hourI, minI, 0, 0);
-      console.log(timestampI);
       
       let finish = this.model.finish;
       let finishD = new Date(finish);
@@ -196,7 +191,6 @@ export class HistoryComponent implements OnInit {
       let hourF = this.model.hourF;
       let minF = this.model.minF;
       let timestampF = + new Date(yearF, monthF, dayF, hourF, minF, 0, 0);
-      console.log(timestampF);
 
       //Dividir o eixo x
       let tamanho = timestampF/1000-timestampI/1000;
@@ -206,41 +200,29 @@ export class HistoryComponent implements OnInit {
       for(let i=0;i<=nr;i++){
         let aux = i+1;
         this.lineChartLabels.push(''+timestampAux);
-       // console.log(timestampAux);
         timestampAux+=5;
       }
-     // console.log(this.lineChartLabels);
 
       //Buscar valores leituras
       let size = 0;
       //Percorrer aux2 e buscar reads e colocar em linedata
-      console.log(this.aux2.length);
       let values: Array<any> =[];
       let rValues = [];
      // let valuesTime = [];
       for(let i=0;i<this.aux2.length;i++){
-        console.log("buscar valores");
         values = [];
         rValues = [];
         this.lineChartData[i].data = [];
         this.sensorValuesService.getSensorIdValues2(this.aux2[i].sensorId,this.aux2[i].zoneId,timestampI/1000,timestampF/1000)
           .subscribe(
             res => {
-              //console.log(res);
               for(let r of res){//recebeu valores, guardar no sitio certo
-                //console.log(r);
                 values.push( {value: r.value, timestamp: r.timestamp});
-                //valuesTime.push(new Date(r.timestamp*1000));
               }
-              console.log("values lidos:");
-              console.log(values);
               for(let k=0;k<this.lineChartLabels.length-1;k++){
                 let timesAux = parseInt(this.lineChartLabels[k]);
                 let timesAuxFim = parseInt(this.lineChartLabels[k+1]);
-                //console.log(timesAux);
                 let findTimestamp = values.find(res => res.timestamp>=timesAux && res.timestamp<timesAuxFim); 
-                //console.log("Encontrou?");
-                console.log(findTimestamp);
                 if(findTimestamp){//Encontrou
                   rValues.push(findTimestamp.value);
                 }else{//Nao encontrou
@@ -251,20 +233,14 @@ export class HistoryComponent implements OnInit {
                this.chart.ngOnChanges({});
                values = [];
                rValues = [];
-               //console.log(valuesTime);
-               //valuesTime = [];
             }
           );
-          //this.lineChartData[i].data = values;
-         // this.chart.ngOnChanges({});
       }
     }
 
     //When select of zone changes, get the respective sensors
     getSensors($event, i){
-      console.log($event);
       let zoneSelected: Zone = this.zones.find(res => res.id==$event);
-
       let sensor: Sensor = null;
       this.sensorsService.get(zoneSelected.id)
           .subscribe(
@@ -278,7 +254,6 @@ export class HistoryComponent implements OnInit {
               this.aux2[i].zoneId = $event;
             }
           );
-        console.log(this.aux2);
     }
 
     //Change sensor on graphic
@@ -295,40 +270,20 @@ export class HistoryComponent implements OnInit {
     //Add sensor to graphic
     addSensor(){
       let i = this.lineChartData.length;
-      console.log(i);
       this.lineChartData.push({data: new Array(), label: "New Sensor"});
       this.aux2.push({zone: "New Zone",zoneId: 0, sensor: "New Sensor", sensorId: 0});
-
       this.chart.ngOnChanges({});
-
-      
-      /*console.log(this.lineChartData);
-      console.log(this.aux2);*/
-
   }
 
   remove(i){
     this.lineChartData.splice(i,1);
     this.aux2.splice(i,1);
-    
     this.chart.ngOnChanges({});
-
   }
 
   myName(i){
     return "nameS"+i;
   }
-
-/*public randomize():void {
-    let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
-    }
-    this.lineChartData = _lineChartData;
-  }*/
 }
 
 class SensorGraphic { 

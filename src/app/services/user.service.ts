@@ -12,7 +12,6 @@ export class UserService {
 
 
   registerUser(email: string, password:string, user_type:number){
-    console.log(user_type);
     return this.http.post(this.httpUtil.url('/admin/users'), JSON.stringify({email: email, password: password, user_type: user_type}), this.httpUtil.headers())
                .map(this.httpUtil.extrairDados)
   }
