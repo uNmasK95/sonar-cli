@@ -36,7 +36,7 @@ export class SensorsService {
                   latitude: lat, longitude: long }),this.httpUtil.headers())
                .map(this.httpUtil.extrairDados);
   }
-    getSensorIdValues(zoneid:string,sensorid:string,timestamp:number){
+    getSensorIdValues(zoneid:string,sensorid:string,window:number){
       let headersParams = { 'Content-Type': 'application/json' };
       if (localStorage['currentUser']) {
           headersParams['Authorization'] = localStorage['currentUser'];
@@ -44,7 +44,22 @@ export class SensorsService {
       var search = new URLSearchParams();
       search.set('zone', ''+zoneid);
       search.set('sensor', ''+sensorid);
-      search.set('window',''+1); //mudar aqui caralho
+      search.set('window',''+window);
+      let headers = new Headers(headersParams);
+      let options = new RequestOptions({ headers: headers, search:search});
+      return this.http.get(this.httpUtil.url("/reads"),options)
+                  .map(this.httpUtil.extrairDados);
+  }
+
+    getSensorLastValues(zoneid:string,sensorid:string,timestamp:number){
+      let headersParams = { 'Content-Type': 'application/json' };
+      if (localStorage['currentUser']) {
+          headersParams['Authorization'] = localStorage['currentUser'];
+      }
+      var search = new URLSearchParams();
+      search.set('zone', ''+zoneid);
+      search.set('sensor', ''+sensorid);
+      search.set('window',''+window);
       let headers = new Headers(headersParams);
       let options = new RequestOptions({ headers: headers, search:search});
       return this.http.get(this.httpUtil.url("/reads"),options)

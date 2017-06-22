@@ -64,35 +64,7 @@ export class DashboardItemGraficComponent implements OnInit {
       
   };
 
-  public lineChartColors:Array<any> = [
-     /* { // grey
-        backgroundColor: 'rgba(0,0,0,0)',
-        borderColor: 'rgba(148,159,177,1)',
-        //pointBackgroundColor: 'rgba(148,159,177,1)',
-        //pointBorderColor: '#fff',
-        //pointHoverBackgroundColor: '#fff',
-        //pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-      },
-      { // dark grey
-        //backgroundColor: 'rgba(77,83,96,0.2)',
-        borderColor: 'rgba(255,0,0,1)',
-        borderWidth: 1,
-        backgroundColor: 'rgba(0,0,0,0)',
-        //pointBackgroundColor: 'rgba(77,83,96,1)',
-        //pointBorderColor: '#fff',
-        //pointHoverBackgroundColor: '#fff',
-        //pointHoverBorderColor: 'rgba(77,83,96,1)'
-      },
-      { // grey
-        //backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: 'rgba(148,159,177,1)',
-        backgroundColor: 'rgba(0,0,0,0)',
-        //pointBackgroundColor: 'rgba(148,159,177,1)',
-        //pointBorderColor: '#fff',
-        //pointHoverBackgroundColor: '#fff',
-        //pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-      }*/
-  ];
+  public lineChartColors:Array<any> = [];
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
 
@@ -205,19 +177,32 @@ export class DashboardItemGraficComponent implements OnInit {
           let rValues = this.lineChartData.find(x => x.label == metrica.sensor).data
           console.log(rValues);
           console.log("rvavva")
+          console.log(this.lineChartLabels.length)
         let t: number = this.refresh/5;
         this.lineChartLabels.splice(0,t);
         rValues.splice(0,t);
         let p = this.lineChartLabels[0];
         let numerocomeca = this.lineChartLabels.length;
+
+        let inicio = this.lineChartLabels[numerocomeca-t];
+
         for(let i = this.lineChartLabels.length;i<(this.lineChartLabels.length+t) ;i++){
-          p = parseInt(p+'') + this.refreshXgraphic;
-        //  console.log(i);
-        // console.log(p);
-        // console.log(this.lineChartLabels.length+t);
-          this.lineChartLabels.push(p+'');
+          inicio = parseInt(inicio+'') + this.refreshXgraphic;
+          //  console.log(i);
+          // console.log(p);
+          console.log(this.lineChartLabels.length+t);
+          console.log(i)
+          console.log("sou o i")
+          console.log(p)
+          console.log("SOU O P")
+          console.log(inicio)
+          this.lineChartLabels.push(inicio+'');
           break;
         }
+        console.log(p)  
+        console.log("SOU O P")
+        console.log(inicio)
+
         this.sensorsService.getSensorIdValues(metrica.zone,metrica.sensor,p).subscribe(
           resultado=>{
             let i = 0;
@@ -314,10 +299,7 @@ export class DashboardItemGraficComponent implements OnInit {
 
     this.lineChartLabels = new Array();
     this.lineChartLabels = [];
-    console.log("sou o refresh + " + this.refresh)
-    console.log(tamanho);
-    console.log(this.timestamp);
-    console.log(timenow.getTime())
+
 
     for(let i=0;i<=tamanho;i =this.refreshXgraphic+i){
       this.lineChartLabels.push(timestampAux+'');
@@ -386,7 +368,7 @@ export class DashboardItemGraficComponent implements OnInit {
                   //rValues.push(findTimestamp.value);
                   rValues.push(findTimestamp[0].value);
                 }else{//Nao encontrou
-                  rValues.push(20);
+                  rValues.push(null);
                 }
               }
               let timesAux = parseInt(this.lineChartLabels[k]);
