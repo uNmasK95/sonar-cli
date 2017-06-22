@@ -35,7 +35,7 @@ export class ZonesInternalComponent implements OnInit {
         res => {
           console.log(res);
           for(let s of res){
-            sensor = new Sensor(s._id.$oid,s.name,s.description,s.latitude,s.longitude,s.hostname,s.min,s.max);
+            sensor = new Sensor(s._id.$oid,s.name,s.description,null,null,s.hostname,s.min,s.max);
             this.sensors.push(sensor);
             this.times.push(new Date());
 
