@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Zone } from "app/models/zone";
 import { Sensor } from "app/models/sensor";
 import { ZonesService } from "app/services/zones.service";
@@ -9,6 +9,7 @@ import { ZonesService } from "app/services/zones.service";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
 
   model : any = {};
   zones : Zone[] = [];
