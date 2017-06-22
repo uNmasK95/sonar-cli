@@ -134,4 +134,14 @@ export class ZonesInternalComponent implements OnInit {
         }
       );
   }
+
+  getType(){
+    if(localStorage.getItem('userOn')){
+      let p =JSON.parse(localStorage.getItem('userOn')).user_type
+      if(p==0){
+        return true;
+      }
+    }
+    return false;
+  }
 }

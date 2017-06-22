@@ -1,7 +1,7 @@
 <h1 class="page-header">Internal Zone</h1>
 
 <div class="row">
-  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+ <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <!-- Search -->    
       <div class="input-group custom-search-form">
           <input type="text" class="form-control" placeholder="Search...">
@@ -14,9 +14,9 @@
       <!-- /Search -->
   </div>
 
-  <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4">  
+  <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-2 col-xs-12">  
     <!-- Button Add Sensor -->
-    <a class="btn btn-block btn-social btn-registerR" [routerLink]="['/zones','internal',zoneId,'new']" title="Register Sensor" data-toggle="popover" data-trigger="hover">
+    <a *ngIf="getType()" class="btn btn-block btn-social btn-registerR" [routerLink]="['/zones','internal',zoneId,'new']" title="Register Sensor" data-toggle="popover" data-trigger="hover">
         <i class="fa fa-plus-square"></i> Register Sensor
     </a>
     <!-- /Button Add Sensor-->
@@ -43,25 +43,25 @@
             <li class="clearfix">
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 {{s.name}}<br>
-                <button *ngIf="active(s,i)" type="button" class="btn btn-outline btn-success btn-xs" (click)="refresh(s,i)" title="refresh" data-toggle="popover" data-trigger="hover">
+                <button *ngIf="getType() && active(s,i)" type="button" class="btn btn-outline btn-success btn-xs" (click)="refresh(s,i)" title="refresh" data-toggle="popover" data-trigger="hover">
                   <i class="fa fa-refresh" aria-hidden="true"></i> ACTIVE Updated at {{timeAux(times[i])}}
                 </button>
-                <button *ngIf="active(s,i)" type="button" class="btn btn-danger btn-xs" (click)="turnOff(s,i)" title="TurnOff" data-toggle="popover" data-trigger="hover">
+                <button *ngIf="getType() && active(s,i)" type="button" class="btn btn-danger btn-xs" (click)="turnOff(s,i)" title="TurnOff" data-toggle="popover" data-trigger="hover">
                   <i class="fa fa-power-off" aria-hidden="true"></i>
                 </button>
-                <button *ngIf="!active(s,i)" type="button" class="btn btn-outline btn-danger btn-xs" (click)="refresh(s,i)" title="refresh" data-toggle="popover" data-trigger="hover">
+                <button *ngIf="getType() && !active(s,i)" type="button" class="btn btn-outline btn-danger btn-xs" (click)="refresh(s,i)" title="refresh" data-toggle="popover" data-trigger="hover">
                   <i class="fa fa-refresh" aria-hidden="true"></i> INACTIVE Updated at {{timeAux(times[i])}}
                 </button>
-                <button *ngIf="!active(s,i)" type="button" class="btn btn-success btn-xs" (click)="activeNow(s,i)" title="TurnOn" data-toggle="popover" data-trigger="hover">
+                <button *ngIf="getType() && !active(s,i)" type="button" class="btn btn-success btn-xs" (click)="activeNow(s,i)" title="TurnOn" data-toggle="popover" data-trigger="hover">
                   <i class="fa fa-check" aria-hidden="true"></i>
                 </button>
               </div>
-              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+              <div class="col-lg-5 col-md-5 col-sm-3 col-xs-5">
                 {{s.description}} 
               </div>
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+              <div class="col-lg-3 col-md-3 col-sm-5 col-xs-3">
                 <!-- Button Add Sensor -->
-                <a class="btn btn-block btn-social btn-editR" (click)="sensorChoise(s)" title="Edit Sensor" data-toggle="popover" data-trigger="hover">
+                <a *ngIf="getType()" class="btn btn-block btn-social btn-editR" (click)="sensorChoise(s)" title="Edit Sensor" data-toggle="popover" data-trigger="hover">
                     <i class="fa fa-pencil-square-o"></i> Edit Sensor
                 </a>
                 <!-- /Button Add Sensor-->

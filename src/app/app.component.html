@@ -40,7 +40,7 @@
                             </li>
                         </div>
                         <div id="pF" class="panel-footer">
-                            <a class="text-center" [routerLink]="['/notifications']">
+                            <a (click)="seeall()" class="text-center" [routerLink]="['/notifications']">
                                 <strong>See All Alerts</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
@@ -71,17 +71,6 @@
           <div *ngIf="isLogged()" class="navbar-default sidebar" role="navigation">
               <div class="sidebar-nav navbar-collapse">
                   <ul class="nav" id="side-menu">
-                      <li class="sidebar-search">
-                          <div class="input-group custom-search-form">
-                              <input type="text" class="form-control" placeholder="Search...">
-                              <span class="input-group-btn">
-                                  <button class="btn btn-default" type="button">
-                                      <i class="fa fa-search"></i>
-                                  </button>
-                              </span>
-                          </div>
-                          <!-- /input-group -->
-                      </li>
                       <li>
                           <a [routerLink]="['/dashboard']" *ngIf="isLogged()"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                       </li>
@@ -92,7 +81,7 @@
                           <a [routerLink]="['/zones']" *ngIf="isLogged()"><i class="fa fa-map-marker fa-fw"></i> Zones</a>
                       </li>
                       <li>
-                          <a [routerLink]="['/users']" *ngIf="isLogged()"><i class="fa fa-users fa-fw"></i> Users</a>
+                          <a [routerLink]="['/users']" *ngIf="isLogged() && getType()"><i class="fa fa-users fa-fw"></i> Users</a>
                       </li>
                   </ul>
               </div>

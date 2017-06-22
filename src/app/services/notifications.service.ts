@@ -32,6 +32,12 @@ export class NotificationsService {
                 .map(this.httpUtil.extrairDados);
   }
 
+  seeAll(){
+    return this.http.post(this.httpUtil.url('/notifications/seeall?user='+localStorage['id']),'',
+          this.httpUtil.headers())
+              .map(this.httpUtil.extrairDados);
+  }
+
   //Marcar notificacao como lida pelo user locado
   wasRead(not: Notification){
     console.log(not.id);

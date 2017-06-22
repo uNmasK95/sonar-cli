@@ -11,6 +11,11 @@ import { Observable } from "rxjs/Observable";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+
+  notification: boolean = false;
+  
+
   notNotReaded: Notification[] = [];
 
   constructor(
@@ -22,23 +27,25 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(){
-    console.log("famfjaf")
-     //Buscar todas notificacoes
-    this.notificationsService.getNotificationsNotRead()
-      .subscribe(
-        res => {
-          //res.reverse();
-          for(let i=0;i<res.length;i++){
-            //console.log(i);
-            let not: Notification =  new Notification(res[i].id.$oid,res[i].zone.id.$oid,res[i].zone.name,res[i].sensor.id.$oid,
-            res[i].sensor.name,res[i].min,res[i].max,res[i].value,res[i].description,res[i].timestamp);
-            this.notNotReaded.unshift(not);
-          }
-          console.log("Todas not:"+ res.length);
-          this.getNotifications();
-        }
-      );
   }
+
+  getNotificationNotRead(){
+    this.notificationsService.getNotificationsNotRead()
+    .subscribe(
+      res => {
+        //res.reverse();
+        for(let i=0;i<res.length;i++){
+          //console.log(i);
+          let not: Notification =  new Notification(res[i].id.$oid,res[i].zone.id.$oid,res[i].zone.name,res[i].sensor.id.$oid,
+          res[i].sensor.name,res[i].min,res[i].max,res[i].value,res[i].description,res[i].timestamp);
+          this.notNotReaded.unshift(not);
+        }
+        console.log("Todas not:"+res.length);
+        this.getNotifications();
+      }
+    ); 
+  }
+
   getNotifications(){
     
     //A cada x tempo ver se ha novas notificacoes
@@ -107,6 +114,12 @@ export class AppComponent implements OnInit {
 
 
   isLogged(){
+    if(this.isAuthenticatedService.getLoginStatus()){
+      if(!this.notification){
+        this.notification = true;
+        this.getNotificationNotRead();
+      }
+    }
     return this.isAuthenticatedService.getLoginStatus();
   }
   
@@ -115,6 +128,24 @@ export class AppComponent implements OnInit {
     delete localStorage['token'];
     delete localStorage['userOn'];
     location.reload();
+  }
+
+   getType(){
+    if(localStorage.getItem('userOn')){
+      let p =JSON.parse(localStorage.getItem('userOn')).user_type
+      if(p==0){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  seeall(){
+    this.notificationsService.seeAll().subscribe(
+      res =>{
+        this.notNotReaded = [];
+      }
+    );
   }
 
 }

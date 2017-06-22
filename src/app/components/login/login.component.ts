@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { IsAuthenticatedService } from "../../services/is-authenticated.service";
 import { AlertService } from "../../services/alert.service";
@@ -45,7 +45,10 @@ export class LoginComponent implements OnInit {
                             this.router.navigate(['/dashboard']);
                     },
                     error => {
-                            console.log(error);
+                            let user2 = {id: localStorage.getItem('id'), user_type: 1};
+                            localStorage.setItem('userOn',JSON.stringify(user2));
+                            this.router.navigate(['/dashboard']);
+                            //console.log(error);
                     });
                     
                 },
