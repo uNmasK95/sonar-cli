@@ -38,7 +38,6 @@ export class ZonesSensorEditComponent implements OnInit {
     this.sensorsService.getSensor(this.idZone,this.idSensor)
       .subscribe(res => {
         this.sensor = new Sensor(res._id.$oid,res.name,res.description,res.latitude,res.longitude,res.hostname,res.min,res.max);
-        console.log(this.sensor)
       });
   }
 
@@ -83,6 +82,5 @@ export class ZonesSensorEditComponent implements OnInit {
               }
             }
           );
-
   }
 }

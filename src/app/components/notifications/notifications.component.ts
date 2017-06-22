@@ -31,12 +31,10 @@ export class NotificationsComponent implements OnInit {
       .subscribe(
         res => {
           for(let i=0;i<res.length;i++){
-            //console.log(i);
             let not: Notification =  new Notification(res[i].id.$oid,res[i].zone.id.$oid,res[i].zone.name,res[i].sensor.id.$oid,
             res[i].sensor.name,res[i].min,res[i].max,res[i].value,res[i].description,res[i].timestamp);
             this.notifications.unshift(not);
           }
-          console.log("Todas not:"+res.length);
         }
       );
   }

@@ -19,14 +19,11 @@ export class UsersCreateComponent implements OnInit {
   }
 
   registerUser(){
-    console.log(this.model.type)
     this.loading = true;
     if(this.model.email && this.model.password){
       if(this.validateEmail()){
-        //ver a cena de admins, mas tem a informação que falta no this.model.admin = true||fase
         this.userService.registerUser(this.model.email,this.model.password,this.model.type).subscribe(
           resultado => {
-            console.log(resultado);
             this.loading = false;
             if(this.model.type==2){
               this.alertService.success("Sensor "+this.model.email+" add to the system");

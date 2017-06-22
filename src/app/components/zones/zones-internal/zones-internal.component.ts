@@ -33,7 +33,6 @@ export class ZonesInternalComponent implements OnInit {
     this.sensorsService.get(this.zoneId)
       .subscribe(
         res => {
-          console.log(res);
           for(let s of res){
             sensor = new Sensor(s._id.$oid,s.name,s.description,null,null,s.hostname,s.min,s.max);
             this.sensors.push(sensor);
@@ -51,11 +50,9 @@ export class ZonesInternalComponent implements OnInit {
                 },
                 error=>{
                   console.log("getState: Deu erro"); 
-                  
                 }
               );
           }
-          //console.log(this.zones)
         },
         error=>{
           console.log("get: Deu erro"); 
@@ -68,7 +65,6 @@ export class ZonesInternalComponent implements OnInit {
   }
 
   refresh(sensor,i){
-    console.log("update");
     //Ver estado
     this.sensorsService.getState(this.zoneId,sensor.id)
       .subscribe(
@@ -109,12 +105,9 @@ export class ZonesInternalComponent implements OnInit {
     this.sensorsService.turnOn(this.zoneId,sensor.id)
       .subscribe(
         res => {
-          console.log("TURNON: Nao deu erro:"+i); 
-
           this.actives[i]=1; //Por active
         },
         error=>{
-          console.log("TURNON: Deu erro"); 
           console.log(error);
         }
       );
@@ -125,11 +118,9 @@ export class ZonesInternalComponent implements OnInit {
     this.sensorsService.turnOff(this.zoneId,sensor.id)
       .subscribe(
         res => {
-          console.log("TURNOFF: Nao deu erro"); 
           this.actives[i]=0; //Por inactive
         },
         error=>{
-          console.log("TURNOFF: Deu erro"); 
           console.log(error);
         }
       );

@@ -16,7 +16,6 @@ export class GraficService {
             headersParams['Authorization'] = localStorage['currentUser'];
         }
         var search = new URLSearchParams();
-        console.log(userId);
         search.set('user', userId);
         let headers = new Headers(headersParams);
         let options = new RequestOptions({ headers: headers, search:search});
@@ -31,7 +30,6 @@ export class GraficService {
             headersParams['Authorization'] = localStorage['currentUser'];
         }
         var search = new URLSearchParams();
-        console.log(userId);
         search.set('user', userId);
         let headers = new Headers(headersParams);
         let options = new RequestOptions({ headers: headers, search:search});

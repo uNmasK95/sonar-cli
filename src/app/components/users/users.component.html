@@ -28,7 +28,6 @@
       <div *ngFor="let u of users | FilterPipe: model.queryString; let i = index">
         <ul class="chat">
           <li data-toggle="popover" data-trigger="hover" class="left clearfix" >
-          <!--div id="usersL" class="row" (click)="sensorDetails(u)"-->
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
               {{u.email}}
             </div>

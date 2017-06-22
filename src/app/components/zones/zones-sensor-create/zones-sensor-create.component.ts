@@ -27,7 +27,6 @@ export class ZonesSensorCreateComponent implements OnInit {
               .subscribe(
                 res => {
                   this.typeZone=res.type;
-                  console.log(this.typeZone);
                 }
               )
         });

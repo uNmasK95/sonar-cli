@@ -13,7 +13,6 @@ export class RowService {
     getRows(userId: string){
         let headersParams = { 'Content-Type': 'application/json' };
         if (localStorage['currentUser']) {
-                   console.log(localStorage['currentUser']);
             headersParams['Authorization'] = localStorage['currentUser'];
         }
         var search = new URLSearchParams();
@@ -33,8 +32,6 @@ export class RowService {
         search.set('user', userId);
         let headers = new Headers(headersParams);
         let options = new RequestOptions({ headers: headers, search:search});
-        console.log(options)
-        console.log("Criada");
         return this.http.post(this.httpUtil.url("/lines"),JSON.stringify({name: nameRow}),options)
                    .map(this.httpUtil.extrairDados);
     }
@@ -48,8 +45,6 @@ export class RowService {
         search.set('user', userId);
         let headers = new Headers(headersParams);
         let options = new RequestOptions({ headers: headers, search:search});
-        console.log(options)
-        console.log("eliminada")
        return this.http.delete(this.httpUtil.url("/lines/"+lineId),options)
                    .map(this.httpUtil.extrairDados);
     }

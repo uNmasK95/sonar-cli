@@ -16,7 +16,6 @@ export class IsAuthenticatedService {
 
   //call this function when login status changes
   changeLoginStatus(status: boolean){
-      //this.userLoggedIn = status;
       console.log("in changeLoginStatus: ", status);
   }
 
@@ -31,7 +30,6 @@ export class IsAuthenticatedService {
                 .map(
                   (response: Response) => {
                       let data = response.json();
-                      console.log(data);
                       if(data && data.auth_token){
                         localStorage.setItem('currentUser',data.auth_token);
                         localStorage.setItem('id',data.user_id.$oid);
@@ -41,7 +39,6 @@ export class IsAuthenticatedService {
   }
 
   logout(){
-    //this.changeLoginStatus(false);
     this.userLogged = null;
     localStorage.removeItem('currentUser');
   }
