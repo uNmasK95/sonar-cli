@@ -51,15 +51,15 @@ export class SensorsService {
                   .map(this.httpUtil.extrairDados);
   }
 
-    getSensorLastValues(zoneid:string,sensorid:string,timestamp:number){
+    getSensorLastValues(zoneid: string, sensorid: string, timestamp: number)  {
       let headersParams = { 'Content-Type': 'application/json' };
       if (localStorage['currentUser']) {
           headersParams['Authorization'] = localStorage['currentUser'];
       }
       var search = new URLSearchParams();
-      search.set('zone', ''+zoneid);
-      search.set('sensor', ''+sensorid);
-      search.set('window',''+window);
+      search.set('zone', '' + zoneid);
+      search.set('sensor', '' + sensorid);
+      search.set('timestamp', '' + timestamp);
       let headers = new Headers(headersParams);
       let options = new RequestOptions({ headers: headers, search:search});
       return this.http.get(this.httpUtil.url("/reads"),options)
