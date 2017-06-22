@@ -52,13 +52,13 @@
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                 <div class="form-group">
                   <label>Hour:</label>
-                  <input [(ngModel)]="model.hourI" title={{model.hourI}}  data-toggle="popover" data-trigger="hover" type="number" class="form-control">
+                  <input min="0" max="23" [(ngModel)]="model.hourI" title={{model.hourI}}  data-toggle="popover" data-trigger="hover" type="number" class="form-control">
                 </div>
               </div>
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                 <div class="form-group">
                   <label>Min:</label>
-                  <input [(ngModel)]="model.minI" title={{model.minI}}  data-toggle="popover" data-trigger="hover" type="number" class="form-control">
+                  <input min="0" max="59" [(ngModel)]="model.minI" title={{model.minI}}  data-toggle="popover" data-trigger="hover" type="number" class="form-control">
                 </div>
               </div>
             </div>

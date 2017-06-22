@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IsAuthenticatedService } from "./services/is-authenticated.service";
 import { Router } from "@angular/router";
 import { Notification } from "app/models/notification";
@@ -10,7 +10,7 @@ import { Observable } from "rxjs/Observable";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app workssadas!';
   
   notNotReaded: Notification[] = [];
@@ -34,8 +34,11 @@ export class AppComponent {
     private router: Router,
     private notificationsService: NotificationsService)
     //private userService: UserService) 
-    { 
-      //Buscar todas notificacoes
+    {}
+
+
+  ngOnInit(){
+     //Buscar todas notificacoes
     this.notificationsService.getAll()
       .subscribe(
         res => {
@@ -50,9 +53,7 @@ export class AppComponent {
           this.getNotifications();
         }
       );
-     
   }
-
   getNotifications(){
     
     //A cada x tempo ver se ha novas notificacoes

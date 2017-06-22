@@ -50,34 +50,49 @@ export class HistoryComponent implements OnInit {
             '10s', '15s', '20s', '15s', '20s','10s', '15s', '20s', '15s', '20s','10s', '15s', '20s', '15s', '20s'*/
             ];
     public lineChartOptions:any = {
-      responsive: true
+        responsive: true,
+        data: [{
+            type: "line",
+        }],
+        
+        elements:{
+            point:{
+              radius:1
+            }
+          },
+        scales: {
+          
+          xAxes: [{
+            display: false
+          }],
+          yAxes: [{
+            display: true
+          }],}
       
     };
+
     public lineChartColors:Array<any> = [
-      { // grey
-        backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: 'rgba(148,159,177,1)',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      { // red
+        backgroundColor: 'rgba(0,0,0,0)',
+        borderColor: 'rgba(255,0,0,1)',
       },
-      { // dark grey
-        backgroundColor: 'rgba(77,83,96,0.2)',
-        borderColor: 'rgba(77,83,96,1)',
-        pointBackgroundColor: 'rgba(77,83,96,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(77,83,96,1)'
+      { // green
+        backgroundColor: 'rgba(0,0,0,0)',
+        borderColor: 'rgba(0,255,0,1)',
+      },
+      { // blue
+        backgroundColor: 'rgba(0,0,0,0)',
+        borderColor: 'rgba(7, 0, 133, 1)',
       },
       { // grey
-        backgroundColor: 'rgba(148,159,177,0.2)',
+        backgroundColor: 'rgba(0,0,0,0)',
         borderColor: 'rgba(148,159,177,1)',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      },
+      { // roxo
+        backgroundColor: 'rgba(0,0,0,0)',
+        borderColor: 'rgba(249, 77, 255, 1)',
       }
+      
     ];
     public lineChartLegend:boolean = true;
     public lineChartType:string = 'line';
@@ -187,11 +202,14 @@ export class HistoryComponent implements OnInit {
       let tamanho = timestampF/1000-timestampI/1000;
       let timestampAux = timestampI/1000;
       this.lineChartLabels = [];
-      for(let i=0;i<=tamanho;i++){
+      let nr = tamanho/5;
+      for(let i=0;i<=nr;i++){
         let aux = i+1;
         this.lineChartLabels.push(''+timestampAux);
-        timestampAux++;
+       // console.log(timestampAux);
+        timestampAux+=5;
       }
+     // console.log(this.lineChartLabels);
 
       //Buscar valores leituras
       let size = 0;
@@ -216,12 +234,13 @@ export class HistoryComponent implements OnInit {
               }
               console.log("values lidos:");
               console.log(values);
-              for(let k=0;k<this.lineChartLabels.length;k++){
+              for(let k=0;k<this.lineChartLabels.length-1;k++){
                 let timesAux = parseInt(this.lineChartLabels[k]);
+                let timesAuxFim = parseInt(this.lineChartLabels[k+1]);
                 //console.log(timesAux);
-                let findTimestamp = values.find(res => res.timestamp==timesAux); 
+                let findTimestamp = values.find(res => res.timestamp>=timesAux && res.timestamp<timesAuxFim); 
                 //console.log("Encontrou?");
-                //console.log(findTimestamp);
+                console.log(findTimestamp);
                 if(findTimestamp){//Encontrou
                   rValues.push(findTimestamp.value);
                 }else{//Nao encontrou
