@@ -77,7 +77,7 @@ export class DashboardItemGraficComponent implements OnInit, OnDestroy, OnChange
     if ( this.grafic.metric ) {
       let metricPosition = 0;
       for ( const metric of this.grafic.metric ){
-        this.chartMetricDefault(metricPosition, 'metric ' + metricPosition);
+        this.chartMetricDefaultInit(metricPosition, 'metric ' + metricPosition);
         this.chartGetFristValuesForMetric( metricPosition, metric);
         metricPosition++;
       }
@@ -91,74 +91,29 @@ export class DashboardItemGraficComponent implements OnInit, OnDestroy, OnChange
   }
 
 
-  ngOnChanges(changes: SimpleChanges){
-    console.log('Mudei o refresh')
+  ngOnChanges(changes: SimpleChanges) {
     console.log('Timeview: ' + this.timeview + '-> Antigo Timeview: ' + this.antigotimeview );
     console.log('Refresh: ' + this.refresh + '-> Antigo Refresh: ' + this.antigorefresh );
 
-    // if(this.timeview != this.antigotimeview || this.refresh != this.antigorefresh){
-    //     clearInterval(this.interval);
-    //     console.log("mudei o refresh")
-    //     this.antigorefresh = this.refresh;
-    //     this.antigotimeview = this.timeview;
-    //     if(this.grafic.metric){
-    //     let index = 0;
-    //     //this.lineChartData = [{data: [], label: 'First Sensor Ex'}];
+    if ( this.timeview !== this.antigotimeview || this.refresh !== this.antigorefresh){
+      clearInterval(this.interval);
 
-    //    // this.lineChartData.splice(0,1)
-        
-    //     console.log("COMEÇA CARALHO")
+      if ( this.timeview !== this.antigotimeview ) {
+        this.chartTimeDefault();
+        if ( this.grafic.metric ) {
+          let metricPosition = 0;
+          for ( const metric of this.grafic.metric ){
+            this.chartMetricDefaultChange(metricPosition);
+            this.chartGetFristValuesForMetric( metricPosition, metric);
+            metricPosition++;
+          }
+        }
+      }
+      this.setIntervalMetrics();
 
-    //    // this.divideTimestamp();
-
-    //     for(let metrica of this.grafic.metric){
-    //       let values: Array<any> =[];
-    //       let rValues = [];
-
-    //       this.sensorsService.getSensorIdValues(metrica.zone,metrica.sensor,1).subscribe(
-    //         resultado =>{
-
-    //           console.log(resultado)
-              
-    //           for(let value of resultado){
-    //             values.push( {value: value.value, timestamp: value.timestamp});
-    //           }
-              
-    //           let k = 0;
-    //           for(;k<this.lineChartLabels.length-2;k++){
-    //             const timesAux = parseInt(this.lineChartLabels[k]);
-    //             const timesAuxF = parseInt(this.lineChartLabels[k+1]);
-
-    //             const findTimestamp = values.filter(res => res.timestamp>=timesAux && res.timestamp<=timesAuxF);
-
-    //             if(findTimestamp.length != 0){//Encontrou
-    //               rValues.push(findTimestamp[0].value);
-    //             }else{//Nao encontrou
-    //               rValues.push(null);
-    //             }
-    //           }
-    //           const timesAux = parseInt(this.lineChartLabels[k]);
-    //           const findTimestamp = values.filter(res => res.timestamp>=timesAux);
-
-    //           if(findTimestamp.length != 0){//Encontrou
-    //             rValues.push(findTimestamp[0].value);
-    //           }else {// Nao encontrou
-    //             rValues.push(20);
-    //           }
-    //           this.lineChartData.find(x => x.label == metrica.sensor).data = rValues;
-    //           this.chart.ngOnChanges({});
-    //           rValues = [];
-    //         },
-    //         error =>{
-    //           console.log(error)
-    //         }
-    //       )
-    //       index++;
-    //     }
-    //   }
-    //    this.setIntervals();
-    //    console.log("sET iNTREVAL AQUI")
-    // }
+      this.antigorefresh = this.refresh;
+      this.antigotimeview = this.timeview;
+    }
   }
 
   chartTimeDefault() {
@@ -176,7 +131,11 @@ export class DashboardItemGraficComponent implements OnInit, OnDestroy, OnChange
   }
 
 
-  chartMetricDefault(metricPosition: number, label: string) {
+  chartMetricDefaultInit(metricPosition: number, label: string) {
+    this.lineChartColors.push({ // red
+        backgroundColor: 'rgba(0,0,0,0)',
+        borderColor: 'rgba(255,0,0,1)',
+    });
     this.lineChartData.push({ label: label, data: [ ] });
     // Adicionar valores ao eixo do Xs
     for (let i = 0; i < (60 * this.timeview) / this.refresh; i++ ) {
@@ -184,7 +143,13 @@ export class DashboardItemGraficComponent implements OnInit, OnDestroy, OnChange
     }
   }
 
- 
+  chartMetricDefaultChange(metricPosition: number) {
+    this.lineChartData[metricPosition].data = [];
+    // Adicionar valores de dados
+    for (let i = 0; i < (60 * this.timeview) / this.refresh; i++ ) {
+      this.lineChartData[metricPosition].data.push( this.defaultValue );
+    }
+  }
 
   chartGetFristValuesForMetric( metricPosition: number, metrica: any ) {
     this.sensorsService.getSensorIdValues( metrica.zone, metrica.sensor, 1 ).subscribe(
@@ -240,13 +205,15 @@ export class DashboardItemGraficComponent implements OnInit, OnDestroy, OnChange
   }
 
   setIntervalMetrics() {
-    this.interval = setInterval( () => {
-      let metricPosition = 0;
-      for ( const metric of this.grafic.metric ){
-        this.refreshMetric( 0, this.grafic.metric[0] );
-        metricPosition++;
-      }
+    if (this.grafic.metric) {
+      this.interval = setInterval( () => {
+        let metricPosition = 0;
+        for ( const metric of this.grafic.metric ){
+          this.refreshMetric( 0, this.grafic.metric[0] );
+          metricPosition++;
+        }
       }, 1000 * this.refresh);
+    }
   }
 
 }
