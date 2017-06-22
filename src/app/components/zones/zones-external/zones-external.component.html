@@ -55,6 +55,19 @@
             <!-- .panel-heading -->
             <div class="panel-body">
               <strong>{{sensorSelected.name}}:</strong> Local ({{sensorSelected.latitude}}º,{{sensorSelected.longitude}}º)
+              <br>
+              <button *ngIf="active()" type="button" class="btn btn-outline btn-success btn-xs" (click)="refresh()" title="refresh" data-toggle="popover" data-trigger="hover">
+                <i class="fa fa-refresh" aria-hidden="true"></i> ACTIVE Updated at {{timeAux()}}
+              </button>
+              <button *ngIf="active()" type="button" class="btn btn-danger btn-xs" (click)="turnOff()" title="TurnOff" data-toggle="popover" data-trigger="hover">
+                <i class="fa fa-power-off" aria-hidden="true"></i>
+              </button>
+              <button *ngIf="!active()" type="button" class="btn btn-outline btn-danger btn-xs" (click)="refresh()" title="refresh" data-toggle="popover" data-trigger="hover">
+                <i class="fa fa-refresh" aria-hidden="true"></i> INACTIVE Updated at {{timeAux()}}
+              </button>
+              <button *ngIf="!active()" type="button" class="btn btn-success btn-xs" (click)="activeNow()" title="TurnOn" data-toggle="popover" data-trigger="hover">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
             </div>
             <!-- .panel-body -->
           </div>

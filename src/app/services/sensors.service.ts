@@ -69,7 +69,8 @@ export class SensorsService {
   //Get State of sensor
   getState(zoneId, sensorId){
     return this.http.get(this.httpUtil.url('/zones/'+zoneId+'/sensors/'+sensorId+'/state'), this.httpUtil.headers())
-               .map(this.httpUtil.extrairDados);
+               .map(this.httpUtil.extrairDados)
+               .catch(this.httpUtil.processarErros);
   }
 
   //TurnOn sensor
