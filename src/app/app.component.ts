@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'app workssadas!';
   
   notNotReaded: Notification[] = [];
-  notifications: Notification[] = [];
+  //notifications: Notification[] = [];
                     /*new Notification(1,"Sensor 1","Zone1","Sensor fora 40db",new Date()),
                           new Notification(2,"Sensor 2","Zone2","Sensor fora 40db",new Date()),
                           new Notification(3,"Sensor 3","Zone3","Sensor fora 40db",new Date()),
@@ -38,8 +38,9 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(){
+    console.log("famfjaf")
      //Buscar todas notificacoes
-    this.notificationsService.getAll()
+    this.notificationsService.getNotificationsNotRead()
       .subscribe(
         res => {
           //res.reverse();
@@ -47,7 +48,7 @@ export class AppComponent implements OnInit {
             //console.log(i);
             let not: Notification =  new Notification(res[i].id.$oid,res[i].zone.id.$oid,res[i].zone.name,res[i].sensor.id.$oid,
             res[i].sensor.name,res[i].min,res[i].max,res[i].value,res[i].description,res[i].timestamp);
-            this.notifications.unshift(not);
+            this.notNotReaded.unshift(not);
           }
           console.log("Todas not:"+res.length);
           this.getNotifications();
@@ -64,14 +65,17 @@ export class AppComponent implements OnInit {
                 //console.log(this.notNotReaded);
                 //res.reverse();
                 if(res.length>this.notNotReaded.length){//Nova notificacao
+                  console.log(res);
                   let newSize = res.length-this.notNotReaded.length;
                   console.log("Tem nova notificacao")
-                  for(let i=0;i<newSize;i++){
+                  let i=res.length-1;
+                  //for(let i=0;i<newSize;i++){
                     let not: Notification =  new Notification(res[i].id.$oid,res[i].zone.id.$oid,res[i].zone.name,res[i].sensor.id.$oid,
-            res[i].sensor.name,res[i].min,res[i].max,res[i].value,res[i].description,res[i].timestamp);
+                                res[i].sensor.name,res[i].min,res[i].max,res[i].value,res[i].description,res[i].timestamp);
+                    console.log(not);
                     this.notNotReaded.unshift(not);
-                    this.notifications.unshift(not);
-                  }
+                    //this.notifications.unshift(not);
+                  //}
                 }else{//Nao ha nova notificacao
                   console.log("Nao ha novas notificacoes");
                 }
@@ -84,7 +88,7 @@ export class AppComponent implements OnInit {
   }
   
   //Ao clicar no notification o badge fica a 0, todas lidas
-  readAll($event){
+  /*readAll($event){
     console.log($event);
     //Marcar como liga pelo user logado as notificacoes
     for(let i=0;i<this.notNotReaded.length;i++){
@@ -93,6 +97,15 @@ export class AppComponent implements OnInit {
         .subscribe();
     }
     this.notNotReaded = [];
+  }*/
+
+  //Ler notificacao pelo cliente
+  notRead(not, i){
+    this.notificationsService.wasRead(not)
+        .subscribe( res => {
+          //this.notNotReaded.splice(i,1);
+          this.notNotReaded = this.notNotReaded.filter(x => x !==not);
+        });
   }
 
   //Calcular ha qts minutos foi notificacao

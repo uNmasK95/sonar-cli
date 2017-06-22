@@ -12,6 +12,7 @@
 }
 
 #l{
+    cursor: pointer;
     margin: 0;
     padding: 0;
 }
@@ -24,4 +25,7 @@
 
 #pF{
     text-align: center;
+}
+#inf{
+    color: blue;
 }
