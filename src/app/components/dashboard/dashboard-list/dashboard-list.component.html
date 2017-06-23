@@ -18,7 +18,7 @@
                                 <label>Name</label>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
-                                <input type="text" name="name" id="idname" [(ngModel)]="model.name" #name="ngModel" required class="form-control" placeholder="Ex: Sensor XPTO">
+                                <input type="text" name="name" id="idname" [(ngModel)]="model.name" #name="ngModel" required class="form-control" placeholder="Ex: Row Title">
                                 <div *ngIf="f.submitted && !name.valid" class="help-block">Name is required</div>
                             </div>
                         </div>

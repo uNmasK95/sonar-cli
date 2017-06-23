@@ -35,9 +35,8 @@ export class DashboardComponent implements OnInit {
           this.sensor_zones.set(zona._id.$oid,sensores);
         }
         this.doneok = true;
-        //console.log(this.sensor_zones);
       },
-      error =>{
+      error => {
 
       }
     )

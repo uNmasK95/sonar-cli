@@ -44,9 +44,7 @@ export class DashboardItemGraficEditComponentComponent implements OnInit {
     
       if(this.grafic.metric){
         let index = 0;
-        
-        console.log("COMEÇA CARALHO SOU O EDIT!");
-        this.lineChartLabels= [];
+                this.lineChartLabels= [];
 
         for(let metrica of this.grafic.metric){
           if(index == 0){
@@ -54,7 +52,6 @@ export class DashboardItemGraficEditComponentComponent implements OnInit {
           }
           let values: Array<any> =[0,0,0,1,2,3,4,10,20,30,40,50,60,70,80,90,100];
           this.lineChartData.push({data: values, label:metrica.sensor});
-          console.log(this.lineChartData[index])
 
           if( metrica.zone && metrica.sensor){
             this.sensorsService.getSensor(metrica.zone,metrica.sensor).subscribe(
@@ -76,7 +73,6 @@ export class DashboardItemGraficEditComponentComponent implements OnInit {
     if(localStorage.getItem("graphic")){
       if(JSON.parse(localStorage.getItem("graphic")).id == this.grafic.id){
         console.log(this.grafic);
-        console.log("mudei o grafico ou sou o mesmo")
       }
     }
   }
@@ -85,9 +81,7 @@ export class DashboardItemGraficEditComponentComponent implements OnInit {
 
   // events
   public chartClicked(e:any):void {
-    console.log(e);
     localStorage.setItem("graphic",JSON.stringify({graphic : this.grafic}));
-    console.log(this.grafic);
 
     this.graphicSelect.emit();
     this.selectGraphic=true;

@@ -54,7 +54,7 @@
                 <!-- /Hostname -->
               </div>
 
-              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !min.valid && !max.valid }">
+              <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
                 <!-- Range -->
                 <br>
                 <div class="row">
@@ -64,13 +64,13 @@
                   
                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <label>Min:</label>
-                    <input type="number" class="form-control"  name="min" id="idmin" [(ngModel)]="model.min" #min="ngModel" required>
+                    <input type="number" class="form-control"  name="min" id="idmin" [(ngModel)]="model.min" #min="ngModel">
                     <div *ngIf="f.submitted && !min.valid" class="help-block">Min is required</div>
                   </div>
                 
                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <label>Max:</label>
-                    <input type="number" class="form-control"  name="max" id="idmax" [(ngModel)]="model.max" #max="ngModel" required>
+                    <input type="number" class="form-control"  name="max" id="idmax" [(ngModel)]="model.max" #max="ngModel">
                     <div *ngIf="f.submitted && !max.valid" class="help-block">Max is required</div>
                   </div>
                 </div>

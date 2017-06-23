@@ -16,14 +16,11 @@ export class DashboardItemComponent implements OnInit {
   constructor(private sensorValuesService:SensorValuesService) { }
 
   ngOnInit() {
-    console.log(this.timestamp);
-    console.log(this.row)
-    console.log("dada")
+
   }
 
    ngOnChanges(changes: SimpleChanges) {
-     console.log("mudei o timestamp no dashboard item")
-    console.log(this.timestamp);
+
   }
 
   deleteRow(){
@@ -34,8 +31,6 @@ export class DashboardItemComponent implements OnInit {
   putRow(){
     localStorage.setItem('row', JSON.stringify(this.row));
     localStorage.setItem('timeStamp', this.timestamp+"");
-    console.log(this.row)
-    console.log(this.timestamp)
   }
 
 }

@@ -20,7 +20,7 @@ export class ZonesCreateComponent implements OnInit {
 
   createZone(){
     let aux = 0;
-    if(this.model.type=="External") aux=1;
+    if(this.model.typeZ=="External") aux=1;
     this.zonesService.create(this.model.nameS,this.model.descS,aux,
       this.model.min, this.model.max)
           .subscribe( res => {
